@@ -89,7 +89,7 @@
 		D65A73E5241B173000047944 /* SFSymbolsCollectionUsingNewAPI */ = {
 			isa = PBXGroup;
 			children = (
-				D6BBA05B241B2F8600199481 /* Categories */,
+				D6BBA05B241B2F8600199481 /* DataSource&FlowLayout */,
 				D65A73E6241B173000047944 /* AppDelegate.swift */,
 				D65A73E8241B173000047944 /* SceneDelegate.swift */,
 				D65A73EF241B173000047944 /* Assets.xcassets */,
@@ -110,7 +110,7 @@
 			path = SFSymbolsCollectionUsingNewAPITests;
 			sourceTree = "<group>";
 		};
-		D6BBA05B241B2F8600199481 /* Categories */ = {
+		D6BBA05B241B2F8600199481 /* DataSource&FlowLayout */ = {
 			isa = PBXGroup;
 			children = (
 				D65A740E241B216300047944 /* CategoryCell.swift */,
@@ -119,7 +119,7 @@
 				D6BBA061241B557900199481 /* CategoryHeader.swift */,
 				D6BBA063241B660300199481 /* CategoryCollectionViewDeglegate.swift */,
 			);
-			path = Categories;
+			path = "DataSource&FlowLayout";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
