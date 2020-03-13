@@ -32,10 +32,10 @@ final class CategoryCell: UICollectionViewCell {
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            iconImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            iconImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-            iconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            iconImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            iconImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            iconImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            iconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            iconImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
         ])
     }
 

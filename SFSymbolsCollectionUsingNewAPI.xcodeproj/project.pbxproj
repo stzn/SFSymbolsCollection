@@ -19,6 +19,7 @@
 		D6BBA05D241B2FAF00199481 /* CategoryCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BBA05C241B2FAF00199481 /* CategoryCollectionViewDataSource.swift */; };
 		D6BBA062241B557900199481 /* CategoryHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BBA061241B557900199481 /* CategoryHeader.swift */; };
 		D6BBA064241B660300199481 /* CategoryCollectionViewDeglegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BBA063241B660300199481 /* CategoryCollectionViewDeglegate.swift */; };
+		D6BBA067241B6CE900199481 /* CategoriesNewAPIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BBA066241B6CE900199481 /* CategoriesNewAPIViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		D6BBA05C241B2FAF00199481 /* CategoryCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		D6BBA061241B557900199481 /* CategoryHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryHeader.swift; sourceTree = "<group>"; };
 		D6BBA063241B660300199481 /* CategoryCollectionViewDeglegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewDeglegate.swift; sourceTree = "<group>"; };
+		D6BBA066241B6CE900199481 /* CategoriesNewAPIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesNewAPIViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,9 @@
 		D65A73E5241B173000047944 /* SFSymbolsCollectionUsingNewAPI */ = {
 			isa = PBXGroup;
 			children = (
+				D65A740E241B216300047944 /* CategoryCell.swift */,
+				D6BBA061241B557900199481 /* CategoryHeader.swift */,
+				D6BBA065241B6C4A00199481 /* DiffableDataSources&CompositionalLayout */,
 				D6BBA05B241B2F8600199481 /* DataSource&FlowLayout */,
 				D65A73E6241B173000047944 /* AppDelegate.swift */,
 				D65A73E8241B173000047944 /* SceneDelegate.swift */,
@@ -113,13 +118,19 @@
 		D6BBA05B241B2F8600199481 /* DataSource&FlowLayout */ = {
 			isa = PBXGroup;
 			children = (
-				D65A740E241B216300047944 /* CategoryCell.swift */,
 				D65A7408241B1A4600047944 /* CategoriesViewController.swift */,
 				D6BBA05C241B2FAF00199481 /* CategoryCollectionViewDataSource.swift */,
-				D6BBA061241B557900199481 /* CategoryHeader.swift */,
 				D6BBA063241B660300199481 /* CategoryCollectionViewDeglegate.swift */,
 			);
 			path = "DataSource&FlowLayout";
+			sourceTree = "<group>";
+		};
+		D6BBA065241B6C4A00199481 /* DiffableDataSources&CompositionalLayout */ = {
+			isa = PBXGroup;
+			children = (
+				D6BBA066241B6CE900199481 /* CategoriesNewAPIViewController.swift */,
+			);
+			path = "DiffableDataSources&CompositionalLayout";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,6 +239,7 @@
 				D65A740B241B1AC900047944 /* SFSymbolCategory.swift in Sources */,
 				D65A73E7241B173000047944 /* AppDelegate.swift in Sources */,
 				D65A73E9241B173000047944 /* SceneDelegate.swift in Sources */,
+				D6BBA067241B6CE900199481 /* CategoriesNewAPIViewController.swift in Sources */,
 				D65A740F241B216300047944 /* CategoryCell.swift in Sources */,
 				D6BBA05D241B2FAF00199481 /* CategoryCollectionViewDataSource.swift in Sources */,
 				D6BBA064241B660300199481 /* CategoryCollectionViewDeglegate.swift in Sources */,

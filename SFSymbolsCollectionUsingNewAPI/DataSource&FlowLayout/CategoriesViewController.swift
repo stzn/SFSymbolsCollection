@@ -15,7 +15,7 @@ final class CategoriesViewController: UIViewController {
     }()
 
     let dataSource = CategoryCollectionViewDataSource()
-    let delegate = CategoryCollectionViewDeglegate(numberOfItemsPerRow: 4, interItemSpacing: 12)
+    let delegate = CategoryCollectionViewDeglegate(numberOfItemsPerRow: 4, interItemSpacing: 8)
 
     override func viewDidLoad() {
         super.viewDidLoad()

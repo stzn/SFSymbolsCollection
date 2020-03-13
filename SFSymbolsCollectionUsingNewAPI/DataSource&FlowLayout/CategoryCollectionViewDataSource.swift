@@ -9,17 +9,7 @@
 import UIKit
 
 final class CategoryCollectionViewDataSource: NSObject, UICollectionViewDataSource {
-    private struct DecodableSFSymbol: Decodable {
-        let symbols: [SFSymbolCategory]
-    }
-
-    lazy var symbols: [SFSymbolCategory] = {
-        let path = Bundle.main.path(forResource: "symbols", ofType: "json")!
-        let url = URL(fileURLWithPath: path)
-        let data = try! Data(contentsOf: url)
-        return try! JSONDecoder().decode(DecodableSFSymbol.self, from: data).symbols
-    }()
-
+    let symbols = SFSymbolCategory.loadJSONFile()
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return symbols.count
