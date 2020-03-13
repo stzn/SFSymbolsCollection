@@ -1,0 +1,35 @@
+{
+    "symbols":[
+        {
+            "categoryIconName": "message",
+            "name": "Communication",
+            "iconNames" : [
+                "mic", "mic.fill",
+                "mic.circle", "mic.circle.fill",
+                "mic.slash", "mic.slash.fill",
+                "message", "message.fill"
+            ]
+        },
+        {
+            "categoryIconName": "cloud.sun",
+            "name": "Wather",
+            "iconNames" : [
+                "sun.min", "sun.min.fill",
+                "sun.max", "sun.max.fill",
+                "sunrise", "sunrise.fill",
+                "sunset", "sunset.fill",
+                "moon", "moon.fill"
+            ]
+        },
+        {
+            "categoryIconName": "desktopcomputer",
+            "name": "Devices",
+            "iconNames" : [
+                "keyborad", "keyborad.fill",
+                "hifispeaker", "hifispeaker.fill",
+                "printer", "printer.fill",
+                "tv", "tv.fill",
+                "gamecontroller", "gamecontroller.fill"
+            ]
+        }
+    ]}
