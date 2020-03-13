@@ -1,5 +1,5 @@
 //
-//  CategoryCell.swift
+//  CategoryHeader.swift
 //  SFSymbolsCollectionUsingNewAPI
 //
 //  Created by Shinzan Takata on 2020/03/13.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-final class CategoryCell: UICollectionViewCell {
-    static let reuseIdentifier = "CategoryCell"
+class CategoryHeader: UICollectionReusableView {
+    static let reuseIdentifier = "CategoryHeader"
 
     lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
@@ -19,11 +19,12 @@ final class CategoryCell: UICollectionViewCell {
     lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = UIFont.boldSystemFont(ofSize: 40)
+        label.numberOfLines = 0
         return label
     }()
 
-    lazy var separator: UIView = {
+    lazy var bottomSeparator: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGray
         return view
@@ -39,27 +40,29 @@ final class CategoryCell: UICollectionViewCell {
     }
 
     private func setup() {
-        contentView.addSubview(iconImageView)
-        contentView.addSubview(nameLabel)
-        contentView.addSubview(separator)
+        addSubview(iconImageView)
+        addSubview(nameLabel)
+        addSubview(bottomSeparator)
+
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        separator.translatesAutoresizingMaskIntoConstraints = false
+        bottomSeparator.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            iconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            iconImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
             iconImageView.trailingAnchor.constraint(equalTo: nameLabel.leadingAnchor, constant: -8),
-            iconImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            iconImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             iconImageView.heightAnchor.constraint(equalToConstant: 44),
             iconImageView.widthAnchor.constraint(equalTo: iconImageView.heightAnchor),
 
-            nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 8),
-            nameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            nameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 8),
+            nameLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
 
-            separator.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            separator.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            separator.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            separator.heightAnchor.constraint(equalToConstant: 1),
+
+            bottomSeparator.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            bottomSeparator.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
+            bottomSeparator.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
+            bottomSeparator.heightAnchor.constraint(equalToConstant: 1),
         ])
     }
 

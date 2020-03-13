@@ -14,7 +14,8 @@ final class CategoriesViewController: UIViewController {
                          collectionViewLayout: UICollectionViewFlowLayout())
     }()
 
-    let dataSource = CategoriesDataSource()
+    let dataSource = CategoryCollectionViewDataSource()
+    let delegate = CategoryCollectionViewDeglegate(numberOfItemsPerRow: 4, interItemSpacing: 12)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,9 +26,12 @@ final class CategoriesViewController: UIViewController {
     private func setupCollectionView() {
         collectionView.backgroundColor = .white
         collectionView.dataSource = dataSource
-        collectionView.delegate = self
+        collectionView.delegate = delegate
         collectionView.register(CategoryCell.self,
                                 forCellWithReuseIdentifier: CategoryCell.reuseIdentifier)
+        collectionView.register(CategoryHeader.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: CategoryHeader.reuseIdentifier)
 
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -37,22 +41,5 @@ final class CategoriesViewController: UIViewController {
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
-    }
-}
-
-// MARK: UICollectionViewDelegate
-
-extension CategoriesViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: false)
-        let category = dataSource.item(at: indexPath)
-    }
-}
-
-// MARK: UICollectionViewDelegateFlowLayout
-
-extension CategoriesViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: view.bounds.width, height: 80)
     }
 }

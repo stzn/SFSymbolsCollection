@@ -25,7 +25,7 @@
             "categoryIconName": "desktopcomputer",
             "name": "Devices",
             "iconNames" : [
-                "keyborad", "keyborad.fill",
+                "keyboard", "headphones",
                 "hifispeaker", "hifispeaker.fill",
                 "printer", "printer.fill",
                 "tv", "tv.fill",
