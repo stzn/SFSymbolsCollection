@@ -18,7 +18,7 @@ final class CategoryCollectionViewDeglegate: NSObject, UICollectionViewDelegateF
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let maxWidth = UIScreen.main.bounds.width
+        let maxWidth = collectionView.bounds.width
         let totalSpacing = interItemSpacing * numberOfItemsPerRow
         let itemWidth = (maxWidth - totalSpacing)/numberOfItemsPerRow
 
@@ -42,6 +42,6 @@ final class CategoryCollectionViewDeglegate: NSObject, UICollectionViewDelegateF
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        CGSize(width: UIScreen.main.bounds.width, height: 80)
+        CGSize(width: collectionView.bounds.width, height: CategoryHeader.height)
     }
 }

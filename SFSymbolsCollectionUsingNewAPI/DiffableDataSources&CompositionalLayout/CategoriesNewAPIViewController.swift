@@ -8,10 +8,7 @@
 
 import UIKit
 
-class CategoriesNewAPIViewController: UIViewController {
-    typealias CategoryName = String
-    typealias SymbolName = String
-
+final class CategoriesNewAPIViewController: UIViewController {
     private let sectionHeaderElementKind = "section-header-element-kind"
 
     let symbols = SFSymbolCategory.loadJSONFile()
@@ -25,7 +22,6 @@ class CategoriesNewAPIViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "SFSymbol NewAPI"
         setupCollectionView()
     }
 
@@ -58,11 +54,12 @@ class CategoriesNewAPIViewController: UIViewController {
         let section = NSCollectionLayoutSection(group: group)
 
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                heightDimension: .estimated(80))
+                                                heightDimension: .estimated(CategoryHeader.height))
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
             elementKind: sectionHeaderElementKind, alignment: .top)
         section.boundarySupplementaryItems = [sectionHeader]
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 8, trailing: 0)
         return UICollectionViewCompositionalLayout(section: section)
     }
 

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -17,7 +18,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             let tab = UITabBarController()
-            tab.viewControllers = [CategoriesViewController(), CategoriesNewAPIViewController()]
+
+            let categoriesViewController = CategoriesViewController()
+            categoriesViewController.tabBarItem = UITabBarItem(title: "old API", image: nil, tag: 0)
+
+            let categoriesNewAPIViewController = CategoriesNewAPIViewController()
+            categoriesNewAPIViewController.tabBarItem = UITabBarItem(title: "new API", image: nil, tag: 1)
+
+            let categoriesView = UIHostingController(rootView: CategoriesView())
+            categoriesView.tabBarItem = UITabBarItem(title: "SwiftUI", image: nil, tag: 2)
+
+            tab.viewControllers = [categoriesViewController, categoriesNewAPIViewController, categoriesView]
             window.rootViewController = tab
             self.window = window
             window.makeKeyAndVisible()

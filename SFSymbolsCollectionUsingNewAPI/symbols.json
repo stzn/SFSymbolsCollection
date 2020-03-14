@@ -12,7 +12,7 @@
         },
         {
             "categoryIconName": "cloud.sun",
-            "name": "Wather",
+            "name": "Weather",
             "iconNames" : [
                 "sun.min", "sun.min.fill",
                 "sun.max", "sun.max.fill",

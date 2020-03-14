@@ -8,10 +8,13 @@
 
 import Foundation
 
-struct SFSymbolCategory: Decodable, Hashable {
+typealias CategoryName = String
+typealias SymbolName = String
+
+struct SFSymbolCategory: Equatable, Decodable, Hashable {
     let categoryIconName: String
-    let name: String
-    let iconNames: [String]
+    let name: CategoryName
+    let iconNames: [SymbolName]
 
     private struct DecodableSFSymbol: Decodable {
         let symbols: [SFSymbolCategory]

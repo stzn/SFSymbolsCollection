@@ -8,7 +8,8 @@
 
 import UIKit
 
-class CategoryHeader: UICollectionReusableView {
+final class CategoryHeader: UICollectionReusableView {
+    static let height: CGFloat = 80
     static let reuseIdentifier = "CategoryHeader"
 
     lazy var iconImageView: UIImageView = {
