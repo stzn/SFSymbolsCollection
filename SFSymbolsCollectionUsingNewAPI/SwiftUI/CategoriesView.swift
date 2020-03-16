@@ -14,7 +14,7 @@ struct SectionHeader: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
-                Image(systemName: category.categoryIconName)
+                Image(systemName: category.iconName)
                     .resizable()
                     .frame(width: 40, height: 40)
                     .padding(.leading, 8)
@@ -62,8 +62,8 @@ struct CategoriesView: View {
 
     private func createRow(for size: CGSize, with rowModel: RowModel) -> some View {
         return HStack {
-            ForEach(rowModel.items, id: \.self) { iconName in
-                Image(systemName: iconName)
+            ForEach(rowModel.items, id: \.self) { symbol in
+                Image(systemName: symbol.name)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .padding([.top, .leading, .trailing], 4)
@@ -81,7 +81,7 @@ struct CategoriesView: View {
         guard size != .zero else {
             return []
         }
-        let iconNames = category.iconNames
+        let iconNames = category.symbols
         let strideSize = columnCount
         let rowModels = stride(from: iconNames.startIndex, to: iconNames.endIndex, by: strideSize)
             .map { index -> RowModel in
@@ -94,8 +94,8 @@ struct CategoriesView: View {
 
     private struct RowModel: Identifiable {
         let id: String
-        let items: [SymbolName]
-        init(items: [SymbolName]) {
+        let items: [SFSymbolCategory.Symbol]
+        init(items: [SFSymbolCategory.Symbol]) {
             self.id = UUID().uuidString
             self.items = items
         }

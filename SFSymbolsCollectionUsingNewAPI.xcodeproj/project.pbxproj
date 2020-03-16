@@ -14,7 +14,7 @@
 		D65A73FE241B173100047944 /* SFSymbolsCollectionUsingNewAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65A73FD241B173100047944 /* SFSymbolsCollectionUsingNewAPITests.swift */; };
 		D65A7409241B1A4600047944 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65A7408241B1A4600047944 /* CategoriesViewController.swift */; };
 		D65A740B241B1AC900047944 /* SFSymbolCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65A740A241B1AC900047944 /* SFSymbolCategory.swift */; };
-		D65A740D241B1BF500047944 /* symbols.json in Resources */ = {isa = PBXBuildFile; fileRef = D65A740C241B1BF500047944 /* symbols.json */; };
+		D65A740D241B1BF500047944 /* SFSymbols.json in Resources */ = {isa = PBXBuildFile; fileRef = D65A740C241B1BF500047944 /* SFSymbols.json */; };
 		D65A740F241B216300047944 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65A740E241B216300047944 /* CategoryCell.swift */; };
 		D6BBA05D241B2FAF00199481 /* CategoryCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BBA05C241B2FAF00199481 /* CategoryCollectionViewDataSource.swift */; };
 		D6BBA062241B557900199481 /* CategoryHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BBA061241B557900199481 /* CategoryHeader.swift */; };
@@ -45,7 +45,7 @@
 		D65A73FF241B173100047944 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D65A7408241B1A4600047944 /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		D65A740A241B1AC900047944 /* SFSymbolCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbolCategory.swift; sourceTree = "<group>"; };
-		D65A740C241B1BF500047944 /* symbols.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = symbols.json; sourceTree = "<group>"; };
+		D65A740C241B1BF500047944 /* SFSymbols.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SFSymbols.json; sourceTree = "<group>"; };
 		D65A740E241B216300047944 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		D6BBA05C241B2FAF00199481 /* CategoryCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		D6BBA061241B557900199481 /* CategoryHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryHeader.swift; sourceTree = "<group>"; };
@@ -104,7 +104,7 @@
 				D65A73F1241B173000047944 /* LaunchScreen.storyboard */,
 				D65A73F4241B173100047944 /* Info.plist */,
 				D65A740A241B1AC900047944 /* SFSymbolCategory.swift */,
-				D65A740C241B1BF500047944 /* symbols.json */,
+				D65A740C241B1BF500047944 /* SFSymbols.json */,
 			);
 			path = SFSymbolsCollectionUsingNewAPI;
 			sourceTree = "<group>";
@@ -226,7 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D65A73F3241B173000047944 /* LaunchScreen.storyboard in Resources */,
-				D65A740D241B1BF500047944 /* symbols.json in Resources */,
+				D65A740D241B1BF500047944 /* SFSymbols.json in Resources */,
 				D65A73F0241B173000047944 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

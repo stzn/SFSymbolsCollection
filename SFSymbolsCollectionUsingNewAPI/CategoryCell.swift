@@ -39,7 +39,7 @@ final class CategoryCell: UICollectionViewCell {
         ])
     }
 
-    func configure(_ iconName: String) {
-        iconImageView.image = UIImage(systemName: iconName)?.withRenderingMode(.alwaysOriginal)
+    func configure(_ symbol: SFSymbolCategory.Symbol) {
+        iconImageView.image = UIImage(systemName: symbol.name)?.withRenderingMode(.alwaysOriginal)
     }
 }

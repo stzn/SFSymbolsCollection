@@ -1,9 +1,9 @@
 {
-    "symbols":[
+    "categories":[
         {
-            "categoryIconName": "message",
+            "iconName": "message",
             "name": "Communication",
-            "iconNames" : [
+            "symbols" : [
                 "mic", "mic.fill",
                 "mic.circle", "mic.circle.fill",
                 "mic.slash", "mic.slash.fill",
@@ -11,9 +11,9 @@
             ]
         },
         {
-            "categoryIconName": "cloud.sun",
+            "iconName": "cloud.sun",
             "name": "Weather",
-            "iconNames" : [
+            "symbols" : [
                 "sun.min", "sun.min.fill",
                 "sun.max", "sun.max.fill",
                 "sunrise", "sunrise.fill",
@@ -22,9 +22,9 @@
             ]
         },
         {
-            "categoryIconName": "desktopcomputer",
+            "iconName": "desktopcomputer",
             "name": "Devices",
-            "iconNames" : [
+            "symbols" : [
                 "keyboard", "headphones",
                 "hifispeaker", "hifispeaker.fill",
                 "printer", "printer.fill",

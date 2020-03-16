@@ -68,7 +68,7 @@ final class CategoryHeader: UICollectionReusableView {
     }
 
     func configure(_ symbol: SFSymbolCategory) {
-        iconImageView.image = UIImage(systemName: symbol.categoryIconName)?.withRenderingMode(.alwaysOriginal)
+        iconImageView.image = UIImage(systemName: symbol.iconName)?.withRenderingMode(.alwaysOriginal)
         nameLabel.text = symbol.name
     }
 }

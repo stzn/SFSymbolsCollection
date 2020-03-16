@@ -16,7 +16,7 @@ final class CategoryCollectionViewDataSource: NSObject, UICollectionViewDataSour
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return symbols[section].iconNames.count
+        return symbols[section].symbols.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -24,10 +24,10 @@ final class CategoryCollectionViewDataSource: NSObject, UICollectionViewDataSour
             withReuseIdentifier: CategoryCell.reuseIdentifier, for: indexPath) as? CategoryCell else {
                 fatalError()
         }
-        guard let iconName = cellItem(at: indexPath) else {
+        guard let symbol = cellItem(at: indexPath) else {
             return UICollectionViewCell()
         }
-        cell.configure(iconName)
+        cell.configure(symbol)
         return cell
     }
 
@@ -51,11 +51,11 @@ final class CategoryCollectionViewDataSource: NSObject, UICollectionViewDataSour
         return symbols[indexPath.section]
     }
 
-    func cellItem(at indexPath: IndexPath) -> String? {
+    func cellItem(at indexPath: IndexPath) -> SFSymbolCategory.Symbol? {
         guard let section = sectionItem(at: indexPath),
-            section.iconNames.count > indexPath.item else {
+            section.symbols.count > indexPath.item else {
                 return nil
         }
-        return section.iconNames[indexPath.item]
+        return section.symbols[indexPath.item]
     }
 }

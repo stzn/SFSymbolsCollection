@@ -11,14 +11,14 @@ import UIKit
 final class CategoriesNewAPIViewController: UIViewController {
     private let sectionHeaderElementKind = "section-header-element-kind"
 
-    let symbols = SFSymbolCategory.loadJSONFile()
+    private let symbols = SFSymbolCategory.loadJSONFile()
 
     lazy var collectionView: UICollectionView = {
         UICollectionView(frame: .zero,
                          collectionViewLayout: UICollectionViewFlowLayout())
     }()
 
-    var dataSource: UICollectionViewDiffableDataSource<CategoryName, SymbolName>!
+    var dataSource: UICollectionViewDiffableDataSource<SFSymbolCategory, SFSymbolCategory.Symbol>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,33 +64,35 @@ final class CategoriesNewAPIViewController: UIViewController {
     }
 
     func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, iconName in
+        dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, symbol -> UICollectionViewCell? in
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: CategoryCell.reuseIdentifier, for: indexPath) as? CategoryCell else {
-                    fatalError()
+                    return nil
             }
-            cell.configure(iconName)
+            cell.configure(symbol)
             return cell
         }
 
-        dataSource.supplementaryViewProvider = { [unowned self] (collectionView, kind, indexPath) in
-            guard let header = collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind,
-                withReuseIdentifier: CategoryHeader.reuseIdentifier, for: indexPath) as? CategoryHeader else {
-                    fatalError()
+        dataSource.supplementaryViewProvider = { [weak self] (collectionView, kind, indexPath) -> UICollectionReusableView? in
+            guard let self = self,
+                let header = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: CategoryHeader.reuseIdentifier, for: indexPath) as? CategoryHeader else {
+                        return nil
             }
             guard self.symbols.count > indexPath.section else {
-                return UICollectionReusableView()
+                return nil
             }
 
             let category = self.symbols[indexPath.section]
             header.configure(category)
             return header
         }
-        var initialSnapshot = NSDiffableDataSourceSnapshot<CategoryName, SymbolName>()
+
+        var initialSnapshot = NSDiffableDataSourceSnapshot<SFSymbolCategory, SFSymbolCategory.Symbol>()
         for symbol in symbols {
-            initialSnapshot.appendSections([symbol.name])
-            initialSnapshot.appendItems(symbol.iconNames)
+            initialSnapshot.appendSections([symbol])
+            initialSnapshot.appendItems(symbol.symbols)
         }
         dataSource.apply(initialSnapshot)
     }

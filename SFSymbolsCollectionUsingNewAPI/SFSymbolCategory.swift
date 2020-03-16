@@ -12,19 +12,27 @@ typealias CategoryName = String
 typealias SymbolName = String
 
 struct SFSymbolCategory: Equatable, Decodable, Hashable {
-    let categoryIconName: String
+    let iconName: String
     let name: CategoryName
-    let iconNames: [SymbolName]
+    let symbols: [Symbol]
+
+    struct Symbol: Decodable, Equatable, Hashable {
+        let name: SymbolName
+        init(from decoder: Decoder) throws {
+            let container = try decoder.singleValueContainer()
+            name = try container.decode(SymbolName.self)
+        }
+    }
 
     private struct DecodableSFSymbol: Decodable {
-        let symbols: [SFSymbolCategory]
+        let categories: [SFSymbolCategory]
     }
 
     static func loadJSONFile() -> [SFSymbolCategory] {
-        let path = Bundle.main.path(forResource: "symbols", ofType: "json")!
+        let path = Bundle.main.path(forResource: "SFSymbols", ofType: "json")!
         let url = URL(fileURLWithPath: path)
         let data = try! Data(contentsOf: url)
-        return try! JSONDecoder().decode(DecodableSFSymbol.self, from: data).symbols
+        return try! JSONDecoder().decode(DecodableSFSymbol.self, from: data).categories
     }
 }
 
