@@ -84,7 +84,7 @@ final class CategoriesNewAPIViewController: UIViewController {
                 return nil
             }
 
-            let category = self.symbols[indexPath.section]
+            let category = self.dataSource.snapshot().sectionIdentifiers[indexPath.section]
             header.configure(category)
             return header
         }
