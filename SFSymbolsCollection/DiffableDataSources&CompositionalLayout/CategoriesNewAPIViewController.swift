@@ -1,6 +1,6 @@
 //
 //  CategoriesNewAPIViewController.swift
-//  SFSymbolsCollectionUsingNewAPI
+//  SFSymbolsCollection
 //
 //  Created by Shinzan Takata on 2020/03/13.
 //  Copyright © 2020 shiz. All rights reserved.

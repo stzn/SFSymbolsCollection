@@ -1,15 +1,15 @@
 //
-//  SFSymbolsCollectionUsingNewAPITests.swift
-//  SFSymbolsCollectionUsingNewAPITests
+//  SFSymbolsCollectionTests.swift
+//  SFSymbolsCollectionTests
 //
 //  Created by Shinzan Takata on 2020/03/13.
 //  Copyright © 2020 shiz. All rights reserved.
 //
 
 import XCTest
-@testable import SFSymbolsCollectionUsingNewAPI
+@testable import SFSymbolsCollection
 
-class SFSymbolsCollectionUsingNewAPITests: XCTestCase {
+class SFSymbolsCollectionTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

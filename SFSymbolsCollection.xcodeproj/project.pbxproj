@@ -34,13 +34,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D65A73E3241B173000047944 /* SFSymbolsCollectionUsingNewAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SFSymbolsCollectionUsingNewAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D65A73E3241B173000047944 /* SFSymbolsCollection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SFSymbolsCollection.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D65A73E6241B173000047944 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D65A73E8241B173000047944 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D65A73EF241B173000047944 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D65A73F2241B173000047944 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D65A73F4241B173100047944 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D65A73F9241B173100047944 /* SFSymbolsCollectionUsingNewAPITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SFSymbolsCollectionUsingNewAPITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D65A73F9241B173100047944 /* SFSymbolsCollectionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SFSymbolsCollectionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D65A73FD241B173100047944 /* SFSymbolsCollectionUsingNewAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbolsCollectionUsingNewAPITests.swift; sourceTree = "<group>"; };
 		D65A73FF241B173100047944 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D65A7408241B1A4600047944 /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
@@ -75,8 +75,8 @@
 		D65A73DA241B173000047944 = {
 			isa = PBXGroup;
 			children = (
-				D65A73E5241B173000047944 /* SFSymbolsCollectionUsingNewAPI */,
-				D65A73FC241B173100047944 /* SFSymbolsCollectionUsingNewAPITests */,
+				D65A73E5241B173000047944 /* SFSymbolsCollection */,
+				D65A73FC241B173100047944 /* SFSymbolsCollectionTests */,
 				D65A73E4241B173000047944 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -84,13 +84,13 @@
 		D65A73E4241B173000047944 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D65A73E3241B173000047944 /* SFSymbolsCollectionUsingNewAPI.app */,
-				D65A73F9241B173100047944 /* SFSymbolsCollectionUsingNewAPITests.xctest */,
+				D65A73E3241B173000047944 /* SFSymbolsCollection.app */,
+				D65A73F9241B173100047944 /* SFSymbolsCollectionTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D65A73E5241B173000047944 /* SFSymbolsCollectionUsingNewAPI */ = {
+		D65A73E5241B173000047944 /* SFSymbolsCollection */ = {
 			isa = PBXGroup;
 			children = (
 				D6BBA06A241C242000199481 /* SwiftUI */,
@@ -106,16 +106,16 @@
 				D65A740A241B1AC900047944 /* SFSymbolCategory.swift */,
 				D65A740C241B1BF500047944 /* SFSymbols.json */,
 			);
-			path = SFSymbolsCollectionUsingNewAPI;
+			path = SFSymbolsCollection;
 			sourceTree = "<group>";
 		};
-		D65A73FC241B173100047944 /* SFSymbolsCollectionUsingNewAPITests */ = {
+		D65A73FC241B173100047944 /* SFSymbolsCollectionTests */ = {
 			isa = PBXGroup;
 			children = (
 				D65A73FD241B173100047944 /* SFSymbolsCollectionUsingNewAPITests.swift */,
 				D65A73FF241B173100047944 /* Info.plist */,
 			);
-			path = SFSymbolsCollectionUsingNewAPITests;
+			path = SFSymbolsCollectionTests;
 			sourceTree = "<group>";
 		};
 		D6BBA05B241B2F8600199481 /* DataSource&FlowLayout */ = {
@@ -147,9 +147,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D65A73E2241B173000047944 /* SFSymbolsCollectionUsingNewAPI */ = {
+		D65A73E2241B173000047944 /* SFSymbolsCollection */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D65A7402241B173100047944 /* Build configuration list for PBXNativeTarget "SFSymbolsCollectionUsingNewAPI" */;
+			buildConfigurationList = D65A7402241B173100047944 /* Build configuration list for PBXNativeTarget "SFSymbolsCollection" */;
 			buildPhases = (
 				D65A73DF241B173000047944 /* Sources */,
 				D65A73E0241B173000047944 /* Frameworks */,
@@ -159,14 +159,14 @@
 			);
 			dependencies = (
 			);
-			name = SFSymbolsCollectionUsingNewAPI;
+			name = SFSymbolsCollection;
 			productName = SFSymbolsCollectionUsingNewAPI;
-			productReference = D65A73E3241B173000047944 /* SFSymbolsCollectionUsingNewAPI.app */;
+			productReference = D65A73E3241B173000047944 /* SFSymbolsCollection.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D65A73F8241B173100047944 /* SFSymbolsCollectionUsingNewAPITests */ = {
+		D65A73F8241B173100047944 /* SFSymbolsCollectionTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D65A7405241B173100047944 /* Build configuration list for PBXNativeTarget "SFSymbolsCollectionUsingNewAPITests" */;
+			buildConfigurationList = D65A7405241B173100047944 /* Build configuration list for PBXNativeTarget "SFSymbolsCollectionTests" */;
 			buildPhases = (
 				D65A73F5241B173100047944 /* Sources */,
 				D65A73F6241B173100047944 /* Frameworks */,
@@ -177,9 +177,9 @@
 			dependencies = (
 				D65A73FB241B173100047944 /* PBXTargetDependency */,
 			);
-			name = SFSymbolsCollectionUsingNewAPITests;
+			name = SFSymbolsCollectionTests;
 			productName = SFSymbolsCollectionUsingNewAPITests;
-			productReference = D65A73F9241B173100047944 /* SFSymbolsCollectionUsingNewAPITests.xctest */;
+			productReference = D65A73F9241B173100047944 /* SFSymbolsCollectionTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -201,7 +201,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D65A73DE241B173000047944 /* Build configuration list for PBXProject "SFSymbolsCollectionUsingNewAPI" */;
+			buildConfigurationList = D65A73DE241B173000047944 /* Build configuration list for PBXProject "SFSymbolsCollection" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -214,8 +214,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D65A73E2241B173000047944 /* SFSymbolsCollectionUsingNewAPI */,
-				D65A73F8241B173100047944 /* SFSymbolsCollectionUsingNewAPITests */,
+				D65A73E2241B173000047944 /* SFSymbolsCollection */,
+				D65A73F8241B173100047944 /* SFSymbolsCollectionTests */,
 			);
 		};
 /* End PBXProject section */
@@ -271,7 +271,7 @@
 /* Begin PBXTargetDependency section */
 		D65A73FB241B173100047944 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D65A73E2241B173000047944 /* SFSymbolsCollectionUsingNewAPI */;
+			target = D65A73E2241B173000047944 /* SFSymbolsCollection */;
 			targetProxy = D65A73FA241B173100047944 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -408,12 +408,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L8VFCZLW2Z;
-				INFOPLIST_FILE = SFSymbolsCollectionUsingNewAPI/Info.plist;
+				INFOPLIST_FILE = SFSymbolsCollection/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = shiz.sample.SFSymbolsCollectionUsingNewAPI;
+				PRODUCT_BUNDLE_IDENTIFIER = shiz.sample.SFSymbolsCollection;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -426,12 +426,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L8VFCZLW2Z;
-				INFOPLIST_FILE = SFSymbolsCollectionUsingNewAPI/Info.plist;
+				INFOPLIST_FILE = SFSymbolsCollection/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = shiz.sample.SFSymbolsCollectionUsingNewAPI;
+				PRODUCT_BUNDLE_IDENTIFIER = shiz.sample.SFSymbolsCollection;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -445,18 +445,18 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L8VFCZLW2Z;
-				INFOPLIST_FILE = SFSymbolsCollectionUsingNewAPITests/Info.plist;
+				INFOPLIST_FILE = SFSymbolsCollectionTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = shiz.sample.SFSymbolsCollectionUsingNewAPITests;
+				PRODUCT_BUNDLE_IDENTIFIER = shiz.sample.SFSymbolsCollectionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SFSymbolsCollectionUsingNewAPI.app/SFSymbolsCollectionUsingNewAPI";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SFSymbolsCollection.app/SFSymbolsCollection";
 			};
 			name = Debug;
 		};
@@ -467,25 +467,25 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L8VFCZLW2Z;
-				INFOPLIST_FILE = SFSymbolsCollectionUsingNewAPITests/Info.plist;
+				INFOPLIST_FILE = SFSymbolsCollectionTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = shiz.sample.SFSymbolsCollectionUsingNewAPITests;
+				PRODUCT_BUNDLE_IDENTIFIER = shiz.sample.SFSymbolsCollectionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SFSymbolsCollectionUsingNewAPI.app/SFSymbolsCollectionUsingNewAPI";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SFSymbolsCollection.app/SFSymbolsCollection";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D65A73DE241B173000047944 /* Build configuration list for PBXProject "SFSymbolsCollectionUsingNewAPI" */ = {
+		D65A73DE241B173000047944 /* Build configuration list for PBXProject "SFSymbolsCollection" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D65A7400241B173100047944 /* Debug */,
@@ -494,7 +494,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D65A7402241B173100047944 /* Build configuration list for PBXNativeTarget "SFSymbolsCollectionUsingNewAPI" */ = {
+		D65A7402241B173100047944 /* Build configuration list for PBXNativeTarget "SFSymbolsCollection" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D65A7403241B173100047944 /* Debug */,
@@ -503,7 +503,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D65A7405241B173100047944 /* Build configuration list for PBXNativeTarget "SFSymbolsCollectionUsingNewAPITests" */ = {
+		D65A7405241B173100047944 /* Build configuration list for PBXNativeTarget "SFSymbolsCollectionTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D65A7406241B173100047944 /* Debug */,
