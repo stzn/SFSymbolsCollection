@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class CategoryCollectionViewDeglegate: NSObject, UICollectionViewDelegateFlowLayout {
+final class CategoryCollectionViewDeglegateFlowLayout: NSObject, UICollectionViewDelegateFlowLayout {
     let numberOfItemsPerRow: CGFloat
     let interItemSpacing: CGFloat
 
