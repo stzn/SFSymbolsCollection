@@ -93,11 +93,8 @@
 		D65A73E5241B173000047944 /* SFSymbolsCollection */ = {
 			isa = PBXGroup;
 			children = (
+				D690D670242D8FD400BC151F /* UIKit */,
 				D6BBA06A241C242000199481 /* SwiftUI */,
-				D65A740E241B216300047944 /* CategoryCell.swift */,
-				D6BBA061241B557900199481 /* CategoryHeader.swift */,
-				D6BBA065241B6C4A00199481 /* DiffableDataSources&CompositionalLayout */,
-				D6BBA05B241B2F8600199481 /* DataSource&FlowLayout */,
 				D65A73E6241B173000047944 /* AppDelegate.swift */,
 				D65A73E8241B173000047944 /* SceneDelegate.swift */,
 				D65A73EF241B173000047944 /* Assets.xcassets */,
@@ -116,6 +113,17 @@
 				D65A73FF241B173100047944 /* Info.plist */,
 			);
 			path = SFSymbolsCollectionTests;
+			sourceTree = "<group>";
+		};
+		D690D670242D8FD400BC151F /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				D65A740E241B216300047944 /* CategoryCell.swift */,
+				D6BBA061241B557900199481 /* CategoryHeader.swift */,
+				D6BBA065241B6C4A00199481 /* DiffableDataSources&CompositionalLayout */,
+				D6BBA05B241B2F8600199481 /* DataSource&FlowLayout */,
+			);
+			path = UIKit;
 			sourceTree = "<group>";
 		};
 		D6BBA05B241B2F8600199481 /* DataSource&FlowLayout */ = {
