@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             categoriesViewController.tabBarItem = UITabBarItem(title: "old API", image: nil, tag: 0)
 
             let categoriesNewAPIViewController = UINavigationController(
-            rootViewController: CategoriesNewAPIViewController())
+            rootViewController: CategoriesNewAPIViewController(frame: window.bounds, store: InMemoryFavoriteSymbolStore()))
             categoriesNewAPIViewController.tabBarItem = UITabBarItem(title: "new API", image: nil, tag: 1)
 
             let categoriesView = UINavigationController(

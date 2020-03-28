@@ -1,20 +1,52 @@
 //
-//  CategoriesDataSource.swift
+//  CategoryCollectionViewDiffableDataSource.swift
 //  SFSymbolsCollection
 //
-//  Created by Shinzan Takata on 2020/03/13.
+//  Created by Shinzan Takata on 2020/03/29.
 //  Copyright © 2020 shiz. All rights reserved.
 //
 
 import UIKit
 
-final class CategoryCollectionViewDataSource: NSObject, UICollectionViewDataSource {
+final class CategoryCollectionViewDiffableDataSource: UICollectionViewDiffableDataSource<SFSymbolCategory, SFSymbolCategory.Symbol> {
+
     private var categories = SFSymbolCategory.loadJSONFile()
     private let store: FavoriteSymbolStore
 
-    init(store: FavoriteSymbolStore) {
+    init(collectionView: UICollectionView, store: FavoriteSymbolStore) {
         self.store = store
-        super.init()
+        super.init(collectionView: collectionView) { collectionView, indexPath, symbol -> UICollectionViewCell? in
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: CategoryCell.reuseIdentifier, for: indexPath) as? CategoryCell else {
+                    return nil
+            }
+            cell.configure(symbol)
+            return cell
+        }
+
+        supplementaryViewProvider = { [weak self] (collectionView, kind, indexPath) -> UICollectionReusableView? in
+            guard let self = self,
+                let header = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: CategoryHeader.reuseIdentifier, for: indexPath) as? CategoryHeader else {
+                        return nil
+            }
+            guard self.categories.count > indexPath.section else {
+                return nil
+            }
+
+            let category = self.snapshot().sectionIdentifiers[indexPath.section]
+            header.configure(category)
+            return header
+        }
+
+        var initialSnapshot = NSDiffableDataSourceSnapshot<SFSymbolCategory, SFSymbolCategory.Symbol>()
+        for symbol in categories {
+            initialSnapshot.appendSections([symbol])
+            initialSnapshot.appendItems(symbol.symbols)
+        }
+        apply(initialSnapshot)
+
         addNotifications()
     }
 
@@ -30,59 +62,11 @@ final class CategoryCollectionViewDataSource: NSObject, UICollectionViewDataSour
             self.configureSymbols(from: favorites)
         }
     }
-
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return categories.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return categories[section].symbols.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: CategoryCell.reuseIdentifier, for: indexPath) as? CategoryCell else {
-                fatalError()
-        }
-        guard let symbol = cellItem(at: indexPath) else {
-            return UICollectionViewCell()
-        }
-        cell.configure(symbol)
-        return cell
-    }
-
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let header = collectionView.dequeueReusableSupplementaryView(
-            ofKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: CategoryHeader.reuseIdentifier, for: indexPath) as? CategoryHeader else {
-                fatalError()
-        }
-        guard let category = sectionItem(at: indexPath) else {
-            return UICollectionReusableView()
-        }
-        header.configure(category)
-        return header
-    }
-
-    func sectionItem(at indexPath: IndexPath) -> SFSymbolCategory? {
-        guard categories.count > indexPath.section else {
-            return nil
-        }
-        return categories[indexPath.section]
-    }
-
-    func cellItem(at indexPath: IndexPath) -> SFSymbolCategory.Symbol? {
-        guard let section = sectionItem(at: indexPath),
-            section.symbols.count > indexPath.item else {
-                return nil
-        }
-        return section.symbols[indexPath.item]
-    }
 }
 
 // MARK: Notification
 
-extension CategoryCollectionViewDataSource {
+extension CategoryCollectionViewDiffableDataSource {
     private func addNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(addFavoriteSymbol(_:)), name: .didFavoriteSymbolAdd, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deleteFavoriteSymbol(_:)), name: .didFavoriteSymbolDelete, object: nil)
@@ -109,7 +93,7 @@ extension CategoryCollectionViewDataSource {
 
 // MARK: Data Configuration
 
-extension CategoryCollectionViewDataSource {
+extension CategoryCollectionViewDiffableDataSource {
     func configureSymbols(from favorites: FavoriteSymbols) {
         categories = categories.map { category -> SFSymbolCategory in
             var category = category

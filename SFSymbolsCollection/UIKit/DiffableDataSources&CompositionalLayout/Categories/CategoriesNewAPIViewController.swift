@@ -11,18 +11,46 @@ import UIKit
 final class CategoriesNewAPIViewController: UIViewController {
     private let sectionHeaderElementKind = "section-header-element-kind"
 
-    private let symbols = SFSymbolCategory.loadJSONFile()
+    private var categories = SFSymbolCategory.loadJSONFile()
 
     lazy var collectionView: UICollectionView = {
         UICollectionView(frame: .zero,
                          collectionViewLayout: UICollectionViewFlowLayout())
     }()
 
-    var dataSource: UICollectionViewDiffableDataSource<SFSymbolCategory, SFSymbolCategory.Symbol>!
+    private var dataSource: CategoryCollectionViewDiffableDataSource!
+
+    private let frame: CGRect
+    private let store: FavoriteSymbolStore
+    init(frame: CGRect, store: FavoriteSymbolStore) {
+        self.frame = frame
+        self.store = store
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func loadView() {
+        super.loadView()
+        view = UIView(frame: frame)
+        view.backgroundColor = .white
+        setupNavigationBar()
+        setupCollectionView()
+    }
+    
+    private func setupNavigationBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Favorite", style: .plain, target: self, action: #selector(goToFavoriteList))
+    }
+
+    @objc func goToFavoriteList() {
+        let favoriteVC = FavoritesViewController(frame: view.bounds, store: store)
+        navigationController?.pushViewController(favoriteVC, animated: true)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCollectionView()
     }
 
     private func setupCollectionView() {
@@ -43,7 +71,8 @@ final class CategoriesNewAPIViewController: UIViewController {
         ])
 
         collectionView.collectionViewLayout = configureLayout()
-        configureDataSource()
+        dataSource = CategoryCollectionViewDiffableDataSource(
+            collectionView: collectionView, store: store)
     }
 
     func configureLayout() -> UICollectionViewCompositionalLayout {
@@ -61,39 +90,5 @@ final class CategoriesNewAPIViewController: UIViewController {
         section.boundarySupplementaryItems = [sectionHeader]
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 8, trailing: 0)
         return UICollectionViewCompositionalLayout(section: section)
-    }
-
-    func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, symbol -> UICollectionViewCell? in
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: CategoryCell.reuseIdentifier, for: indexPath) as? CategoryCell else {
-                    return nil
-            }
-            cell.configure(symbol)
-            return cell
-        }
-
-        dataSource.supplementaryViewProvider = { [weak self] (collectionView, kind, indexPath) -> UICollectionReusableView? in
-            guard let self = self,
-                let header = collectionView.dequeueReusableSupplementaryView(
-                    ofKind: kind,
-                    withReuseIdentifier: CategoryHeader.reuseIdentifier, for: indexPath) as? CategoryHeader else {
-                        return nil
-            }
-            guard self.symbols.count > indexPath.section else {
-                return nil
-            }
-
-            let category = self.dataSource.snapshot().sectionIdentifiers[indexPath.section]
-            header.configure(category)
-            return header
-        }
-
-        var initialSnapshot = NSDiffableDataSourceSnapshot<SFSymbolCategory, SFSymbolCategory.Symbol>()
-        for symbol in symbols {
-            initialSnapshot.appendSections([symbol])
-            initialSnapshot.appendItems(symbol.symbols)
-        }
-        dataSource.apply(initialSnapshot)
     }
 }
