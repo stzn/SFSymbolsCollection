@@ -12,6 +12,8 @@ final class CategoryCollectionViewDeglegate: NSObject, UICollectionViewDelegateF
     let numberOfItemsPerRow: CGFloat
     let interItemSpacing: CGFloat
 
+    var didSelectItemAt: ((IndexPath) -> Void)?
+
     init(numberOfItemsPerRow: CGFloat, interItemSpacing: CGFloat) {
         self.numberOfItemsPerRow = numberOfItemsPerRow
         self.interItemSpacing = interItemSpacing
@@ -47,11 +49,6 @@ final class CategoryCollectionViewDeglegate: NSObject, UICollectionViewDelegateF
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: false)
-        guard let category = dataSource.sectionItem(at: indexPath),
-            let symbol = dataSource.cellItem(at: indexPath) else {
-            return
-        }
-        let symbolVC = SymbolViewController(input: .init(categoryId: category.id, symbol: symbol, store: InMemoryFavoriteSymbolStore()))
-        navigationController?.pushViewController(symbolVC, animated: true)
+        didSelectItemAt?(indexPath)
     }
 }

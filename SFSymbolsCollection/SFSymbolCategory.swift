@@ -14,13 +14,20 @@ typealias SymbolName = String
 struct SFSymbolCategory: Equatable, Decodable, Hashable {
     let iconName: String
     let name: CategoryName
-    let symbols: [Symbol]
+    var symbols: [Symbol]
 
     struct Symbol: Decodable, Equatable, Hashable {
         let name: SymbolName
+        var isFavorite: Bool
         init(from decoder: Decoder) throws {
             let container = try decoder.singleValueContainer()
             name = try container.decode(SymbolName.self)
+            isFavorite = false
+        }
+
+        init(name: SymbolName, isFavorite: Bool) {
+            self.name = name
+            self.isFavorite = isFavorite
         }
     }
 

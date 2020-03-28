@@ -9,7 +9,7 @@
 import UIKit
 
 final class CategoryCell: UICollectionViewCell {
-    static let reuseIdentifier = "CategoryCell"
+    static let reuseIdentifier = String(describing: CategoryCell.self)
 
     lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()

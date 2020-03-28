@@ -19,13 +19,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let window = UIWindow(windowScene: windowScene)
             let tab = UITabBarController()
 
-            let categoriesViewController = CategoriesViewController()
+            let categoriesViewController = UINavigationController(
+                rootViewController: CategoriesViewController(frame: window.bounds, store: InMemoryFavoriteSymbolStore()))
             categoriesViewController.tabBarItem = UITabBarItem(title: "old API", image: nil, tag: 0)
 
-            let categoriesNewAPIViewController = CategoriesNewAPIViewController()
+            let categoriesNewAPIViewController = UINavigationController(
+            rootViewController: CategoriesNewAPIViewController())
             categoriesNewAPIViewController.tabBarItem = UITabBarItem(title: "new API", image: nil, tag: 1)
 
-            let categoriesView = UIHostingController(rootView: CategoriesView())
+            let categoriesView = UINavigationController(
+            rootViewController: UIHostingController(rootView: CategoriesView()))
             categoriesView.tabBarItem = UITabBarItem(title: "SwiftUI", image: nil, tag: 2)
 
             tab.viewControllers = [categoriesViewController, categoriesNewAPIViewController, categoriesView]

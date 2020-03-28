@@ -10,7 +10,7 @@ import UIKit
 
 final class CategoryHeader: UICollectionReusableView {
     static let height: CGFloat = 80
-    static let reuseIdentifier = "CategoryHeader"
+    static let reuseIdentifier = String(describing: CategoryHeader.self)
 
     lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
@@ -67,8 +67,8 @@ final class CategoryHeader: UICollectionReusableView {
         ])
     }
 
-    func configure(_ symbol: SFSymbolCategory) {
-        iconImageView.image = UIImage(systemName: symbol.iconName)?.withRenderingMode(.alwaysOriginal)
-        nameLabel.text = symbol.name
+    func configure(_ category: SFSymbolCategory) {
+        iconImageView.image = UIImage(systemName: category.iconName)?.withRenderingMode(.alwaysOriginal)
+        nameLabel.text = category.name
     }
 }
