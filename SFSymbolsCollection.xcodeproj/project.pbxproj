@@ -20,6 +20,7 @@
 		D681359D242F13FB0031C868 /* FavoriteCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D681359C242F13FB0031C868 /* FavoriteCollectionViewDataSource.swift */; };
 		D681359F242F1C3B0031C868 /* FavoriteCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D681359E242F1C3B0031C868 /* FavoriteCollectionViewDelegate.swift */; };
 		D68135A1242F27100031C868 /* SymbolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135A0242F27100031C868 /* SymbolCell.swift */; };
+		D68135A4242F442C0031C868 /* InMemoryFavoriteSymbolStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135A3242F442C0031C868 /* InMemoryFavoriteSymbolStore.swift */; };
 		D690D672242D90F500BC151F /* SymbolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D690D671242D90F500BC151F /* SymbolViewController.swift */; };
 		D690D674242D93B900BC151F /* FavoriteSymbolStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D690D673242D93B900BC151F /* FavoriteSymbolStore.swift */; };
 		D6BBA05D241B2FAF00199481 /* CategoryCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BBA05C241B2FAF00199481 /* CategoryCollectionViewDataSource.swift */; };
@@ -57,6 +58,7 @@
 		D681359C242F13FB0031C868 /* FavoriteCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		D681359E242F1C3B0031C868 /* FavoriteCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		D68135A0242F27100031C868 /* SymbolCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolCell.swift; sourceTree = "<group>"; };
+		D68135A3242F442C0031C868 /* InMemoryFavoriteSymbolStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryFavoriteSymbolStore.swift; sourceTree = "<group>"; };
 		D690D671242D90F500BC151F /* SymbolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolViewController.swift; sourceTree = "<group>"; };
 		D690D673242D93B900BC151F /* FavoriteSymbolStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSymbolStore.swift; sourceTree = "<group>"; };
 		D6BBA05C241B2FAF00199481 /* CategoryCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewDataSource.swift; sourceTree = "<group>"; };
@@ -105,9 +107,9 @@
 		D65A73E5241B173000047944 /* SFSymbolsCollection */ = {
 			isa = PBXGroup;
 			children = (
+				D68135A2242F441B0031C868 /* FavoriteSymbolStore */,
 				D65A73E6241B173000047944 /* AppDelegate.swift */,
 				D65A73EF241B173000047944 /* Assets.xcassets */,
-				D690D673242D93B900BC151F /* FavoriteSymbolStore.swift */,
 				D65A73F4241B173100047944 /* Info.plist */,
 				D65A73F1241B173000047944 /* LaunchScreen.storyboard */,
 				D65A73E8241B173000047944 /* SceneDelegate.swift */,
@@ -146,6 +148,15 @@
 				D681359E242F1C3B0031C868 /* FavoriteCollectionViewDelegate.swift */,
 			);
 			path = Favorites;
+			sourceTree = "<group>";
+		};
+		D68135A2242F441B0031C868 /* FavoriteSymbolStore */ = {
+			isa = PBXGroup;
+			children = (
+				D690D673242D93B900BC151F /* FavoriteSymbolStore.swift */,
+				D68135A3242F442C0031C868 /* InMemoryFavoriteSymbolStore.swift */,
+			);
+			path = FavoriteSymbolStore;
 			sourceTree = "<group>";
 		};
 		D690D670242D8FD400BC151F /* UIKit */ = {
@@ -294,6 +305,7 @@
 				D65A740B241B1AC900047944 /* SFSymbolCategory.swift in Sources */,
 				D65A73E7241B173000047944 /* AppDelegate.swift in Sources */,
 				D690D672242D90F500BC151F /* SymbolViewController.swift in Sources */,
+				D68135A4242F442C0031C868 /* InMemoryFavoriteSymbolStore.swift in Sources */,
 				D65A73E9241B173000047944 /* SceneDelegate.swift in Sources */,
 				D6BBA067241B6CE900199481 /* CategoriesNewAPIViewController.swift in Sources */,
 				D690D674242D93B900BC151F /* FavoriteSymbolStore.swift in Sources */,
