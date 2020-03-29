@@ -16,7 +16,8 @@ struct SFSymbolCategory: Equatable, Decodable, Hashable {
     let name: CategoryName
     var symbols: [Symbol]
 
-    struct Symbol: Decodable, Equatable, Hashable {
+    struct Symbol: Decodable, Equatable, Hashable, Identifiable {
+        var id: String { name }
         let name: SymbolName
         var isFavorite: Bool
         init(from decoder: Decoder) throws {

@@ -34,6 +34,7 @@ final class InMemoryFavoriteSymbolStore: FavoriteSymbolStore {
             } else {
                 dictionary[category] = symbols
             }
+            completion(.success(()))
             NotificationCenter.default.post(name: NSNotification.Name.didFavoriteSymbolDelete, object: symbol)
         }
     }

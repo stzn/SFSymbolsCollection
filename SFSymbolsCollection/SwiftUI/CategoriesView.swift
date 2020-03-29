@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct SectionHeader: View {
+    static let height: CGFloat = 88
     let category: SFSymbolCategory
 
     var body: some View {
@@ -22,58 +23,82 @@ struct SectionHeader: View {
                     .bold()
                     .font(.system(size: 40))
 
-            }
+            }.padding(.top, 16)
             Divider()
                 .background(Color.gray)
-                .padding([.top, .leading, .trailing], 8)
+                .padding([.leading, .trailing], 8)
         }
     }
 }
 
 struct CategoriesView: View {
+    private let store: FavoriteSymbolStore
     private let columnCount: Int = 4
-    private let symbols = SFSymbolCategory.loadJSONFile()
+    private let categories = SFSymbolCategory.loadJSONFile()
+
+    init(store: FavoriteSymbolStore) {
+        self.store = store
+    }
 
     var body: some View {
         GeometryReader { geometry in
             List {
-                ForEach(self.symbols, id: \.name) { category in
+                ForEach(self.categories, id: \.name) { category in
                     self.createSFSymbolCategorySection(for: geometry, with: category)
                 }.listRowInsets(EdgeInsets())
             }
             .onAppear {
                 UITableView.appearance().separatorStyle = .none
             }
-        }
+        }.navigationBarItems(trailing:
+            Button(action: {
+            }) {
+                Text("Favorite")
+            }
+        )
+    }
+
+    private func height(elementSize: CGSize, elementCount: Int) -> CGFloat {
+        let rows = ceil(Double(elementCount) / Double(columnCount))
+        return elementSize.height * CGFloat(rows) + SectionHeader.height
     }
 
     private func createSFSymbolCategorySection(for geometry: GeometryProxy, with category: SFSymbolCategory) -> some View {
         let size = self.size(for: geometry)
         return VStack {
             SectionHeader(category: category)
-                .frame(width: geometry.size.width)
-            ForEach(self.dataCollection(size: size, with: category)) { rowModel in
-                self.createRow(for: size, with: rowModel)
+            CollectionView(data: category.symbols, layout: flowLayout, elementSize: size) { symbol in
+                NavigationLink(destination: self.createSymbolView(category: category, symbol: symbol)) {
+                    Image(systemName: symbol.name)
+                        .renderingMode(.original)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .padding(8)
+                }.frame(width: size.width, height: size.height)
             }
-            .frame(width: geometry.size.width, height: 88, alignment: .leading)
-        }
-        .padding([.bottom, .top])
+        }.frame(width: geometry.size.width,
+                height: height(elementSize: size, elementCount: category.symbols.count))
     }
 
-    private func createRow(for size: CGSize, with rowModel: RowModel) -> some View {
-        return HStack {
+    private func createSymbolView(category: SFSymbolCategory, symbol: SFSymbolCategory.Symbol) -> some View {
+        SymbolView(category: FavoriteSymbolKey(iconName: category.iconName, categoryName: category.name),
+                   symbol: symbol, store: self.store)
+    }
+
+    private func createRow(for size: CGSize, category: SFSymbolCategory,
+                           with rowModel: RowModel) -> some View {
+        HStack {
             ForEach(rowModel.items, id: \.self) { symbol in
                 Image(systemName: symbol.name)
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .padding([.top, .leading, .trailing], 4)
-                    .padding([.bottom], 8)
-            }.frame(width: size.width, height: size.height)
+                    .aspectRatio(contentMode: ContentMode.fit)
+                    .frame(width: size.width, height: size.height)
+            }
         }
     }
 
     private func size(for geometry: GeometryProxy) -> CGSize {
-        let size = (geometry.size.width - 24) / CGFloat(columnCount)
+        let size = floor(geometry.size.width / CGFloat(columnCount))
         return CGSize(width: size, height: size)
     }
 
@@ -87,16 +112,18 @@ struct CategoriesView: View {
             .map { index -> RowModel in
                 let range = index..<min(index + strideSize, iconNames.endIndex)
                 let subItems = iconNames[range]
-                return RowModel(items: Array(subItems))
+                return RowModel(category: category, items: Array(subItems))
         }
         return rowModels
     }
 
     private struct RowModel: Identifiable {
         let id: String
+        let category: SFSymbolCategory
         let items: [SFSymbolCategory.Symbol]
-        init(items: [SFSymbolCategory.Symbol]) {
+        init(category: SFSymbolCategory, items: [SFSymbolCategory.Symbol]) {
             self.id = UUID().uuidString
+            self.category = category
             self.items = items
         }
     }

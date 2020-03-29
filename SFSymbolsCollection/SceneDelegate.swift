@@ -28,8 +28,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             rootViewController: CategoriesNewAPIViewController(frame: window.bounds, store: store))
             categoriesNewAPIViewController.tabBarItem = UITabBarItem(title: "new API", image: nil, tag: 1)
 
-            let categoriesView = UINavigationController(
-            rootViewController: UIHostingController(rootView: CategoriesView()))
+            let categoriesView = UINavigationController(rootViewController:
+                UIHostingController(rootView: CategoriesView(store: store)))
             categoriesView.tabBarItem = UITabBarItem(title: "SwiftUI", image: nil, tag: 2)
 
             tab.viewControllers = [categoriesViewController, categoriesNewAPIViewController, categoriesView]
