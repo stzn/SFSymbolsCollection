@@ -23,6 +23,7 @@
 		D68135A4242F442C0031C868 /* InMemoryFavoriteSymbolStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135A3242F442C0031C868 /* InMemoryFavoriteSymbolStore.swift */; };
 		D68135A82430160C0031C868 /* FavoritesNewAPIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135A72430160C0031C868 /* FavoritesNewAPIViewController.swift */; };
 		D68135AA243018B20031C868 /* CategoryCollectionViewDiffableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135A9243018B20031C868 /* CategoryCollectionViewDiffableDataSource.swift */; };
+		D68135AC24301EBE0031C868 /* FavoriteCollectionViewDiffableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135AB24301EBE0031C868 /* FavoriteCollectionViewDiffableDataSource.swift */; };
 		D690D672242D90F500BC151F /* SymbolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D690D671242D90F500BC151F /* SymbolViewController.swift */; };
 		D690D674242D93B900BC151F /* FavoriteSymbolStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D690D673242D93B900BC151F /* FavoriteSymbolStore.swift */; };
 		D6BBA05D241B2FAF00199481 /* CategoryCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BBA05C241B2FAF00199481 /* CategoryCollectionViewDataSource.swift */; };
@@ -63,6 +64,7 @@
 		D68135A3242F442C0031C868 /* InMemoryFavoriteSymbolStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryFavoriteSymbolStore.swift; sourceTree = "<group>"; };
 		D68135A72430160C0031C868 /* FavoritesNewAPIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesNewAPIViewController.swift; sourceTree = "<group>"; };
 		D68135A9243018B20031C868 /* CategoryCollectionViewDiffableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewDiffableDataSource.swift; sourceTree = "<group>"; };
+		D68135AB24301EBE0031C868 /* FavoriteCollectionViewDiffableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewDiffableDataSource.swift; sourceTree = "<group>"; };
 		D690D671242D90F500BC151F /* SymbolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolViewController.swift; sourceTree = "<group>"; };
 		D690D673242D93B900BC151F /* FavoriteSymbolStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSymbolStore.swift; sourceTree = "<group>"; };
 		D6BBA05C241B2FAF00199481 /* CategoryCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewDataSource.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				D68135A72430160C0031C868 /* FavoritesNewAPIViewController.swift */,
+				D68135AB24301EBE0031C868 /* FavoriteCollectionViewDiffableDataSource.swift */,
 			);
 			path = Favorites;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				D68135AA243018B20031C868 /* CategoryCollectionViewDiffableDataSource.swift in Sources */,
 				D65A73E7241B173000047944 /* AppDelegate.swift in Sources */,
 				D690D672242D90F500BC151F /* SymbolViewController.swift in Sources */,
+				D68135AC24301EBE0031C868 /* FavoriteCollectionViewDiffableDataSource.swift in Sources */,
 				D68135A4242F442C0031C868 /* InMemoryFavoriteSymbolStore.swift in Sources */,
 				D68135A82430160C0031C868 /* FavoritesNewAPIViewController.swift in Sources */,
 				D65A73E9241B173000047944 /* SceneDelegate.swift in Sources */,

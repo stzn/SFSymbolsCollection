@@ -19,12 +19,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let window = UIWindow(windowScene: windowScene)
             let tab = UITabBarController()
 
+            let store = InMemoryFavoriteSymbolStore()
             let categoriesViewController = UINavigationController(
-                rootViewController: CategoriesViewController(frame: window.bounds, store: InMemoryFavoriteSymbolStore()))
+                rootViewController: CategoriesViewController(frame: window.bounds, store: store))
             categoriesViewController.tabBarItem = UITabBarItem(title: "old API", image: nil, tag: 0)
 
             let categoriesNewAPIViewController = UINavigationController(
-            rootViewController: CategoriesNewAPIViewController(frame: window.bounds, store: InMemoryFavoriteSymbolStore()))
+            rootViewController: CategoriesNewAPIViewController(frame: window.bounds, store: store))
             categoriesNewAPIViewController.tabBarItem = UITabBarItem(title: "new API", image: nil, tag: 1)
 
             let categoriesView = UINavigationController(

@@ -144,8 +144,7 @@ extension CategoryCollectionViewDataSource {
             guard let index = category.symbols.firstIndex(where: { $0.name == symbol.name }) else {
                 return category
             }
-            category.symbols[index] = SFSymbolCategory.Symbol(name: category.symbols[index].name,
-                                                              isFavorite: isFavorite)
+            category.symbols[index] = SFSymbolCategory.Symbol(name: category.symbols[index].name, isFavorite: isFavorite)
             return category
         }
     }

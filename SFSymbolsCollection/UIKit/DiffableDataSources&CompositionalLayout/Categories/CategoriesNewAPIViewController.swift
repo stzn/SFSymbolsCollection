@@ -11,8 +11,6 @@ import UIKit
 final class CategoriesNewAPIViewController: UIViewController {
     private let sectionHeaderElementKind = "section-header-element-kind"
 
-    private var categories = SFSymbolCategory.loadJSONFile()
-
     lazy var collectionView: UICollectionView = {
         UICollectionView(frame: .zero,
                          collectionViewLayout: UICollectionViewFlowLayout())
@@ -45,12 +43,13 @@ final class CategoriesNewAPIViewController: UIViewController {
     }
 
     @objc func goToFavoriteList() {
-        let favoriteVC = FavoritesViewController(frame: view.bounds, store: store)
+        let favoriteVC = FavoritesNewAPIViewController(frame: view.bounds, store: store)
         navigationController?.pushViewController(favoriteVC, animated: true)
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        dataSource.reloadData()
     }
 
     private func setupCollectionView() {
@@ -71,6 +70,7 @@ final class CategoriesNewAPIViewController: UIViewController {
         ])
 
         collectionView.collectionViewLayout = configureLayout()
+        collectionView.delegate = self
         dataSource = CategoryCollectionViewDiffableDataSource(
             collectionView: collectionView, store: store)
     }
@@ -90,5 +90,23 @@ final class CategoriesNewAPIViewController: UIViewController {
         section.boundarySupplementaryItems = [sectionHeader]
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 8, trailing: 0)
         return UICollectionViewCompositionalLayout(section: section)
+    }
+}
+
+// MARK: UICollectionViewDelegate
+
+extension CategoriesNewAPIViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: false)
+
+        let category = dataSource.snapshot().sectionIdentifiers[indexPath.section]
+        guard let symbol = dataSource.itemIdentifier(for: indexPath) else {
+            return
+        }
+
+        let input = SymbolViewController.Input(category: FavoriteSymbolKey(iconName: category.iconName, categoryName: category.name),
+                                               symbol: symbol, store: store)
+        let symbolVC = SymbolViewController(frame: view.bounds, input: input)
+        navigationController?.pushViewController(symbolVC, animated: true)
     }
 }
