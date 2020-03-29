@@ -85,46 +85,8 @@ struct CategoriesView: View {
                    symbol: symbol, store: self.store)
     }
 
-    private func createRow(for size: CGSize, category: SFSymbolCategory,
-                           with rowModel: RowModel) -> some View {
-        HStack {
-            ForEach(rowModel.items, id: \.self) { symbol in
-                Image(systemName: symbol.name)
-                    .resizable()
-                    .aspectRatio(contentMode: ContentMode.fit)
-                    .frame(width: size.width, height: size.height)
-            }
-        }
-    }
-
     private func size(for geometry: GeometryProxy) -> CGSize {
         let size = floor(geometry.size.width / CGFloat(columnCount))
         return CGSize(width: size, height: size)
-    }
-
-    private func dataCollection(size: CGSize, with category: SFSymbolCategory) -> [RowModel] {
-        guard size != .zero else {
-            return []
-        }
-        let iconNames = category.symbols
-        let strideSize = columnCount
-        let rowModels = stride(from: iconNames.startIndex, to: iconNames.endIndex, by: strideSize)
-            .map { index -> RowModel in
-                let range = index..<min(index + strideSize, iconNames.endIndex)
-                let subItems = iconNames[range]
-                return RowModel(category: category, items: Array(subItems))
-        }
-        return rowModels
-    }
-
-    private struct RowModel: Identifiable {
-        let id: String
-        let category: SFSymbolCategory
-        let items: [SFSymbolCategory.Symbol]
-        init(category: SFSymbolCategory, items: [SFSymbolCategory.Symbol]) {
-            self.id = UUID().uuidString
-            self.category = category
-            self.items = items
-        }
     }
 }

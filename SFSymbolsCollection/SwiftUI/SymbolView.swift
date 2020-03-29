@@ -38,8 +38,7 @@ struct SymbolView: View {
     }
 
     private var favoriteToggleButton: some View {
-
-        return Button(action: {
+        Button(action: {
             if self.isFavorite {
                 self.store.delete(self.category, symbol: self.symbol) { _ in
                     self.isFavorite.toggle()
