@@ -13,6 +13,7 @@ final class SymbolCell: UICollectionViewCell {
 
     lazy var symbolImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
 
@@ -53,7 +54,6 @@ final class SymbolCell: UICollectionViewCell {
             symbolImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             symbolImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             symbolImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.2),
-            symbolImageView.heightAnchor.constraint(equalTo: symbolImageView.widthAnchor),
             nameLabel.leadingAnchor.constraint(equalTo: symbolImageView.trailingAnchor, constant: 12),
             nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
             nameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),

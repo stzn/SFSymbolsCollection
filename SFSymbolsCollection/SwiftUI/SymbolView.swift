@@ -30,9 +30,14 @@ struct SymbolView: View {
                 Image(systemName: self.symbol.name)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: proxy.size.width * 0.2)
+                    .frame(height: proxy.size.height * 0.5)
+                    .padding(.top, 30)
+                    .padding(.bottom, 48)
                 Text(self.symbol.name).font(.title)
                 self.favoriteToggleButton
+                    .frame(width: proxy.size.width * 0.8)
+                    .background(Color.blue)
+                    .cornerRadius(8)
             }
         }
     }
@@ -49,12 +54,11 @@ struct SymbolView: View {
                 }
             }
         }) {
-            Text(self.isFavorite ? removeFromFavorite: addToFavorite)
+            Text(self.isFavorite ? self.removeFromFavorite: self.addToFavorite)
+                .font(.headline)
                 .foregroundColor(.white)
                 .padding(8)
         }
-        .background(Color.blue)
-        .cornerRadius(8)
     }
 }
 

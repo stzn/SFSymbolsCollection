@@ -8,29 +8,6 @@
 
 import SwiftUI
 
-struct SectionHeader: View {
-    static let height: CGFloat = 88
-    let category: SFSymbolCategory
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                Image(systemName: category.iconName)
-                    .resizable()
-                    .frame(width: 40, height: 40)
-                    .padding(.leading, 8)
-                Text(category.name)
-                    .bold()
-                    .font(.system(size: 40))
-
-            }.padding(.top, 16)
-            Divider()
-                .background(Color.gray)
-                .padding([.leading, .trailing], 8)
-        }
-    }
-}
-
 struct CategoriesView: View {
     private let store: FavoriteSymbolStore
     private let columnCount: Int = 4
@@ -51,8 +28,7 @@ struct CategoriesView: View {
                 UITableView.appearance().separatorStyle = .none
             }
         }.navigationBarItems(trailing:
-            Button(action: {
-            }) {
+            NavigationLink(destination: FavoritesView(store: store)) {
                 Text("Favorite")
             }
         )
@@ -73,7 +49,7 @@ struct CategoriesView: View {
                         .renderingMode(.original)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .padding(8)
+                        .padding([.leading, .bottom, .trailing], 8)
                 }.frame(width: size.width, height: size.height)
             }
         }.frame(width: geometry.size.width,

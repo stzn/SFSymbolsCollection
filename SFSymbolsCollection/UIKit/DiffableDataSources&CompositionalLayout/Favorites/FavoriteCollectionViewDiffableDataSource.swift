@@ -44,7 +44,7 @@ final class FavoriteCollectionViewDiffableDataSource: UICollectionViewDiffableDa
             }
 
             let section = self.snapshot().sectionIdentifiers[indexPath.section]
-            header.configure(SFSymbolCategory(iconName: section.iconName, name: section.categoryName, symbols: []))
+            header.configure(section.toSFSymbolCategory())
             return header
         }
 

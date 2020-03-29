@@ -21,12 +21,14 @@ final class SymbolViewController: UIViewController {
     lazy var containerView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
+        stack.distribution = .fill
         stack.spacing = 8
         return stack
     }()
 
     lazy var symbolImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
 
@@ -91,7 +93,7 @@ final class SymbolViewController: UIViewController {
         NSLayoutConstraint.activate([
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            symbolImageView.heightAnchor.constraint(equalTo: symbolImageView.widthAnchor),
+            symbolImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
             favoriteButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
         ])
     }

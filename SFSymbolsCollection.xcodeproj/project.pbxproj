@@ -26,6 +26,8 @@
 		D68135AC24301EBE0031C868 /* FavoriteCollectionViewDiffableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135AB24301EBE0031C868 /* FavoriteCollectionViewDiffableDataSource.swift */; };
 		D68135AE24302CB30031C868 /* SymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135AD24302CB30031C868 /* SymbolView.swift */; };
 		D68135B024303E2A0031C868 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135AF24303E2A0031C868 /* CollectionView.swift */; };
+		D68135B22430650F0031C868 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135B12430650F0031C868 /* FavoritesView.swift */; };
+		D68135B4243068740031C868 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135B3243068740031C868 /* SectionHeader.swift */; };
 		D690D672242D90F500BC151F /* SymbolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D690D671242D90F500BC151F /* SymbolViewController.swift */; };
 		D690D674242D93B900BC151F /* FavoriteSymbolStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D690D673242D93B900BC151F /* FavoriteSymbolStore.swift */; };
 		D6BBA05D241B2FAF00199481 /* CategoryCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BBA05C241B2FAF00199481 /* CategoryCollectionViewDataSource.swift */; };
@@ -69,6 +71,8 @@
 		D68135AB24301EBE0031C868 /* FavoriteCollectionViewDiffableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewDiffableDataSource.swift; sourceTree = "<group>"; };
 		D68135AD24302CB30031C868 /* SymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolView.swift; sourceTree = "<group>"; };
 		D68135AF24303E2A0031C868 /* CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
+		D68135B12430650F0031C868 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+		D68135B3243068740031C868 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		D690D671242D90F500BC151F /* SymbolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolViewController.swift; sourceTree = "<group>"; };
 		D690D673242D93B900BC151F /* FavoriteSymbolStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSymbolStore.swift; sourceTree = "<group>"; };
 		D6BBA05C241B2FAF00199481 /* CategoryCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewDataSource.swift; sourceTree = "<group>"; };
@@ -224,6 +228,8 @@
 				D68135AF24303E2A0031C868 /* CollectionView.swift */,
 				D6BBA06B241C246900199481 /* CategoriesView.swift */,
 				D68135AD24302CB30031C868 /* SymbolView.swift */,
+				D68135B12430650F0031C868 /* FavoritesView.swift */,
+				D68135B3243068740031C868 /* SectionHeader.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -340,6 +346,7 @@
 				D690D672242D90F500BC151F /* SymbolViewController.swift in Sources */,
 				D68135AC24301EBE0031C868 /* FavoriteCollectionViewDiffableDataSource.swift in Sources */,
 				D68135A4242F442C0031C868 /* InMemoryFavoriteSymbolStore.swift in Sources */,
+				D68135B22430650F0031C868 /* FavoritesView.swift in Sources */,
 				D68135A82430160C0031C868 /* FavoritesNewAPIViewController.swift in Sources */,
 				D65A73E9241B173000047944 /* SceneDelegate.swift in Sources */,
 				D6BBA067241B6CE900199481 /* CategoriesNewAPIViewController.swift in Sources */,
@@ -348,6 +355,7 @@
 				D65A740F241B216300047944 /* CategoryCell.swift in Sources */,
 				D681359F242F1C3B0031C868 /* FavoriteCollectionViewDelegate.swift in Sources */,
 				D6BBA05D241B2FAF00199481 /* CategoryCollectionViewDataSource.swift in Sources */,
+				D68135B4243068740031C868 /* SectionHeader.swift in Sources */,
 				D6BBA06C241C246900199481 /* CategoriesView.swift in Sources */,
 				D68135B024303E2A0031C868 /* CollectionView.swift in Sources */,
 				D6BBA064241B660300199481 /* CategoryCollectionViewDeglegate.swift in Sources */,

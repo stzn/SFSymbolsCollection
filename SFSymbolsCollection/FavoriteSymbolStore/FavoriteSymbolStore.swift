@@ -14,6 +14,10 @@ struct FavoriteSymbolKey: Comparable, Hashable {
     static func < (lhs: FavoriteSymbolKey, rhs: FavoriteSymbolKey) -> Bool {
         lhs.categoryName < rhs.categoryName
     }
+
+    func toSFSymbolCategory() -> SFSymbolCategory {
+        SFSymbolCategory(iconName: iconName, name: categoryName, symbols: [])
+    }
 }
 
 typealias FavoriteSymbols = [FavoriteSymbolKey: [SFSymbolCategory.Symbol]]
