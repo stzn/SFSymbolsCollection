@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-private let rowHeight: CGFloat = 80
+private let rowHeight: CGFloat = 88
 
 struct FavoritesView: View {
     @State private var symbols: FavoriteSymbols = [:]
@@ -60,16 +60,15 @@ struct SymbolsView: View {
                     HStack {
                         Image(systemName: symbol.name)
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: proxy.size.width * 0.2)
+                            .scaledToFit()
                         Text(symbol.name)
                             .font(.title)
+                            .padding(.leading, 12)
                         Spacer()
                     }
                     .frame(height: rowHeight)
-                    .padding([.leading, .top], 8)
                 }
-                Spacer()
+                .padding(.horizontal, 16)
             }
         }
     }
@@ -77,6 +76,9 @@ struct SymbolsView: View {
 
 struct FavoritesView_Previews: PreviewProvider {
     static var previews: some View {
-        FavoritesView(store: InMemoryFavoriteSymbolStore())
+        let store = InMemoryFavoriteSymbolStore()
+        store.save(FavoriteSymbolKey(iconName: "mic", categoryName: "mic"), symbol: .init(name: "mic", isFavorite: true)) {_ in}
+        store.save(FavoriteSymbolKey(iconName: "mic", categoryName: "mic"), symbol: .init(name: "mic", isFavorite: true)) {_ in}
+        return FavoritesView(store: store)
     }
 }

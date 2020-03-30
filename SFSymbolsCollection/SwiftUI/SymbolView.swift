@@ -29,7 +29,7 @@ struct SymbolView: View {
             VStack(alignment: .center, spacing: 8) {
                 Image(systemName: self.symbol.name)
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
+                    .scaledToFit()
                     .frame(height: proxy.size.height * 0.5)
                     .padding(.top, 30)
                     .padding(.bottom, 48)
@@ -64,8 +64,8 @@ struct SymbolView: View {
 
 struct SymbolView_Previews: PreviewProvider {
     static var previews: some View {
-        SymbolView(category: FavoriteSymbolKey(iconName: "", categoryName: ""),
-                   symbol: SFSymbolCategory.Symbol(name: "name", isFavorite: false),
+        SymbolView(category: FavoriteSymbolKey(iconName: "mic", categoryName: "mic"),
+                   symbol: SFSymbolCategory.Symbol(name: "mic", isFavorite: false),
                    store: InMemoryFavoriteSymbolStore())
     }
 }

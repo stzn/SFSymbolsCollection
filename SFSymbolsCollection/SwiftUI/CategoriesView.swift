@@ -48,7 +48,7 @@ struct CategoriesView: View {
                     Image(systemName: symbol.name)
                         .renderingMode(.original)
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .scaledToFit()
                         .padding([.leading, .bottom, .trailing], 8)
                 }.frame(width: size.width, height: size.height)
             }
