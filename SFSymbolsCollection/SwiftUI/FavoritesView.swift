@@ -35,7 +35,7 @@ struct FavoritesView: View {
                 ForEach(self.sections, id: \.categoryName) { section in
                     VStack {
                         SectionHeader(category: section.toSFSymbolCategory())
-                        SymbolsView(symbols: self.symbols[section, default: []])
+                        CategoryFavoriteSymbolsView(symbols: self.symbols[section, default: []])
                             .frame(height: self.height(for: section))
                     }
                 }
@@ -51,7 +51,7 @@ struct FavoritesView: View {
     }
 }
 
-struct SymbolsView: View {
+struct CategoryFavoriteSymbolsView: View {
     let symbols: [SFSymbolCategory.Symbol]
     var body: some View {
         GeometryReader { proxy in
