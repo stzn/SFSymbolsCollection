@@ -38,9 +38,9 @@ final class SymbolCell: UICollectionViewCell {
         }
     }
 
-    var selecting: Bool = false {
+    override var isSelected: Bool {
         didSet {
-            let systemName = isEditing && selecting ? "checkmark.circle.fill" : "checkmark.circle"
+            let systemName = isEditing && isSelected ? "checkmark.circle.fill" : "checkmark.circle"
             checkboxImageView.image = UIImage(systemName: systemName, withConfiguration: UIImage.SymbolConfiguration(scale: .large))
             checkboxImageView.isHidden = !isEditing
         }

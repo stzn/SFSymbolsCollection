@@ -25,24 +25,43 @@ final class FavoriteCollectionViewDataSource: NSObject, UICollectionViewDataSour
         store.get { [weak self] result in
             if let symbols = try? result.get() {
                 self?.symbols = symbols
+            }
+            DispatchQueue.main.async {
                 completion?()
             }
         }
     }
 
-    func deleteFavorites(indexPaths: [IndexPath], completion: @escaping (Result<Void, Error>) -> Void) {
-        indexPaths.forEach {
-            guard let section = sectionItem(at: $0), let symbol = cellItem(at: $0) else {
-                return
-            }
-            store.delete(section, symbol: symbol) { result in
-                if case .failure(let error) = result {
-                    completion(.failure(error))
+    func deleteFavorites(collectionView: UICollectionView, completion: @escaping (Result<Void, Error>) -> Void) {
+        guard let indexPaths = collectionView.indexPathsForSelectedItems else {
+            return
+        }
+
+        let group = DispatchGroup()
+        let queue = DispatchQueue(label: "queue")
+        var error: Error?
+        indexPaths.forEach { indexPath in
+            group.enter()
+            queue.async(group: group) {
+                guard let section = self.sectionItem(at: indexPath), let symbol = self.cellItem(at: indexPath) else {
                     return
+                }
+                self.store.delete(section, symbol: symbol) { result in
+                    if case .failure(let err) = result {
+                        error = err
+                    }
+                    group.leave()
                 }
             }
         }
-        completion(.success(()))
+
+        group.notify(queue: .main) {
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {

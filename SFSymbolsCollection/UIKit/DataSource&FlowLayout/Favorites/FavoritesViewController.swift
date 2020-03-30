@@ -29,7 +29,6 @@ final class FavoritesViewController: UIViewController {
     private let delegate = FavoriteCollectionViewDelegate()
     private let frame: CGRect
     private let dataSource: FavoriteCollectionViewDataSource
-    private var selectedIndexPaths: [IndexPath] = []
 
     init(frame: CGRect, store: FavoriteSymbolStore) {
         self.frame = frame
@@ -51,7 +50,9 @@ final class FavoritesViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        dataSource.reloadData()
+        dataSource.reloadData { [weak self] in
+            self?.collectionView.reloadData()
+        }
     }
 
     private func setupCollectionView() {
@@ -75,20 +76,41 @@ final class FavoritesViewController: UIViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
+}
+
+// MARK: Edit Mode
+
+extension FavoritesViewController {
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        if isEditing {
+            navigationItem.rightBarButtonItems = [cancelButtonItem, deleteButtonItem]
+        } else {
+            navigationItem.rightBarButtonItems = nil
+            navigationItem.rightBarButtonItem = editButtonItem
+        }
+        collectionView.allowsMultipleSelection = isEditing
+        collectionView.indexPathsForVisibleItems.forEach {
+            guard let cell = collectionView.cellForItem(at: $0) as? SymbolCell else {
+                return
+            }
+            cell.isEditing = isEditing
+
+            if !isEditing {
+                cell.isSelected = false
+            }
+        }
+    }
 
     private func setCellSelectedAt(_ indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? SymbolCell, isEditing else {
             return
         }
-        cell.selecting.toggle()
-        selectedIndexPaths.removeAll(where: { $0 == indexPath })
-        if cell.selecting {
-            selectedIndexPaths.append(indexPath)
-        }
+        cell.isSelected.toggle()
     }
 
     @objc func deleteFavorites() {
-        dataSource.deleteFavorites(indexPaths: selectedIndexPaths) { [weak self] result in
+        dataSource.deleteFavorites(collectionView: collectionView) { [weak self] result in
             if case .failure = result {
                 return
             }
@@ -106,28 +128,5 @@ final class FavoritesViewController: UIViewController {
 
     @objc func cancelEdit() {
         setEditing(false, animated: true)
-    }
-}
-
-extension FavoritesViewController {
-    override func setEditing(_ editing: Bool, animated: Bool) {
-        super.setEditing(editing, animated: animated)
-        if isEditing {
-            navigationItem.rightBarButtonItems = [cancelButtonItem, deleteButtonItem]
-        } else {
-            navigationItem.rightBarButtonItems = nil
-            navigationItem.rightBarButtonItem = editButtonItem
-        }
-        collectionView.isMultipleTouchEnabled = isEditing
-        collectionView.indexPathsForVisibleItems.forEach {
-            guard let cell = collectionView.cellForItem(at: $0) as? SymbolCell else {
-                return
-            }
-            cell.isEditing = isEditing
-
-            if !isEditing {
-                cell.selecting = false
-            }
-        }
     }
 }

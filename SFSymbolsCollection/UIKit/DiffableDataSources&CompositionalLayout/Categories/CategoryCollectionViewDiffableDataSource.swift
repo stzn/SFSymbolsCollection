@@ -49,17 +49,19 @@ final class CategoryCollectionViewDiffableDataSource: UICollectionViewDiffableDa
         addNotifications()
     }
 
+    deinit {
+        removeNotifications()
+    }
+
     private func updateSnapshot() {
         var initialSnapshot = NSDiffableDataSourceSnapshot<SFSymbolCategory, SFSymbolCategory.Symbol>()
         for symbol in categories {
             initialSnapshot.appendSections([symbol])
             initialSnapshot.appendItems(symbol.symbols)
         }
-        apply(initialSnapshot)
-    }
-
-    deinit {
-        removeNotifications()
+        DispatchQueue.main.async {
+            self.apply(initialSnapshot, animatingDifferences: false)
+        }
     }
 
     func reloadData() {

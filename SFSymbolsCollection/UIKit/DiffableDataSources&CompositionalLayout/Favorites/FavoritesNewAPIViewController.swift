@@ -18,6 +18,18 @@ final class FavoritesNewAPIViewController: UIViewController {
                          collectionViewLayout: UICollectionViewFlowLayout())
     }()
 
+    private lazy var deleteButtonItem: UIBarButtonItem = {
+        let barButton = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .plain,
+                                        target: self, action: #selector(deleteFavorites))
+        return barButton
+    }()
+
+    private lazy var cancelButtonItem: UIBarButtonItem = {
+        let barButton = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain,
+                                        target: self, action: #selector(cancelEdit))
+        return barButton
+    }()
+
     private var dataSource: FavoriteCollectionViewDiffableDataSource!
 
     private let frame: CGRect
@@ -36,6 +48,7 @@ final class FavoritesNewAPIViewController: UIViewController {
         super.loadView()
         view = UIView(frame: frame)
         view.backgroundColor = .white
+        navigationItem.rightBarButtonItem = editButtonItem
         setupCollectionView()
     }
 
@@ -46,6 +59,7 @@ final class FavoritesNewAPIViewController: UIViewController {
 
     private func setupCollectionView() {
         collectionView.backgroundColor = .white
+        collectionView.delegate = self
         collectionView.register(SymbolCell.self,
                                 forCellWithReuseIdentifier: SymbolCell.reuseIdentifier)
         collectionView.register(CategoryHeader.self,
@@ -65,7 +79,46 @@ final class FavoritesNewAPIViewController: UIViewController {
         dataSource = FavoriteCollectionViewDiffableDataSource(
             collectionView: collectionView, store: store)
     }
+}
 
+// MARK: Edit Mode
+
+extension FavoritesNewAPIViewController {
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        if isEditing {
+            navigationItem.rightBarButtonItems = [cancelButtonItem, deleteButtonItem]
+        } else {
+            navigationItem.rightBarButtonItems = nil
+            navigationItem.rightBarButtonItem = editButtonItem
+        }
+        collectionView.allowsMultipleSelection = isEditing
+        collectionView.indexPathsForVisibleItems.forEach {
+            guard let cell = collectionView.cellForItem(at: $0) as? SymbolCell else {
+                return
+            }
+            cell.isEditing = isEditing
+
+            if !isEditing {
+                cell.isSelected = false
+            }
+        }
+    }
+
+    @objc func deleteFavorites() {
+        dataSource.deleteFavorites(collectionView: collectionView) { [weak self] _ in
+            self?.isEditing.toggle()
+        }
+    }
+
+    @objc func cancelEdit() {
+        setEditing(false, animated: true)
+    }
+}
+
+// MARK: Layout
+
+extension FavoritesNewAPIViewController {
     func configureLayout() -> UICollectionViewCompositionalLayout {
         let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(80))
         let item = NSCollectionLayoutItem(layoutSize: size)
@@ -82,6 +135,17 @@ final class FavoritesNewAPIViewController: UIViewController {
         section.interGroupSpacing = 10
         section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0)
         return UICollectionViewCompositionalLayout(section: section)
+    }
+}
+
+// MARK: UICollectionViewDelegate
+
+extension FavoritesNewAPIViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? SymbolCell, isEditing else {
+            return
+        }
+        cell.isSelected.toggle()
     }
 }
 

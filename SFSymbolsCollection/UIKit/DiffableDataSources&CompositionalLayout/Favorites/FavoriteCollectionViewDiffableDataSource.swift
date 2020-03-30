@@ -47,7 +47,6 @@ final class FavoriteCollectionViewDiffableDataSource: UICollectionViewDiffableDa
             header.configure(section.toSFSymbolCategory())
             return header
         }
-
         updateSnapshot()
     }
 
@@ -57,13 +56,53 @@ final class FavoriteCollectionViewDiffableDataSource: UICollectionViewDiffableDa
             initialSnapshot.appendSections([section])
             initialSnapshot.appendItems(symbols[section, default: []])
         }
-        apply(initialSnapshot)
+        DispatchQueue.main.async {
+            self.apply(initialSnapshot, animatingDifferences: false)
+        }
     }
 
-    func reloadData() {
-        store.get { [weak self] result in
-            if let symbols = try? result.get() {
-                self?.symbols = symbols
+    func reloadData(completion: (()-> Void)? = nil) {
+        store.get { result in
+            DispatchQueue.main.async { [weak self] in
+                if let symbols = try? result.get() {
+                    self?.symbols = symbols
+                }
+                completion?()
+            }
+        }
+    }
+
+    func deleteFavorites(collectionView: UICollectionView, completion: @escaping (Result<Void, Error>) -> Void) {
+        guard let indexPaths = collectionView.indexPathsForSelectedItems else {
+            return
+        }
+
+        let group = DispatchGroup()
+        let queue = DispatchQueue(label: "queue")
+        var error: Error?
+        indexPaths.forEach { indexPath in
+            group.enter()
+            queue.async(group: group) {
+                let section = self.sections[indexPath.section]
+                guard let symbol = self.itemIdentifier(for: indexPath) else {
+                    return
+                }
+                self.store.delete(section, symbol: symbol) { result in
+                    if case .failure(let err) = result {
+                        error = err
+                    }
+                    group.leave()
+                }
+            }
+        }
+
+        group.notify(queue: .main) { [weak self] in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            self?.reloadData {
+                completion(.success(()))
             }
         }
     }
