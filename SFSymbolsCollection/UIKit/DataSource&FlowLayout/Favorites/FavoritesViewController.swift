@@ -26,7 +26,7 @@ final class FavoritesViewController: UIViewController {
         return barButton
     }()
 
-    private let delegate: FavoriteCollectionViewDelegate
+    private let delegate = FavoriteCollectionViewDelegate()
     private let frame: CGRect
     private let dataSource: FavoriteCollectionViewDataSource
     private var selectedIndexPaths: [IndexPath] = []
@@ -34,7 +34,6 @@ final class FavoritesViewController: UIViewController {
     init(frame: CGRect, store: FavoriteSymbolStore) {
         self.frame = frame
         self.dataSource = FavoriteCollectionViewDataSource(store: store)
-        self.delegate = FavoriteCollectionViewDelegate()
         super.init(nibName: nil, bundle: nil)
     }
 
