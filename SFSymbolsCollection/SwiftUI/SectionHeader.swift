@@ -28,7 +28,7 @@ struct SectionHeader: View {
             .padding([.bottom], 8)
             Divider()
                 .background(Color.black)
-                .padding([.leading, .trailing], 8)
+                .padding(.horizontal, 8)
         }
     }
 }

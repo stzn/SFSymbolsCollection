@@ -36,7 +36,8 @@ struct FavoritesView: View {
                     VStack {
                         SectionHeader(category: section.toSFSymbolCategory())
                         CategoryFavoriteSymbolsView(symbols: self.symbols[section, default: []])
-                            .frame(height: self.height(for: section))
+                        .padding(.top, 8)
+                        .padding(.horizontal, 20)
                     }
                 }
                 Spacer()
@@ -45,32 +46,30 @@ struct FavoritesView: View {
             }
         }
     }
-
-    private func height(for section: FavoriteSymbolKey) -> CGFloat {
-        CGFloat(rowHeight) * CGFloat(self.symbols[section, default: []].count)
-    }
 }
 
 struct CategoryFavoriteSymbolsView: View {
     let symbols: [SFSymbolCategory.Symbol]
     var body: some View {
-        GeometryReader { proxy in
-            VStack(alignment: .leading) {
-                ForEach(self.symbols, id: \.name) { symbol in
-                    HStack {
-                        Image(systemName: symbol.name)
-                            .resizable()
-                            .scaledToFit()
-                        Text(symbol.name)
-                            .font(.title)
-                            .padding(.leading, 12)
-                        Spacer()
-                    }
-                    .frame(height: rowHeight)
+        VStack {
+            ForEach(self.symbols, id: \.name) { symbol in
+                HStack {
+                    Image(systemName: symbol.name)
+                        .resizable()
+                        .scaledToFit()
+                    Text(symbol.name)
+                        .font(.title)
+                        .padding(.leading, 16)
+                    Spacer()
                 }
-                .padding(.horizontal, 16)
+                .frame(height: rowHeight)
             }
         }
+        .frame(height: self.height)
+    }
+
+    private var height: CGFloat {
+        CGFloat(rowHeight) * CGFloat(symbols.count)
     }
 }
 
