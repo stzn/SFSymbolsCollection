@@ -23,7 +23,7 @@ struct FavoriteSymbolKey: Comparable, Hashable {
 typealias FavoriteSymbols = [FavoriteSymbolKey: [SFSymbolCategory.Symbol]]
 
 protocol FavoriteSymbolStore {
-    func delete(_ category: FavoriteSymbolKey, symbol: SFSymbolCategory.Symbol, completion: (Result<Void, Error>) -> Void)
-    func save(_ category: FavoriteSymbolKey, symbol: SFSymbolCategory.Symbol, completion: (Result<Void, Error>) -> Void)
-    func get(completion: (Result<FavoriteSymbols, Error>) -> Void)
+    func delete(_ category: FavoriteSymbolKey, symbol: SFSymbolCategory.Symbol, completion: @escaping (Result<Void, Error>) -> Void)
+    func save(_ category: FavoriteSymbolKey, symbol: SFSymbolCategory.Symbol, completion: @escaping (Result<Void, Error>) -> Void)
+    func get(completion: @escaping (Result<FavoriteSymbols, Error>) -> Void)
 }

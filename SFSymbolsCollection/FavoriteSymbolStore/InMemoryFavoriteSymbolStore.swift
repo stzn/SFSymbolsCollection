@@ -15,28 +15,35 @@ extension NSNotification.Name {
 
 final class InMemoryFavoriteSymbolStore: FavoriteSymbolStore {
     var dictionary: FavoriteSymbols = [:]
+    let asyncQueue = DispatchQueue(label: "asyncQueue")
 
-    func save(_ category: FavoriteSymbolKey, symbol: SFSymbolCategory.Symbol, completion: (Result<Void, Error>) -> Void) {
-        dictionary[category, default: []].append(symbol)
-        NotificationCenter.default.post(name: NSNotification.Name.didFavoriteSymbolAdd, object: symbol)
-        completion(.success(()))
-    }
-
-    func get(completion: (Result<FavoriteSymbols, Error>) -> Void) {
-        completion(.success(dictionary))
-    }
-
-    func delete(_ category: FavoriteSymbolKey, symbol: SFSymbolCategory.Symbol, completion: (Result<Void, Error>) -> Void) {
-        if var symbols = dictionary[category] {
-            symbols.removeAll(where: { $0.name == symbol.name })
-            if symbols.count == 0 {
-                dictionary[category] = nil
-            } else {
-                dictionary[category] = symbols
-            }
-            NotificationCenter.default.post(name: NSNotification.Name.didFavoriteSymbolDelete, object: symbol)
+    func save(_ category: FavoriteSymbolKey, symbol: SFSymbolCategory.Symbol, completion: @escaping (Result<Void, Error>) -> Void) {
+        asyncQueue.asyncAfter(deadline: .now() + 0.1) {
+            self.dictionary[category, default: []].append(symbol)
+            NotificationCenter.default.post(name: NSNotification.Name.didFavoriteSymbolAdd, object: symbol)
+            completion(.success(()))
         }
-        completion(.success(()))
+    }
+
+    func get(completion: @escaping (Result<FavoriteSymbols, Error>) -> Void) {
+        asyncQueue.asyncAfter(deadline: .now() + 0.1) {
+            completion(.success(self.dictionary))
+        }
+    }
+
+    func delete(_ category: FavoriteSymbolKey, symbol: SFSymbolCategory.Symbol, completion: @escaping (Result<Void, Error>) -> Void) {
+        asyncQueue.asyncAfter(deadline: .now() + 0.1) {
+            if var symbols = self.dictionary[category] {
+                symbols.removeAll(where: { $0.name == symbol.name })
+                if symbols.count == 0 {
+                    self.dictionary[category] = nil
+                } else {
+                    self.dictionary[category] = symbols
+                }
+                NotificationCenter.default.post(name: NSNotification.Name.didFavoriteSymbolDelete, object: symbol)
+            }
+            completion(.success(()))
+        }
     }
 }
 
