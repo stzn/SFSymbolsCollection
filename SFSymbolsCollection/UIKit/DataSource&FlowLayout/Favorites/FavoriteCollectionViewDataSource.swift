@@ -21,12 +21,28 @@ final class FavoriteCollectionViewDataSource: NSObject, UICollectionViewDataSour
         reloadData()
     }
 
-    func reloadData() {
+    func reloadData(completion: (() -> Void)? = nil) {
         store.get { [weak self] result in
             if let symbols = try? result.get() {
                 self?.symbols = symbols
+                completion?()
             }
         }
+    }
+
+    func deleteFavorites(indexPaths: [IndexPath], completion: @escaping (Result<Void, Error>) -> Void) {
+        indexPaths.forEach {
+            guard let section = sectionItem(at: $0), let symbol = cellItem(at: $0) else {
+                return
+            }
+            store.delete(section, symbol: symbol) { result in
+                if case .failure(let error) = result {
+                    completion(.failure(error))
+                    return
+                }
+            }
+        }
+        completion(.success(()))
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {

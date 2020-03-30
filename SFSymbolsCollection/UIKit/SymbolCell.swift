@@ -25,6 +25,27 @@ final class SymbolCell: UICollectionViewCell {
         return label
     }()
 
+    lazy var checkboxImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "checkmark.circle", withConfiguration: UIImage.SymbolConfiguration(scale: .large))
+        imageView.isHidden = true
+        return imageView
+    }()
+
+    var isEditing: Bool = false {
+        didSet {
+            checkboxImageView.isHidden = !isEditing
+        }
+    }
+
+    var selecting: Bool = false {
+        didSet {
+            let systemName = isEditing && selecting ? "checkmark.circle.fill" : "checkmark.circle"
+            checkboxImageView.image = UIImage(systemName: systemName, withConfiguration: UIImage.SymbolConfiguration(scale: .large))
+            checkboxImageView.isHidden = !isEditing
+        }
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -48,15 +69,19 @@ final class SymbolCell: UICollectionViewCell {
     private func setupView() {
         contentView.addSubview(symbolImageView)
         contentView.addSubview(nameLabel)
+        contentView.addSubview(checkboxImageView)
         symbolImageView.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        checkboxImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             symbolImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             symbolImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             symbolImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.2),
             nameLabel.leadingAnchor.constraint(equalTo: symbolImageView.trailingAnchor, constant: 12),
-            nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            nameLabel.trailingAnchor.constraint(equalTo: checkboxImageView.leadingAnchor, constant: 8),
             nameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            checkboxImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            checkboxImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
         ])
     }
 }

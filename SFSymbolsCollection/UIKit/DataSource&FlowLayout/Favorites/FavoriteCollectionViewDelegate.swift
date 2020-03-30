@@ -9,6 +9,7 @@
 import UIKit
 
 final class FavoriteCollectionViewDelegate: NSObject, UICollectionViewDelegateFlowLayout {
+    var didSelectItemAt: ((IndexPath) -> Void)?
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: collectionView.bounds.width, height: 80)
@@ -20,5 +21,9 @@ final class FavoriteCollectionViewDelegate: NSObject, UICollectionViewDelegateFl
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         CGSize(width: collectionView.bounds.width, height: CategoryHeader.height)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        didSelectItemAt?(indexPath)
     }
 }

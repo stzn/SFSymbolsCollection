@@ -9,18 +9,32 @@
 import UIKit
 
 final class FavoritesViewController: UIViewController {
-    lazy var collectionView: UICollectionView = {
+    private lazy var collectionView: UICollectionView = {
         UICollectionView(frame: .zero,
                          collectionViewLayout: UICollectionViewFlowLayout())
     }()
 
-    private let delegate = FavoriteCollectionViewDelegate()
+    private lazy var deleteButtonItem: UIBarButtonItem = {
+        let barButton = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .plain,
+                                        target: self, action: #selector(deleteFavorites))
+        return barButton
+    }()
+
+    private lazy var cancelButtonItem: UIBarButtonItem = {
+        let barButton = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain,
+                                        target: self, action: #selector(cancelEdit))
+        return barButton
+    }()
+
+    private let delegate: FavoriteCollectionViewDelegate
     private let frame: CGRect
     private let dataSource: FavoriteCollectionViewDataSource
+    private var selectedIndexPaths: [IndexPath] = []
 
     init(frame: CGRect, store: FavoriteSymbolStore) {
         self.frame = frame
         self.dataSource = FavoriteCollectionViewDataSource(store: store)
+        self.delegate = FavoriteCollectionViewDelegate()
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -32,6 +46,7 @@ final class FavoritesViewController: UIViewController {
         super.loadView()
         view = UIView(frame: frame)
         view.backgroundColor = .white
+        navigationItem.rightBarButtonItem = editButtonItem
         setupCollectionView()
     }
 
@@ -44,6 +59,8 @@ final class FavoritesViewController: UIViewController {
         collectionView.backgroundColor = .white
         collectionView.dataSource = dataSource
         collectionView.delegate = delegate
+        delegate.didSelectItemAt = setCellSelectedAt
+
         collectionView.register(SymbolCell.self,
                                 forCellWithReuseIdentifier: SymbolCell.reuseIdentifier)
         collectionView.register(CategoryHeader.self,
@@ -58,5 +75,60 @@ final class FavoritesViewController: UIViewController {
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
+    }
+
+    private func setCellSelectedAt(_ indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? SymbolCell, isEditing else {
+            return
+        }
+        cell.selecting.toggle()
+        selectedIndexPaths.removeAll(where: { $0 == indexPath })
+        if cell.selecting {
+            selectedIndexPaths.append(indexPath)
+        }
+    }
+
+    @objc func deleteFavorites() {
+        dataSource.deleteFavorites(indexPaths: selectedIndexPaths) { [weak self] result in
+            if case .failure = result {
+                return
+            }
+            self?.dataSource.reloadData { [weak self] in
+                guard let self = self else {
+                    return
+                }
+                self.collectionView.reloadData()
+                // if not call, can not get correct indexPaths from indexPathsForVisibleItems
+                self.collectionView.layoutIfNeeded()
+                self.isEditing.toggle()
+            }
+        }
+    }
+
+    @objc func cancelEdit() {
+        setEditing(false, animated: true)
+    }
+}
+
+extension FavoritesViewController {
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        if isEditing {
+            navigationItem.rightBarButtonItems = [cancelButtonItem, deleteButtonItem]
+        } else {
+            navigationItem.rightBarButtonItems = nil
+            navigationItem.rightBarButtonItem = editButtonItem
+        }
+        collectionView.isMultipleTouchEnabled = isEditing
+        collectionView.indexPathsForVisibleItems.forEach {
+            guard let cell = collectionView.cellForItem(at: $0) as? SymbolCell else {
+                return
+            }
+            cell.isEditing = isEditing
+
+            if !isEditing {
+                cell.selecting = false
+            }
+        }
     }
 }
