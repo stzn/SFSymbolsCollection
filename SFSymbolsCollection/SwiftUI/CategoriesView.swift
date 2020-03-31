@@ -36,24 +36,27 @@ struct CategoriesView: View {
 
     private func height(elementSize: CGSize, elementCount: Int) -> CGFloat {
         let rows = ceil(Double(elementCount) / Double(columnCount))
-        return elementSize.height * CGFloat(rows) + SectionHeader.height
+        return elementSize.height * CGFloat(rows)
     }
 
     private func createSFSymbolCategorySection(for geometry: GeometryProxy, with category: SFSymbolCategory) -> some View {
         let size = self.size(for: geometry)
         return VStack {
             SectionHeader(category: category)
-            CollectionView(data: category.symbols, layout: flowLayout, elementSize: size) { symbol in
+            Grid(category.symbols) { symbol in
                 NavigationLink(destination: self.createSymbolView(category: category, symbol: symbol)) {
                     Image(systemName: symbol.name)
                         .renderingMode(.original)
                         .resizable()
                         .scaledToFit()
-                        .padding([.leading, .bottom, .trailing], 8)
-                }.frame(width: size.width, height: size.height)
+                        .padding(.horizontal, 8)
+                        .padding(.bottom, 12)
+                        .frame(width: size.width, height: size.height)
+                }
             }
-        }.frame(width: geometry.size.width,
-                height: height(elementSize: size, elementCount: category.symbols.count))
+            .frame(width: geometry.size.width,
+                   height: height(elementSize: size, elementCount: category.symbols.count))
+        }
     }
 
     private func createSymbolView(category: SFSymbolCategory, symbol: SFSymbolCategory.Symbol) -> some View {

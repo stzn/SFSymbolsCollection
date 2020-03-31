@@ -24,8 +24,8 @@ struct SectionHeader: View {
                     .bold()
                     .font(.system(size: 40))
             }
-            .padding([.top], 16)
-            .padding([.bottom], 8)
+            .padding(.top, 16)
+            .padding(.bottom, 8)
             Divider()
                 .background(Color.black)
                 .padding(.horizontal, 8)

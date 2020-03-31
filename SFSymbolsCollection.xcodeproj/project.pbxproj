@@ -25,9 +25,9 @@
 		D68135AA243018B20031C868 /* CategoryCollectionViewDiffableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135A9243018B20031C868 /* CategoryCollectionViewDiffableDataSource.swift */; };
 		D68135AC24301EBE0031C868 /* FavoriteCollectionViewDiffableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135AB24301EBE0031C868 /* FavoriteCollectionViewDiffableDataSource.swift */; };
 		D68135AE24302CB30031C868 /* SymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135AD24302CB30031C868 /* SymbolView.swift */; };
-		D68135B024303E2A0031C868 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135AF24303E2A0031C868 /* CollectionView.swift */; };
 		D68135B22430650F0031C868 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135B12430650F0031C868 /* FavoritesView.swift */; };
 		D68135B4243068740031C868 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135B3243068740031C868 /* SectionHeader.swift */; };
+		D68265912432CCE800858E3B /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68265902432CCE800858E3B /* Grid.swift */; };
 		D690D672242D90F500BC151F /* SymbolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D690D671242D90F500BC151F /* SymbolViewController.swift */; };
 		D690D674242D93B900BC151F /* FavoriteSymbolStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D690D673242D93B900BC151F /* FavoriteSymbolStore.swift */; };
 		D6BBA05D241B2FAF00199481 /* CategoryCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BBA05C241B2FAF00199481 /* CategoryCollectionViewDataSource.swift */; };
@@ -70,9 +70,9 @@
 		D68135A9243018B20031C868 /* CategoryCollectionViewDiffableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewDiffableDataSource.swift; sourceTree = "<group>"; };
 		D68135AB24301EBE0031C868 /* FavoriteCollectionViewDiffableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewDiffableDataSource.swift; sourceTree = "<group>"; };
 		D68135AD24302CB30031C868 /* SymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolView.swift; sourceTree = "<group>"; };
-		D68135AF24303E2A0031C868 /* CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
 		D68135B12430650F0031C868 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		D68135B3243068740031C868 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
+		D68265902432CCE800858E3B /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		D690D671242D90F500BC151F /* SymbolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolViewController.swift; sourceTree = "<group>"; };
 		D690D673242D93B900BC151F /* FavoriteSymbolStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSymbolStore.swift; sourceTree = "<group>"; };
 		D6BBA05C241B2FAF00199481 /* CategoryCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewDataSource.swift; sourceTree = "<group>"; };
@@ -225,11 +225,11 @@
 		D6BBA06A241C242000199481 /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				D68135AF24303E2A0031C868 /* CollectionView.swift */,
 				D6BBA06B241C246900199481 /* CategoriesView.swift */,
 				D68135AD24302CB30031C868 /* SymbolView.swift */,
 				D68135B12430650F0031C868 /* FavoritesView.swift */,
 				D68135B3243068740031C868 /* SectionHeader.swift */,
+				D68265902432CCE800858E3B /* Grid.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -353,11 +353,11 @@
 				D690D674242D93B900BC151F /* FavoriteSymbolStore.swift in Sources */,
 				D681359D242F13FB0031C868 /* FavoriteCollectionViewDataSource.swift in Sources */,
 				D65A740F241B216300047944 /* CategoryCell.swift in Sources */,
+				D68265912432CCE800858E3B /* Grid.swift in Sources */,
 				D681359F242F1C3B0031C868 /* FavoriteCollectionViewDelegate.swift in Sources */,
 				D6BBA05D241B2FAF00199481 /* CategoryCollectionViewDataSource.swift in Sources */,
 				D68135B4243068740031C868 /* SectionHeader.swift in Sources */,
 				D6BBA06C241C246900199481 /* CategoriesView.swift in Sources */,
-				D68135B024303E2A0031C868 /* CollectionView.swift in Sources */,
 				D6BBA064241B660300199481 /* CategoryCollectionViewDeglegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
