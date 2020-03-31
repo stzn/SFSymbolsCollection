@@ -37,30 +37,28 @@ final class FavoriteCollectionViewDataSource: NSObject, UICollectionViewDataSour
             return
         }
 
-        let group = DispatchGroup()
-        let queue = DispatchQueue(label: "queue")
-        var error: Error?
-        indexPaths.forEach { indexPath in
-            group.enter()
-            queue.async(group: group) {
-                guard let section = self.sectionItem(at: indexPath), let symbol = self.cellItem(at: indexPath) else {
+        let symbols = collectDeleteSymbols(indexPaths: indexPaths)
+        store.delete(symbols) { result in
+            DispatchQueue.main.async { [weak self] in
+                if case .failure = result {
+                    completion(result)
                     return
                 }
-                self.store.delete(section, symbol: symbol) { result in
-                    if case .failure(let err) = result {
-                        error = err
-                    }
-                    group.leave()
+                self?.reloadData {
+                    completion(result)
                 }
             }
         }
+    }
 
-        group.notify(queue: .main) {
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                completion(.success(()))
+    private func collectDeleteSymbols(indexPaths: [IndexPath]) -> FavoriteSymbols {
+        indexPaths.reduce(into: [:]) { result, indexPath in
+            guard let section = self.sectionItem(at: indexPath) else {
+                return
             }
+            let indexes = indexPaths.filter { $0.section == indexPath.section }
+            let symbols = indexes.compactMap(self.cellItem(at:))
+            result.merge([section: symbols]) { $1 }
         }
     }
 

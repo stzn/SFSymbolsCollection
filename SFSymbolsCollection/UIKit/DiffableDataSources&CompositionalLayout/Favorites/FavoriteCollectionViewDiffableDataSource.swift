@@ -77,33 +77,26 @@ final class FavoriteCollectionViewDiffableDataSource: UICollectionViewDiffableDa
             return
         }
 
-        let group = DispatchGroup()
-        let queue = DispatchQueue(label: "queue")
-        var error: Error?
-        indexPaths.forEach { indexPath in
-            group.enter()
-            queue.async(group: group) {
-                let section = self.sections[indexPath.section]
-                guard let symbol = self.itemIdentifier(for: indexPath) else {
+        let symbols = collectDeleteSymbols(indexPaths: indexPaths)
+        store.delete(symbols) { result in
+            DispatchQueue.main.async { [weak self] in
+                if case .failure = result {
+                    completion(result)
                     return
                 }
-                self.store.delete(section, symbol: symbol) { result in
-                    if case .failure(let err) = result {
-                        error = err
-                    }
-                    group.leave()
+                self?.reloadData {
+                    completion(result)
                 }
             }
         }
+    }
 
-        group.notify(queue: .main) { [weak self] in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            self?.reloadData {
-                completion(.success(()))
-            }
+    private func collectDeleteSymbols(indexPaths: [IndexPath]) -> FavoriteSymbols {
+        indexPaths.reduce(into: [:]) { result, indexPath in
+            let section = self.sections[indexPath.section]
+            let indexes = indexPaths.filter { $0.section == indexPath.section }
+            let symbols = indexes.compactMap(self.itemIdentifier(for:))
+            result.merge([section: symbols]) { $1 }
         }
     }
 }

@@ -114,15 +114,10 @@ extension FavoritesViewController {
             if case .failure = result {
                 return
             }
-            self?.dataSource.reloadData { [weak self] in
-                guard let self = self else {
-                    return
-                }
-                self.collectionView.reloadData()
-                // if not call, can not get correct indexPaths from indexPathsForVisibleItems
-                self.collectionView.layoutIfNeeded()
-                self.isEditing.toggle()
-            }
+            self?.collectionView.reloadData()
+            // if not call, can not get correct indexPaths from indexPathsForVisibleItems
+            self?.collectionView.layoutIfNeeded()
+            self?.isEditing.toggle()
         }
     }
 

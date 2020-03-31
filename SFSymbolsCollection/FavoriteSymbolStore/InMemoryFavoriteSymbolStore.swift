@@ -45,5 +45,34 @@ final class InMemoryFavoriteSymbolStore: FavoriteSymbolStore {
             completion(.success(()))
         }
     }
+
+    func delete(_ favoriteSymbols: FavoriteSymbols, completion: @escaping (Result<Void, Error>) -> Void) {
+        let group = DispatchGroup()
+        var errors: [Error]?
+        for (key, value) in favoriteSymbols {
+            value.forEach { symbol in
+                group.enter()
+                asyncQueue.async(group: group) { [weak self] in
+                    self?.delete(key, symbol: symbol) { result in
+                        if case .failure(let error) = result {
+                            errors?.append(error)
+                        }
+                        group.leave()
+                    }
+                }
+            }
+        }
+
+        group.notify(queue: asyncQueue) {
+            if let errors = errors {
+                let errorInfo = errors.reduce(into: [:]) { result, error in
+                    result.merge([error.localizedDescription: error]) { $1 }
+                }
+                completion(.failure(NSError(domain: "store.delete", code: -1, userInfo: errorInfo)))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
 }
 
