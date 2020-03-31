@@ -34,11 +34,6 @@ struct CategoriesView: View {
         )
     }
 
-    private func height(elementSize: CGSize, elementCount: Int) -> CGFloat {
-        let rows = ceil(Double(elementCount) / Double(columnCount))
-        return elementSize.height * CGFloat(rows)
-    }
-
     private func createSFSymbolCategorySection(for geometry: GeometryProxy, with category: SFSymbolCategory) -> some View {
         let size = self.size(for: geometry)
         return VStack {
@@ -57,6 +52,11 @@ struct CategoriesView: View {
             .frame(width: geometry.size.width,
                    height: height(elementSize: size, elementCount: category.symbols.count))
         }
+    }
+
+    private func height(elementSize: CGSize, elementCount: Int) -> CGFloat {
+        let rows = ceil(Double(elementCount) / Double(columnCount))
+        return elementSize.height * CGFloat(rows)
     }
 
     private func createSymbolView(category: SFSymbolCategory, symbol: SFSymbolCategory.Symbol) -> some View {
