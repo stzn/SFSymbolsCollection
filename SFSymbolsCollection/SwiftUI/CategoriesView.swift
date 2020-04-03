@@ -26,12 +26,12 @@ struct CategoriesView: View {
             }
             .onAppear {
                 UITableView.appearance().separatorStyle = .none
-            }
-        }.navigationBarItems(trailing:
-            NavigationLink(destination: FavoritesView(store: store)) {
-                Text("Favorite")
-            }
-        )
+            }.navigationBarItems(trailing:
+                NavigationLink(destination: FavoritesView(store: self.store)) {
+                    Text("Favorite")
+                }
+            )
+        }
     }
 
     private func createSFSymbolCategorySection(for geometry: GeometryProxy, with category: SFSymbolCategory) -> some View {

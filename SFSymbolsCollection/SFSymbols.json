@@ -31,5 +31,26 @@
                 "tv", "tv.fill",
                 "gamecontroller", "gamecontroller.fill"
             ]
-        }
+        },
+        {
+            "iconName": "wifi",
+            "name": "Connectivity",
+            "symbols" : [
+                "wifi", "wifi.slash"
+            ]
+        },
+        {
+            "iconName": "car",
+            "name": "Transportation",
+            "symbols" : [
+                "car", "airplane"
+            ]
+        },
+        {
+            "iconName": "signature",
+            "name": "Commerce",
+            "symbols" : [
+                "signature", "bag"
+            ]
+        },
     ]}
