@@ -49,6 +49,7 @@ struct Grid<Data: RandomAccessCollection, ElementView: View>: View where Data.El
                         }
                     }
                 }
+                .frame(width: geometry.size.width, alignment: .leading)
             }
             .onPreferenceChange(SizePreferences<Data.Element>.self) { sizes in
                 var newPreferences: [Data.Element: CGRect] = [:]
