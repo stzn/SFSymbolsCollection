@@ -35,23 +35,47 @@ struct CategoriesView: View {
     }
 
     private func createSFSymbolCategorySection(for geometry: GeometryProxy, with category: SFSymbolCategory) -> some View {
-        let size = self.size(for: geometry)
-        return VStack {
+        VStack {
             SectionHeader(category: category)
-            Grid(category.symbols) { symbol in
-                NavigationLink(destination: self.createSymbolView(category: category, symbol: symbol)) {
-                    Image(systemName: symbol.name)
-                        .renderingMode(.original)
-                        .resizable()
-                        .scaledToFit()
-                        .padding(.horizontal, 8)
-                        .padding(.bottom, 12)
-                        .frame(width: size.width, height: size.height)
+            createSymbolsRow(for: geometry, from: category)
+//            createGrid(for: geometry, from: category)
+        }
+    }
+
+    private func createSymbolsRow(for geometry: GeometryProxy, from category: SFSymbolCategory) -> some View {
+        let size = self.size(for: geometry)
+        return ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 0) {
+                ForEach(category.symbols) { symbol in
+                    NavigationLink(destination: self.createSymbolView(category: category, symbol: symbol)) {
+                        Image(systemName: symbol.name)
+                            .renderingMode(.original)
+                            .resizable()
+                            .scaledToFit()
+                            .padding(.horizontal, 8)
+                            .padding(.bottom, 12)
+                            .frame(width: size.width, height: size.height)
+                    }
                 }
             }
-            .frame(width: geometry.size.width,
-                   height: height(elementSize: size, elementCount: category.symbols.count))
         }
+    }
+
+    private func createGrid(for geometry: GeometryProxy, from category: SFSymbolCategory) -> some View {
+        let size = self.size(for: geometry)
+        return Grid(category.symbols) { symbol in
+            NavigationLink(destination: self.createSymbolView(category: category, symbol: symbol)) {
+                Image(systemName: symbol.name)
+                    .renderingMode(.original)
+                    .resizable()
+                    .scaledToFit()
+                    .padding(.horizontal, 8)
+                    .padding(.bottom, 12)
+                    .frame(width: size.width, height: size.height)
+            }
+        }
+        .frame(width: geometry.size.width,
+               height: height(elementSize: size, elementCount: category.symbols.count))
     }
 
     private func height(elementSize: CGSize, elementCount: Int) -> CGFloat {
