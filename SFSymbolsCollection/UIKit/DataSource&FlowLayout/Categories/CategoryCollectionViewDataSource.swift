@@ -123,14 +123,11 @@ extension CategoryCollectionViewDataSource {
     }
 
     private func configureSymbol(from symbol: SFSymbolCategory.Symbol, isFavorite: Bool) {
-        categories = categories.map { category -> SFSymbolCategory in
+        categories.forEach { category in
             var category = category
-
-            guard let index = category.symbols.firstIndex(where: { $0.name == symbol.name }) else {
-                return category
+            if let index = category.symbols.firstIndex(where: { $0.name == symbol.name }) {
+                category.symbols[index] = SFSymbolCategory.Symbol(name: category.symbols[index].name, isFavorite: isFavorite)
             }
-            category.symbols[index] = SFSymbolCategory.Symbol(name: category.symbols[index].name, isFavorite: isFavorite)
-            return category
         }
     }
 }
