@@ -105,30 +105,15 @@ extension CategoryCollectionViewDiffableDataSource {
 
 extension CategoryCollectionViewDiffableDataSource {
     func configureSymbols(from favorites: FavoriteSymbols) {
-        categories = categories.map { category -> SFSymbolCategory in
+        let intersect = categories.compactMap { $0.symbols }
+            .filter(favorites.map { $0.value }.contains)
+            .flatMap { $0 }
+        categories.forEach { category in
             var category = category
-            if let index = findMatchIndex(category: category, favorites: favorites) {
+            if let index = category.symbols.firstIndex(where: intersect.contains) {
                 category.symbols[index] = SFSymbolCategory.Symbol(name: category.symbols[index].name, isFavorite: true)
-                return category
-            } else {
-                return category
             }
         }
-    }
-
-    private func findMatchIndex(category: SFSymbolCategory, favorites: FavoriteSymbols) -> Int? {
-        guard let favorite = findFavoriteSymbol(category: category, favorites: favorites) else {
-            return nil
-        }
-        return findIndex(symbols: category.symbols, favorites: favorite.value)
-    }
-
-    private func findFavoriteSymbol(category: SFSymbolCategory, favorites: FavoriteSymbols) -> FavoriteSymbols.Element? {
-        favorites.first(where: { $0.key.iconName == category.iconName && $0.key.categoryName == category.name } )
-    }
-
-    private func findIndex(symbols: [SFSymbolCategory.Symbol], favorites: [SFSymbolCategory.Symbol]) -> Int? {
-        return symbols.firstIndex(where: { symbol in favorites.contains(where: { symbol.name == $0.name }) })
     }
 
     private func configureSymbol(from symbol: SFSymbolCategory.Symbol, isFavorite: Bool) {
