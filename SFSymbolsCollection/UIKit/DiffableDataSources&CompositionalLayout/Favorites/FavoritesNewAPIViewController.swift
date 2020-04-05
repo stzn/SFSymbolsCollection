@@ -58,8 +58,8 @@ final class FavoritesNewAPIViewController: UIViewController {
     private func setupCollectionView() {
         collectionView.backgroundColor = .white
         collectionView.delegate = self
-        collectionView.register(SymbolCell.self,
-                                forCellWithReuseIdentifier: SymbolCell.reuseIdentifier)
+        collectionView.register(FavoriteSymbolCell.self,
+                                forCellWithReuseIdentifier: FavoriteSymbolCell.reuseIdentifier)
         collectionView.register(CategoryHeader.self,
                                 forSupplementaryViewOfKind: sectionHeaderElementKind,
                                 withReuseIdentifier: CategoryHeader.reuseIdentifier)
@@ -92,7 +92,7 @@ extension FavoritesNewAPIViewController {
         }
         collectionView.allowsMultipleSelection = isEditing
         collectionView.indexPathsForVisibleItems.forEach {
-            guard let cell = collectionView.cellForItem(at: $0) as? SymbolCell else {
+            guard let cell = collectionView.cellForItem(at: $0) as? FavoriteSymbolCell else {
                 return
             }
             cell.isEditing = isEditing
@@ -140,7 +140,7 @@ extension FavoritesNewAPIViewController {
 
 extension FavoritesNewAPIViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? SymbolCell, isEditing else {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? FavoriteSymbolCell, isEditing else {
             return
         }
         cell.isSelected.toggle()

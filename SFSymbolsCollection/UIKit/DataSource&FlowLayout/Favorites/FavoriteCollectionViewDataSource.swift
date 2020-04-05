@@ -75,7 +75,7 @@ final class FavoriteCollectionViewDataSource: NSObject, UICollectionViewDataSour
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: SymbolCell.reuseIdentifier, for: indexPath) as? SymbolCell,
+            withReuseIdentifier: FavoriteSymbolCell.reuseIdentifier, for: indexPath) as? FavoriteSymbolCell,
             let symbol = cellItem(at: indexPath) else {
                 return UICollectionViewCell()
         }

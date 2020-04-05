@@ -25,7 +25,7 @@ final class FavoriteCollectionViewDiffableDataSource: UICollectionViewDiffableDa
         self.store = store
         super.init(collectionView: collectionView) { collectionView, indexPath, symbol -> UICollectionViewCell? in
             guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: SymbolCell.reuseIdentifier, for: indexPath) as? SymbolCell else {
+                withReuseIdentifier: FavoriteSymbolCell.reuseIdentifier, for: indexPath) as? FavoriteSymbolCell else {
                     return nil
             }
             cell.configure(symbol)

@@ -24,7 +24,7 @@
 		D681359B242F125F0031C868 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D681359A242F125F0031C868 /* FavoritesViewController.swift */; };
 		D681359D242F13FB0031C868 /* FavoriteCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D681359C242F13FB0031C868 /* FavoriteCollectionViewDataSource.swift */; };
 		D681359F242F1C3B0031C868 /* FavoriteCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D681359E242F1C3B0031C868 /* FavoriteCollectionViewDelegate.swift */; };
-		D68135A1242F27100031C868 /* SymbolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135A0242F27100031C868 /* SymbolCell.swift */; };
+		D68135A1242F27100031C868 /* FavoriteSymbolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135A0242F27100031C868 /* FavoriteSymbolCell.swift */; };
 		D68135A4242F442C0031C868 /* InMemoryFavoriteSymbolStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135A3242F442C0031C868 /* InMemoryFavoriteSymbolStore.swift */; };
 		D68135A82430160C0031C868 /* FavoritesNewAPIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135A72430160C0031C868 /* FavoritesNewAPIViewController.swift */; };
 		D68135AA243018B20031C868 /* CategoryCollectionViewDiffableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135A9243018B20031C868 /* CategoryCollectionViewDiffableDataSource.swift */; };
@@ -74,7 +74,7 @@
 		D681359A242F125F0031C868 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		D681359C242F13FB0031C868 /* FavoriteCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		D681359E242F1C3B0031C868 /* FavoriteCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewDelegate.swift; sourceTree = "<group>"; };
-		D68135A0242F27100031C868 /* SymbolCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolCell.swift; sourceTree = "<group>"; };
+		D68135A0242F27100031C868 /* FavoriteSymbolCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSymbolCell.swift; sourceTree = "<group>"; };
 		D68135A3242F442C0031C868 /* InMemoryFavoriteSymbolStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryFavoriteSymbolStore.swift; sourceTree = "<group>"; };
 		D68135A72430160C0031C868 /* FavoritesNewAPIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesNewAPIViewController.swift; sourceTree = "<group>"; };
 		D68135A9243018B20031C868 /* CategoryCollectionViewDiffableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewDiffableDataSource.swift; sourceTree = "<group>"; };
@@ -219,10 +219,10 @@
 			children = (
 				D65A740E241B216300047944 /* CategoryCell.swift */,
 				D6BBA061241B557900199481 /* CategoryHeader.swift */,
-				D6BBA065241B6C4A00199481 /* DiffableDataSources&CompositionalLayout */,
-				D6BBA05B241B2F8600199481 /* DataSource&FlowLayout */,
+				D68135A0242F27100031C868 /* FavoriteSymbolCell.swift */,
 				D690D671242D90F500BC151F /* SymbolViewController.swift */,
-				D68135A0242F27100031C868 /* SymbolCell.swift */,
+				D6BBA05B241B2F8600199481 /* DataSource&FlowLayout */,
+				D6BBA065241B6C4A00199481 /* DiffableDataSources&CompositionalLayout */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -359,7 +359,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D681359B242F125F0031C868 /* FavoritesViewController.swift in Sources */,
-				D68135A1242F27100031C868 /* SymbolCell.swift in Sources */,
+				D68135A1242F27100031C868 /* FavoriteSymbolCell.swift in Sources */,
 				D6BBA062241B557900199481 /* CategoryHeader.swift in Sources */,
 				D65A7409241B1A4600047944 /* CategoriesViewController.swift in Sources */,
 				D65A740B241B1AC900047944 /* SFSymbolCategory.swift in Sources */,

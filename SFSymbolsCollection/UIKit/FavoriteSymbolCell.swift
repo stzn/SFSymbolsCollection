@@ -1,5 +1,5 @@
 //
-//  SymbolCell.swift
+//  FavoriteSymbolCell.swift
 //  SFSymbolsCollection
 //
 //  Created by Shinzan Takata on 2020/03/28.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-final class SymbolCell: UICollectionViewCell {
-    static let reuseIdentifier = String(describing: SymbolCell.self)
+final class FavoriteSymbolCell: UICollectionViewCell {
+    static let reuseIdentifier = String(describing: FavoriteSymbolCell.self)
 
     var isEditing: Bool = false {
         didSet {
