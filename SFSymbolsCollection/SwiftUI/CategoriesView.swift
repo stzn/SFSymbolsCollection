@@ -38,6 +38,7 @@ struct CategoriesView: View {
         VStack {
             SectionHeader(category: category)
             createSymbolsRow(for: geometry, from: category)
+            // Change if want grid style layout
 //            createGrid(for: geometry, from: category)
         }
     }
