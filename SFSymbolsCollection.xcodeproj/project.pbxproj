@@ -21,14 +21,8 @@
 		D65A740B241B1AC900047944 /* SFSymbolCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65A740A241B1AC900047944 /* SFSymbolCategory.swift */; };
 		D65A740D241B1BF500047944 /* SFSymbols.json in Resources */ = {isa = PBXBuildFile; fileRef = D65A740C241B1BF500047944 /* SFSymbols.json */; };
 		D65A740F241B216300047944 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65A740E241B216300047944 /* CategoryCell.swift */; };
-		D681359B242F125F0031C868 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D681359A242F125F0031C868 /* FavoritesViewController.swift */; };
-		D681359D242F13FB0031C868 /* FavoriteCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D681359C242F13FB0031C868 /* FavoriteCollectionViewDataSource.swift */; };
-		D681359F242F1C3B0031C868 /* FavoriteCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D681359E242F1C3B0031C868 /* FavoriteCollectionViewDelegate.swift */; };
-		D68135A1242F27100031C868 /* FavoriteSymbolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135A0242F27100031C868 /* FavoriteSymbolCell.swift */; };
 		D68135A4242F442C0031C868 /* InMemoryFavoriteSymbolStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135A3242F442C0031C868 /* InMemoryFavoriteSymbolStore.swift */; };
-		D68135A82430160C0031C868 /* FavoritesNewAPIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135A72430160C0031C868 /* FavoritesNewAPIViewController.swift */; };
 		D68135AA243018B20031C868 /* CategoryCollectionViewDiffableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135A9243018B20031C868 /* CategoryCollectionViewDiffableDataSource.swift */; };
-		D68135AC24301EBE0031C868 /* FavoriteCollectionViewDiffableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135AB24301EBE0031C868 /* FavoriteCollectionViewDiffableDataSource.swift */; };
 		D68135AE24302CB30031C868 /* SymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135AD24302CB30031C868 /* SymbolView.swift */; };
 		D68135B22430650F0031C868 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135B12430650F0031C868 /* FavoritesView.swift */; };
 		D68135B4243068740031C868 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68135B3243068740031C868 /* SectionHeader.swift */; };
@@ -40,6 +34,13 @@
 		D6BBA064241B660300199481 /* CategoryCollectionViewDeglegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BBA063241B660300199481 /* CategoryCollectionViewDeglegate.swift */; };
 		D6BBA067241B6CE900199481 /* CategoriesNewAPIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BBA066241B6CE900199481 /* CategoriesNewAPIViewController.swift */; };
 		D6BBA06C241C246900199481 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BBA06B241C246900199481 /* CategoriesView.swift */; };
+		D6D856FF24397633001055B1 /* UIView+Anchors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D856FE24397633001055B1 /* UIView+Anchors.swift */; };
+		D6D857012439C37F001055B1 /* FavoriteTableViewDiffableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D857002439C37F001055B1 /* FavoriteTableViewDiffableDataSource.swift */; };
+		D6D857032439C3F8001055B1 /* FavoritesNewAPIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D857022439C3F8001055B1 /* FavoritesNewAPIViewController.swift */; };
+		D6D857052439C598001055B1 /* FavoriteSymbolTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D857042439C598001055B1 /* FavoriteSymbolTableCell.swift */; };
+		D6D857072439CF07001055B1 /* FavoriteSymbolHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D857062439CF07001055B1 /* FavoriteSymbolHeader.swift */; };
+		D6D85709243A7349001055B1 /* FavoriteTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D85708243A7349001055B1 /* FavoriteTableViewDataSource.swift */; };
+		D6D8570B243A747A001055B1 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D8570A243A747A001055B1 /* FavoritesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,14 +72,8 @@
 		D65A740A241B1AC900047944 /* SFSymbolCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbolCategory.swift; sourceTree = "<group>"; };
 		D65A740C241B1BF500047944 /* SFSymbols.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SFSymbols.json; sourceTree = "<group>"; };
 		D65A740E241B216300047944 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
-		D681359A242F125F0031C868 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
-		D681359C242F13FB0031C868 /* FavoriteCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewDataSource.swift; sourceTree = "<group>"; };
-		D681359E242F1C3B0031C868 /* FavoriteCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewDelegate.swift; sourceTree = "<group>"; };
-		D68135A0242F27100031C868 /* FavoriteSymbolCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSymbolCell.swift; sourceTree = "<group>"; };
 		D68135A3242F442C0031C868 /* InMemoryFavoriteSymbolStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryFavoriteSymbolStore.swift; sourceTree = "<group>"; };
-		D68135A72430160C0031C868 /* FavoritesNewAPIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesNewAPIViewController.swift; sourceTree = "<group>"; };
 		D68135A9243018B20031C868 /* CategoryCollectionViewDiffableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewDiffableDataSource.swift; sourceTree = "<group>"; };
-		D68135AB24301EBE0031C868 /* FavoriteCollectionViewDiffableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewDiffableDataSource.swift; sourceTree = "<group>"; };
 		D68135AD24302CB30031C868 /* SymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolView.swift; sourceTree = "<group>"; };
 		D68135B12430650F0031C868 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		D68135B3243068740031C868 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
@@ -90,6 +85,13 @@
 		D6BBA063241B660300199481 /* CategoryCollectionViewDeglegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewDeglegate.swift; sourceTree = "<group>"; };
 		D6BBA066241B6CE900199481 /* CategoriesNewAPIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesNewAPIViewController.swift; sourceTree = "<group>"; };
 		D6BBA06B241C246900199481 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
+		D6D856FE24397633001055B1 /* UIView+Anchors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Anchors.swift"; sourceTree = "<group>"; };
+		D6D857002439C37F001055B1 /* FavoriteTableViewDiffableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewDiffableDataSource.swift; sourceTree = "<group>"; };
+		D6D857022439C3F8001055B1 /* FavoritesNewAPIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesNewAPIViewController.swift; sourceTree = "<group>"; };
+		D6D857042439C598001055B1 /* FavoriteSymbolTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSymbolTableCell.swift; sourceTree = "<group>"; };
+		D6D857062439CF07001055B1 /* FavoriteSymbolHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSymbolHeader.swift; sourceTree = "<group>"; };
+		D6D85708243A7349001055B1 /* FavoriteTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewDataSource.swift; sourceTree = "<group>"; };
+		D6D8570A243A747A001055B1 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,9 +182,8 @@
 		D6813599242F10AE0031C868 /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
-				D681359A242F125F0031C868 /* FavoritesViewController.swift */,
-				D681359C242F13FB0031C868 /* FavoriteCollectionViewDataSource.swift */,
-				D681359E242F1C3B0031C868 /* FavoriteCollectionViewDelegate.swift */,
+				D6D85708243A7349001055B1 /* FavoriteTableViewDataSource.swift */,
+				D6D8570A243A747A001055B1 /* FavoritesViewController.swift */,
 			);
 			path = Favorites;
 			sourceTree = "<group>";
@@ -208,8 +209,8 @@
 		D68135A6243015EA0031C868 /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
-				D68135A72430160C0031C868 /* FavoritesNewAPIViewController.swift */,
-				D68135AB24301EBE0031C868 /* FavoriteCollectionViewDiffableDataSource.swift */,
+				D6D857002439C37F001055B1 /* FavoriteTableViewDiffableDataSource.swift */,
+				D6D857022439C3F8001055B1 /* FavoritesNewAPIViewController.swift */,
 			);
 			path = Favorites;
 			sourceTree = "<group>";
@@ -219,8 +220,10 @@
 			children = (
 				D65A740E241B216300047944 /* CategoryCell.swift */,
 				D6BBA061241B557900199481 /* CategoryHeader.swift */,
-				D68135A0242F27100031C868 /* FavoriteSymbolCell.swift */,
+				D6D857062439CF07001055B1 /* FavoriteSymbolHeader.swift */,
+				D6D857042439C598001055B1 /* FavoriteSymbolTableCell.swift */,
 				D690D671242D90F500BC151F /* SymbolViewController.swift */,
+				D6D856FE24397633001055B1 /* UIView+Anchors.swift */,
 				D6BBA05B241B2F8600199481 /* DataSource&FlowLayout */,
 				D6BBA065241B6C4A00199481 /* DiffableDataSources&CompositionalLayout */,
 			);
@@ -358,30 +361,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D681359B242F125F0031C868 /* FavoritesViewController.swift in Sources */,
-				D68135A1242F27100031C868 /* FavoriteSymbolCell.swift in Sources */,
+				D6D85709243A7349001055B1 /* FavoriteTableViewDataSource.swift in Sources */,
+				D6D857032439C3F8001055B1 /* FavoritesNewAPIViewController.swift in Sources */,
 				D6BBA062241B557900199481 /* CategoryHeader.swift in Sources */,
 				D65A7409241B1A4600047944 /* CategoriesViewController.swift in Sources */,
 				D65A740B241B1AC900047944 /* SFSymbolCategory.swift in Sources */,
 				D68135AA243018B20031C868 /* CategoryCollectionViewDiffableDataSource.swift in Sources */,
 				D68135AE24302CB30031C868 /* SymbolView.swift in Sources */,
+				D6D856FF24397633001055B1 /* UIView+Anchors.swift in Sources */,
 				D65A73E7241B173000047944 /* AppDelegate.swift in Sources */,
+				D6D857072439CF07001055B1 /* FavoriteSymbolHeader.swift in Sources */,
+				D6D857052439C598001055B1 /* FavoriteSymbolTableCell.swift in Sources */,
 				D690D672242D90F500BC151F /* SymbolViewController.swift in Sources */,
-				D68135AC24301EBE0031C868 /* FavoriteCollectionViewDiffableDataSource.swift in Sources */,
 				D68135A4242F442C0031C868 /* InMemoryFavoriteSymbolStore.swift in Sources */,
+				D6D857012439C37F001055B1 /* FavoriteTableViewDiffableDataSource.swift in Sources */,
 				D6120B58243726B600FAE875 /* CategoryTableViewCell.swift in Sources */,
 				D6120B542437266900FAE875 /* NestedCategoriesViewController.swift in Sources */,
 				D68135B22430650F0031C868 /* FavoritesView.swift in Sources */,
 				D6120B5C243726F000FAE875 /* NestedCategoryCollectionViewDataSource.swift in Sources */,
-				D68135A82430160C0031C868 /* FavoritesNewAPIViewController.swift in Sources */,
 				D65A73E9241B173000047944 /* SceneDelegate.swift in Sources */,
+				D6D8570B243A747A001055B1 /* FavoritesViewController.swift in Sources */,
 				D6120B5A243726D800FAE875 /* NestedCategoryCollectionViewDeglegate.swift in Sources */,
 				D6BBA067241B6CE900199481 /* CategoriesNewAPIViewController.swift in Sources */,
 				D690D674242D93B900BC151F /* FavoriteSymbolStore.swift in Sources */,
-				D681359D242F13FB0031C868 /* FavoriteCollectionViewDataSource.swift in Sources */,
 				D65A740F241B216300047944 /* CategoryCell.swift in Sources */,
 				D68265912432CCE800858E3B /* Grid.swift in Sources */,
-				D681359F242F1C3B0031C868 /* FavoriteCollectionViewDelegate.swift in Sources */,
 				D6BBA05D241B2FAF00199481 /* CategoryCollectionViewDataSource.swift in Sources */,
 				D68135B4243068740031C868 /* SectionHeader.swift in Sources */,
 				D6BBA06C241C246900199481 /* CategoriesView.swift in Sources */,

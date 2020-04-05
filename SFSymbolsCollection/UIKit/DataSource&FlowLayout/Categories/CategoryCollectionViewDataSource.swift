@@ -9,7 +9,7 @@
 import UIKit
 
 final class CategoryCollectionViewDataSource: NSObject, UICollectionViewDataSource {
-    private var categories = SFSymbolCategory.loadJSONFile()
+    private var categories: [SFSymbolCategory] = []
     private let store: FavoriteSymbolStore
 
     init(store: FavoriteSymbolStore) {
@@ -22,12 +22,15 @@ final class CategoryCollectionViewDataSource: NSObject, UICollectionViewDataSour
         removeNotifications()
     }
 
-    func reloadData() {
+    func reloadData(completion: @escaping () -> Void) {
         store.get { [weak self] result in
             guard let self = self, let favorites = try? result.get() else {
                 return
             }
             self.configureSymbols(from: favorites)
+            DispatchQueue.main.async {
+                completion()
+            }
         }
     }
 
@@ -111,6 +114,10 @@ extension CategoryCollectionViewDataSource {
 
 extension CategoryCollectionViewDataSource {
     func configureSymbols(from favorites: FavoriteSymbols) {
+        categories = SFSymbolCategory.loadJSONFile()
+        guard !favorites.isEmpty else {
+            return
+        }
         categories = categories.map { category -> SFSymbolCategory in
             var category = category
             if let index = findMatchIndex(category: category, favorites: favorites) {

@@ -11,7 +11,7 @@ import UIKit
 final class CategoriesTableViewDataSource: NSObject, UITableViewDataSource {
     var didSelectItem: ((SFSymbolCategory, SFSymbolCategory.Symbol) -> Void)?
 
-    private var categories = SFSymbolCategory.loadJSONFile()
+    private var categories: [SFSymbolCategory] = []
     private let store: FavoriteSymbolStore
 
     init(store: FavoriteSymbolStore) {
@@ -75,6 +75,10 @@ final class CategoriesTableViewDataSource: NSObject, UITableViewDataSource {
 
 extension CategoriesTableViewDataSource {
     func configureSymbols(from favorites: FavoriteSymbols) {
+        categories = SFSymbolCategory.loadJSONFile()
+        guard favorites.isEmpty else {
+            return
+        }
         categories = categories.map { category -> SFSymbolCategory in
             var category = category
             if let index = findMatchIndex(category: category, favorites: favorites) {

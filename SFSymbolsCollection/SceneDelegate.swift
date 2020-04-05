@@ -20,11 +20,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let tab = UITabBarController()
 
             let store = InMemoryFavoriteSymbolStore()
-            let categoriesViewController = UINavigationController(
-                rootViewController: NestedCategoriesViewController(frame: window.bounds, store: store))
-            // Change if want grid style layout
 //            let categoriesViewController = UINavigationController(
-//                rootViewController: CategoriesViewController(frame: window.bounds, store: store))
+//                rootViewController: NestedCategoriesViewController(frame: window.bounds, store: store))
+            // Change if want grid style layout
+            let categoriesViewController = UINavigationController(
+                rootViewController: CategoriesViewController(frame: window.bounds, store: store))
             categoriesViewController.tabBarItem = UITabBarItem(title: "old API", image: nil, tag: 0)
 
             let categoriesNewAPIViewController = UINavigationController(

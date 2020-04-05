@@ -80,8 +80,14 @@ extension NestedCategoryCollectionViewDataSource {
 
 extension NestedCategoryCollectionViewDataSource {
     private func configureSymbol(from symbol: SFSymbolCategory.Symbol, isFavorite: Bool) {
-        if let index = symbols.firstIndex(where: { $0.name == symbol.name }) {
-            symbols[index] = SFSymbolCategory.Symbol(name: symbol.name, isFavorite: isFavorite)
+        symbols = symbols.map { symbol -> SFSymbolCategory.Symbol in
+            var symbol = symbol
+            if let index = symbols.firstIndex(where: { $0.name == symbol.name }) {
+                symbol = SFSymbolCategory.Symbol(name: symbols[index].name, isFavorite: true)
+                return symbol
+            } else {
+                return symbol
+            }
         }
     }
 }

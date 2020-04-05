@@ -2,33 +2,32 @@
 //  FavoritesNewAPIViewController.swift
 //  SFSymbolsCollection
 //
-//  Created by Shinzan Takata on 2020/03/29.
+//  Created by Shinzan Takata on 2020/04/05.
 //  Copyright © 2020 shiz. All rights reserved.
 //
 
 import UIKit
 
 final class FavoritesNewAPIViewController: UIViewController {
-    private let collectionView: UICollectionView = {
-        UICollectionView(frame: .zero,
-                         collectionViewLayout: UICollectionViewFlowLayout())
+    let tableView: UITableView = {
+        UITableView(frame: .zero, style: .grouped)
     }()
 
     private lazy var deleteButtonItem: UIBarButtonItem = {
-        let barButton = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .plain,
-                                        target: self, action: #selector(deleteFavorites))
+        let barButton = UIBarButtonItem(
+            image: UIImage(systemName: "trash"), style: .plain,
+            target: self, action: #selector(deleteFavorites))
         return barButton
     }()
 
     private lazy var cancelButtonItem: UIBarButtonItem = {
-        let barButton = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain,
-                                        target: self, action: #selector(cancelEdit))
+        let barButton = UIBarButtonItem(
+            image: UIImage(systemName: "xmark"), style: .plain,
+            target: self, action: #selector(cancelEdit))
         return barButton
     }()
 
-    private let sectionHeaderElementKind = "section-header-element-kind"
-    private var categories = SFSymbolCategory.loadJSONFile()
-    private var dataSource: FavoriteCollectionViewDiffableDataSource!
+    private var dataSource: FavoriteTableViewDiffableDataSource!
     private let frame: CGRect
     private let store: FavoriteSymbolStore
 
@@ -46,36 +45,32 @@ final class FavoritesNewAPIViewController: UIViewController {
         super.loadView()
         view = UIView(frame: frame)
         view.backgroundColor = .white
-        navigationItem.rightBarButtonItem = editButtonItem
-        setupCollectionView()
+        setupTableView()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        dataSource.reloadData()
+        dataSource.reloadData { [weak self] in
+            self?.configureNavigationBatButtonItems()
+        }
     }
 
-    private func setupCollectionView() {
-        collectionView.backgroundColor = .white
-        collectionView.delegate = self
-        collectionView.register(FavoriteSymbolCell.self,
-                                forCellWithReuseIdentifier: FavoriteSymbolCell.reuseIdentifier)
-        collectionView.register(CategoryHeader.self,
-                                forSupplementaryViewOfKind: sectionHeaderElementKind,
-                                withReuseIdentifier: CategoryHeader.reuseIdentifier)
+    private func setupTableView() {
+        tableView.backgroundColor = .white
+        tableView.delegate = self
+        tableView.register(
+            FavoriteSymbolTableCell.self,
+            forCellReuseIdentifier: FavoriteSymbolTableCell.reuseIdentifier)
+        tableView.register(
+            FavoriteSymbolHeader.self,
+            forHeaderFooterViewReuseIdentifier: FavoriteSymbolHeader.reuseIdentifier)
+        tableView.allowsMultipleSelectionDuringEditing = true
+        tableView.separatorStyle = .none
 
-        view.addSubview(collectionView)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ])
-
-        collectionView.collectionViewLayout = configureLayout()
-        dataSource = FavoriteCollectionViewDiffableDataSource(
-            collectionView: collectionView, store: store)
+        view.addSubview(tableView)
+        tableView.pinEdgesTo(view)
+        dataSource = FavoriteTableViewDiffableDataSource(
+            viewController: self, store: store)
     }
 }
 
@@ -84,27 +79,27 @@ final class FavoritesNewAPIViewController: UIViewController {
 extension FavoritesNewAPIViewController {
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
+        tableView.isEditing = editing
+        configureNavigationBatButtonItems()
+    }
+
+    private func configureNavigationBatButtonItems() {
         if isEditing {
             navigationItem.rightBarButtonItems = [cancelButtonItem, deleteButtonItem]
-        } else {
+        } else if dataSource.sections.count > 0 {
             navigationItem.rightBarButtonItems = nil
             navigationItem.rightBarButtonItem = editButtonItem
-        }
-        collectionView.allowsMultipleSelection = isEditing
-        collectionView.indexPathsForVisibleItems.forEach {
-            guard let cell = collectionView.cellForItem(at: $0) as? FavoriteSymbolCell else {
-                return
-            }
-            cell.isEditing = isEditing
-
-            if !isEditing {
-                cell.isSelected = false
-            }
+        } else {
+            navigationItem.rightBarButtonItems = nil
+            navigationItem.rightBarButtonItem = nil
         }
     }
 
     @objc func deleteFavorites() {
-        dataSource.deleteFavorites(collectionView: collectionView) { [weak self] _ in
+        guard let indexPaths = tableView.indexPathsForSelectedRows else {
+            return
+        }
+        dataSource.deleteFavorites(at: indexPaths) { [weak self] _ in
             self?.isEditing.toggle()
         }
     }
@@ -114,36 +109,33 @@ extension FavoritesNewAPIViewController {
     }
 }
 
-// MARK: Layout
-
-extension FavoritesNewAPIViewController {
-    func configureLayout() -> UICollectionViewCompositionalLayout {
-        let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(80))
-        let item = NSCollectionLayoutItem(layoutSize: size)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(80))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-        let section = NSCollectionLayoutSection(group: group)
-
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                heightDimension: .absolute(CategoryHeader.height))
-        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: headerSize,
-            elementKind: sectionHeaderElementKind, alignment: .top)
-        section.boundarySupplementaryItems = [sectionHeader]
-        section.interGroupSpacing = 10
-        section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0)
-        return UICollectionViewCompositionalLayout(section: section)
-    }
-}
-
-// MARK: UICollectionViewDelegate
-
-extension FavoritesNewAPIViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? FavoriteSymbolCell, isEditing else {
-            return
+extension FavoritesNewAPIViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FavoriteSymbolHeader.reuseIdentifier) as? FavoriteSymbolHeader,
+            dataSource.sections.count > section
+        else {
+            return nil
         }
-        cell.isSelected.toggle()
+        let section = dataSource.snapshot().sectionIdentifiers[section]
+        header.configure(section.toSFSymbolCategory())
+        return header
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        FavoriteSymbolHeader.height
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        FavoriteSymbolTableCell.height
+    }
+
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        .delete
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if !isEditing {
+            tableView.deselectRow(at: indexPath, animated: false)
+        }
     }
 }
-

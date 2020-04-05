@@ -9,7 +9,7 @@
 import UIKit
 
 final class CategoryCollectionViewDiffableDataSource: UICollectionViewDiffableDataSource<SFSymbolCategory, SFSymbolCategory.Symbol> {
-    private var categories = SFSymbolCategory.loadJSONFile() {
+    private var categories: [SFSymbolCategory] = [] {
         didSet {
             updateSnapshot()
         }
@@ -105,6 +105,7 @@ extension CategoryCollectionViewDiffableDataSource {
 
 extension CategoryCollectionViewDiffableDataSource {
     func configureSymbols(from favorites: FavoriteSymbols) {
+        categories = SFSymbolCategory.loadJSONFile()
         categories = categories.map { category -> SFSymbolCategory in
             var category = category
             if let index = findMatchIndex(category: category, favorites: favorites) {
@@ -132,11 +133,15 @@ extension CategoryCollectionViewDiffableDataSource {
     }
 
     private func configureSymbol(from symbol: SFSymbolCategory.Symbol, isFavorite: Bool) {
-        categories.forEach { category in
+        categories = SFSymbolCategory.loadJSONFile()
+        categories = categories.map { category -> SFSymbolCategory in
             var category = category
-            if let index = category.symbols.firstIndex(where: { $0.name == symbol.name }) {
-                category.symbols[index] = SFSymbolCategory.Symbol(name: category.symbols[index].name, isFavorite: isFavorite)
+
+            guard let index = category.symbols.firstIndex(where: { $0.name == symbol.name }) else {
+                return category
             }
+            category.symbols[index] = SFSymbolCategory.Symbol(name: category.symbols[index].name, isFavorite: isFavorite)
+            return category
         }
     }
 }
