@@ -9,9 +9,10 @@
 import UIKit
 
 final class CategoriesTableViewDataSource: NSObject, UITableViewDataSource {
+    var didSelectItem: ((SFSymbolCategory, SFSymbolCategory.Symbol) -> Void)?
+
     private var categories = SFSymbolCategory.loadJSONFile()
     private let store: FavoriteSymbolStore
-    var didSelectItem: ((SFSymbolCategory, SFSymbolCategory.Symbol) -> Void)?
 
     init(store: FavoriteSymbolStore) {
         self.store = store

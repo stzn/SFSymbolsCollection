@@ -9,11 +9,7 @@
 import UIKit
 
 final class FavoritesNewAPIViewController: UIViewController {
-    private let sectionHeaderElementKind = "section-header-element-kind"
-
-    private var categories = SFSymbolCategory.loadJSONFile()
-
-    lazy var collectionView: UICollectionView = {
+    private let collectionView: UICollectionView = {
         UICollectionView(frame: .zero,
                          collectionViewLayout: UICollectionViewFlowLayout())
     }()
@@ -30,10 +26,12 @@ final class FavoritesNewAPIViewController: UIViewController {
         return barButton
     }()
 
+    private let sectionHeaderElementKind = "section-header-element-kind"
+    private var categories = SFSymbolCategory.loadJSONFile()
     private var dataSource: FavoriteCollectionViewDiffableDataSource!
-
     private let frame: CGRect
     private let store: FavoriteSymbolStore
+
     init(frame: CGRect, store: FavoriteSymbolStore) {
         self.frame = frame
         self.store = store

@@ -9,12 +9,12 @@
 import UIKit
 
 final class CategoryCollectionViewDiffableDataSource: UICollectionViewDiffableDataSource<SFSymbolCategory, SFSymbolCategory.Symbol> {
-
     private var categories = SFSymbolCategory.loadJSONFile() {
         didSet {
             updateSnapshot()
         }
     }
+
     private let store: FavoriteSymbolStore
 
     init(collectionView: UICollectionView, store: FavoriteSymbolStore) {

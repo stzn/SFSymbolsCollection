@@ -9,7 +9,7 @@
 import UIKit
 
 final class CategoriesViewController: UIViewController {
-    lazy var collectionView: UICollectionView = {
+    private let collectionView: UICollectionView = {
         UICollectionView(frame: .zero,
                          collectionViewLayout: UICollectionViewFlowLayout())
     }()
@@ -18,6 +18,7 @@ final class CategoriesViewController: UIViewController {
     private let delegate = CategoryCollectionViewDeglegate(numberOfItemsPerRow: 4, interItemSpacing: 8)
     private let frame: CGRect
     private let store: FavoriteSymbolStore
+
     init(frame: CGRect, store: FavoriteSymbolStore) {
         self.frame = frame
         self.store = store

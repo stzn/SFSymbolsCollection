@@ -15,10 +15,7 @@ final class SymbolViewController: UIViewController {
         let store: FavoriteSymbolStore
     }
 
-    private let addToFavorite = "Add to Favorite"
-    private let removeFromFavorite = "Remove from Favorite"
-
-    lazy var containerView: UIStackView = {
+    private let containerView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.distribution = .fill
@@ -26,13 +23,13 @@ final class SymbolViewController: UIViewController {
         return stack
     }()
 
-    lazy var symbolImageView: UIImageView = {
+    private let symbolImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
 
-    lazy var symbolNameLabel: UILabel = {
+    private let symbolNameLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .title1)
         label.textAlignment = .center
@@ -41,7 +38,7 @@ final class SymbolViewController: UIViewController {
         return label
     }()
 
-    lazy var favoriteButton: UIButton = {
+    private lazy var favoriteButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .systemBlue
         button.setTitle(addToFavorite, for: .normal)
@@ -53,14 +50,16 @@ final class SymbolViewController: UIViewController {
         return button
     }()
 
-    let frame: CGRect
-    var input: Input
-    var category: FavoriteSymbolKey { input.category }
-    var symbol: SFSymbolCategory.Symbol {
+    private let addToFavorite = "Add to Favorite"
+    private let removeFromFavorite = "Remove from Favorite"
+    private let frame: CGRect
+    private var input: Input
+    private var category: FavoriteSymbolKey { input.category }
+    private var symbol: SFSymbolCategory.Symbol {
         get { input.symbol }
         set { input.symbol = newValue }
     }
-    var store: FavoriteSymbolStore { input.store }
+    private var store: FavoriteSymbolStore { input.store }
 
     init(frame: CGRect, input: Input) {
         self.frame = frame

@@ -9,8 +9,6 @@
 import UIKit
 
 final class FavoriteCollectionViewDiffableDataSource: UICollectionViewDiffableDataSource<FavoriteSymbolKey, SFSymbolCategory.Symbol> {
-
-    private let store: FavoriteSymbolStore
     private var symbols: FavoriteSymbols = [:] {
         didSet {
             updateSnapshot()
@@ -20,6 +18,8 @@ final class FavoriteCollectionViewDiffableDataSource: UICollectionViewDiffableDa
     private var sections: [FavoriteSymbolKey] {
         symbols.keys.sorted()
     }
+
+    private let store: FavoriteSymbolStore
 
     init(collectionView: UICollectionView, store: FavoriteSymbolStore) {
         self.store = store

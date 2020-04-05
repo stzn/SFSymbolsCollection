@@ -12,12 +12,12 @@ final class CategoryTableViewCell: UITableViewCell {
     static let numberOfItemsPerRow: CGFloat = 4
     static let identifier = String(describing: CategoryTableViewCell.self)
 
-    lazy var collectionView: UICollectionView = {
+    var didSelectItemAt: ((IndexPath) -> Void)?
+
+    private let collectionView: UICollectionView = {
         UICollectionView(frame: .zero,
                          collectionViewLayout: UICollectionViewFlowLayout())
     }()
-
-    var didSelectItemAt: ((IndexPath) -> Void)?
 
     private var dataSource: NestedCategoryCollectionViewDataSource!
     private var delegate: NestedCategoryCollectionViewDeglegate!

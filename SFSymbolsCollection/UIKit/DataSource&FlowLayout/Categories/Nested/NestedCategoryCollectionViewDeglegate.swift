@@ -9,10 +9,10 @@
 import UIKit
 
 final class NestedCategoryCollectionViewDeglegate: NSObject, UICollectionViewDelegateFlowLayout {
-    let numberOfItemsPerRow: CGFloat
-    let interItemSpacing: CGFloat
-
     var didSelectItemAt: ((IndexPath) -> Void)?
+
+    private let numberOfItemsPerRow: CGFloat
+    private let interItemSpacing: CGFloat
 
     init(numberOfItemsPerRow: CGFloat, interItemSpacing: CGFloat = 0) {
         self.numberOfItemsPerRow = numberOfItemsPerRow
@@ -28,11 +28,11 @@ final class NestedCategoryCollectionViewDeglegate: NSObject, UICollectionViewDel
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        interItemSpacing
+        return interItemSpacing
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        interItemSpacing
+        return interItemSpacing
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

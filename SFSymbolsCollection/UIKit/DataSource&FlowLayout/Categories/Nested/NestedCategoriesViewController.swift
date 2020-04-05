@@ -9,14 +9,14 @@
 import UIKit
 
 final class NestedCategoriesViewController: UIViewController {
-    lazy var tableView: UITableView = {
+    private let tableView: UITableView = {
         UITableView(frame: .zero, style: .grouped)
     }()
 
     private var dataSource: CategoriesTableViewDataSource!
-
     private let frame: CGRect
     private let store: FavoriteSymbolStore
+
     init(frame: CGRect, store: FavoriteSymbolStore) {
         self.frame = frame
         self.store = store

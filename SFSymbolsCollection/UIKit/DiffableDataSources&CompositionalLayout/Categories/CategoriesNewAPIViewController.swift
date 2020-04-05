@@ -9,17 +9,16 @@
 import UIKit
 
 final class CategoriesNewAPIViewController: UIViewController {
-    private let sectionHeaderElementKind = "section-header-element-kind"
-
-    lazy var collectionView: UICollectionView = {
+    private let collectionView: UICollectionView = {
         UICollectionView(frame: .zero,
                          collectionViewLayout: UICollectionViewFlowLayout())
     }()
 
+    private let sectionHeaderElementKind = "section-header-element-kind"
     private var dataSource: CategoryCollectionViewDiffableDataSource!
-
     private let frame: CGRect
     private let store: FavoriteSymbolStore
+
     init(frame: CGRect, store: FavoriteSymbolStore) {
         self.frame = frame
         self.store = store

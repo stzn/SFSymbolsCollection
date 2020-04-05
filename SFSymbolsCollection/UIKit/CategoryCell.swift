@@ -11,7 +11,7 @@ import UIKit
 final class CategoryCell: UICollectionViewCell {
     static let reuseIdentifier = String(describing: CategoryCell.self)
 
-    lazy var iconImageView: UIImageView = {
+    private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         return imageView

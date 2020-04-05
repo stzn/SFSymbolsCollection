@@ -11,13 +11,19 @@ import UIKit
 final class SymbolCell: UICollectionViewCell {
     static let reuseIdentifier = String(describing: SymbolCell.self)
 
-    lazy var symbolImageView: UIImageView = {
+    var isEditing: Bool = false {
+        didSet {
+            checkboxImageView.isHidden = !isEditing
+        }
+    }
+
+    private let symbolImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
 
-    lazy var nameLabel: UILabel = {
+    private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .title1)
         label.textAlignment = .left
@@ -25,18 +31,12 @@ final class SymbolCell: UICollectionViewCell {
         return label
     }()
 
-    lazy var checkboxImageView: UIImageView = {
+    private let checkboxImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "checkmark.circle", withConfiguration: UIImage.SymbolConfiguration(scale: .large))
         imageView.isHidden = true
         return imageView
     }()
-
-    var isEditing: Bool = false {
-        didSet {
-            checkboxImageView.isHidden = !isEditing
-        }
-    }
 
     override var isSelected: Bool {
         didSet {

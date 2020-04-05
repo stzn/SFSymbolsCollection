@@ -9,7 +9,7 @@
 import UIKit
 
 final class FavoritesViewController: UIViewController {
-    private lazy var collectionView: UICollectionView = {
+    private let collectionView: UICollectionView = {
         UICollectionView(frame: .zero,
                          collectionViewLayout: UICollectionViewFlowLayout())
     }()
@@ -25,7 +25,7 @@ final class FavoritesViewController: UIViewController {
                                         target: self, action: #selector(cancelEdit))
         return barButton
     }()
-
+    
     private let delegate = FavoriteCollectionViewDelegate()
     private let frame: CGRect
     private let dataSource: FavoriteCollectionViewDataSource

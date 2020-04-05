@@ -12,12 +12,12 @@ final class CategoryHeader: UICollectionReusableView {
     static let height: CGFloat = 80
     static let reuseIdentifier = String(describing: CategoryHeader.self)
 
-    lazy var iconImageView: UIImageView = {
+    private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         return imageView
     }()
 
-    lazy var nameLabel: UILabel = {
+    private let nameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 40)
@@ -25,7 +25,7 @@ final class CategoryHeader: UICollectionReusableView {
         return label
     }()
 
-    lazy var bottomSeparator: UIView = {
+    private let bottomSeparator: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGray
         return view

@@ -9,10 +9,10 @@
 import UIKit
 
 final class CategoryCollectionViewDeglegate: NSObject, UICollectionViewDelegateFlowLayout {
-    let numberOfItemsPerRow: CGFloat
-    let interItemSpacing: CGFloat
-
     var didSelectItemAt: ((IndexPath) -> Void)?
+
+    private let numberOfItemsPerRow: CGFloat
+    private let interItemSpacing: CGFloat
 
     init(numberOfItemsPerRow: CGFloat, interItemSpacing: CGFloat) {
         self.numberOfItemsPerRow = numberOfItemsPerRow
@@ -44,7 +44,7 @@ final class CategoryCollectionViewDeglegate: NSObject, UICollectionViewDelegateF
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        CGSize(width: collectionView.bounds.width, height: CategoryHeader.height)
+        return CGSize(width: collectionView.bounds.width, height: CategoryHeader.height)
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
