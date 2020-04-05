@@ -10,7 +10,7 @@ import UIKit
 
 final class NestedCategoriesViewController: UIViewController {
     lazy var tableView: UITableView = {
-        UITableView(frame: .zero)
+        UITableView(frame: .zero, style: .grouped)
     }()
 
     private var dataSource: CategoriesTableViewDataSource!
