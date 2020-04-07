@@ -160,7 +160,7 @@ final class SymbolViewController: UIViewController {
         symbolNameLabel.text = symbol.name
         let buttonTitle = symbol.isFavorite ? removeFromFavorite : addToFavorite
         favoriteButton.setTitle(buttonTitle, for: .normal)
-        codeLabel.text = "UIImage(systemName: \(symbol.name))"
+        codeLabel.text = "UIImage(systemName: \"\(symbol.name)\")"
     }
 
     override func viewWillAppear(_ animated: Bool) {
