@@ -14,6 +14,7 @@ final class CategoryCell: UICollectionViewCell {
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = .label
         return imageView
     }()
 
@@ -40,6 +41,7 @@ final class CategoryCell: UICollectionViewCell {
     }
 
     func configure(_ symbol: SFSymbolCategory.Symbol) {
-        iconImageView.image = UIImage(systemName: symbol.name)?.withRenderingMode(.alwaysOriginal)
+        iconImageView.image = UIImage(systemName: symbol.name)?
+            .withRenderingMode(.alwaysTemplate)
     }
 }

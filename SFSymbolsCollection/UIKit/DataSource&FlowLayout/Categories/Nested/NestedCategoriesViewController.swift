@@ -30,7 +30,7 @@ final class NestedCategoriesViewController: UIViewController {
     override func loadView() {
         super.loadView()
         view = UIView(frame: frame)
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         setupNavigationBar()
         setupTableView()
     }
@@ -52,7 +52,7 @@ final class NestedCategoriesViewController: UIViewController {
     }
 
     private func setupTableView() {
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .systemBackground
         tableView.register(CategoryTableViewCell.self, forCellReuseIdentifier: CategoryTableViewCell.identifier)
         dataSource = CategoriesTableViewDataSource(store: store)
         tableView.dataSource = dataSource

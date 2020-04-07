@@ -15,12 +15,14 @@ final class FavoriteSymbolTableCell: UITableViewCell {
     private let symbolImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        imageView.tintColor = .label
         return imageView
     }()
 
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .title1)
+        label.textColor = .label
         label.textAlignment = .left
         label.numberOfLines = 0
         return label
@@ -41,12 +43,9 @@ final class FavoriteSymbolTableCell: UITableViewCell {
         nameLabel.text = nil
     }
 
-    func configure(_ symbol: SFSymbolCategory.Symbol) {
-        symbolImageView.image = UIImage(systemName: symbol.name)?.withRenderingMode(.alwaysOriginal)
-        nameLabel.text = symbol.name
-    }
-
     private func setupView() {
+        contentView.backgroundColor = .systemBackground
+        
         contentView.addSubview(symbolImageView)
         contentView.addSubview(nameLabel)
         symbolImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -63,5 +62,11 @@ final class FavoriteSymbolTableCell: UITableViewCell {
                 equalTo: contentView.trailingAnchor, constant: -8),
             nameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
         ])
+    }
+
+    func configure(_ symbol: SFSymbolCategory.Symbol) {
+        symbolImageView.image = UIImage(systemName: symbol.name)?
+            .withRenderingMode(.alwaysTemplate)
+        nameLabel.text = symbol.name
     }
 }

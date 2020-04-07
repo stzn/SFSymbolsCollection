@@ -14,12 +14,13 @@ final class CategoryHeader: UICollectionReusableView {
 
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.tintColor = .label
         return imageView
     }()
 
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .label
         label.font = UIFont.boldSystemFont(ofSize: 40)
         label.numberOfLines = 0
         return label
@@ -68,7 +69,8 @@ final class CategoryHeader: UICollectionReusableView {
     }
 
     func configure(_ category: SFSymbolCategory) {
-        iconImageView.image = UIImage(systemName: category.iconName)?.withRenderingMode(.alwaysOriginal)
+        iconImageView.image = UIImage(systemName: category.iconName)?
+            .withRenderingMode(.alwaysTemplate)
         nameLabel.text = category.name
     }
 }

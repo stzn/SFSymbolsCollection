@@ -32,7 +32,7 @@ final class CategoriesNewAPIViewController: UIViewController {
     override func loadView() {
         super.loadView()
         view = UIView(frame: frame)
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         setupNavigationBar()
         setupCollectionView()
     }
@@ -52,7 +52,7 @@ final class CategoriesNewAPIViewController: UIViewController {
     }
 
     private func setupCollectionView() {
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .systemBackground
         collectionView.register(CategoryCell.self,
                                 forCellWithReuseIdentifier: CategoryCell.reuseIdentifier)
         collectionView.register(CategoryHeader.self,

@@ -115,11 +115,11 @@
 		D6120B522437265600FAE875 /* Nested */ = {
 			isa = PBXGroup;
 			children = (
-				D6120B532437266900FAE875 /* NestedCategoriesViewController.swift */,
 				D6120B552437269000FAE875 /* CategoriesTableViewDataSource.swift */,
 				D6120B57243726B600FAE875 /* CategoryTableViewCell.swift */,
-				D6120B59243726D800FAE875 /* NestedCategoryCollectionViewDeglegate.swift */,
+				D6120B532437266900FAE875 /* NestedCategoriesViewController.swift */,
 				D6120B5B243726F000FAE875 /* NestedCategoryCollectionViewDataSource.swift */,
+				D6120B59243726D800FAE875 /* NestedCategoryCollectionViewDeglegate.swift */,
 			);
 			path = Nested;
 			sourceTree = "<group>";

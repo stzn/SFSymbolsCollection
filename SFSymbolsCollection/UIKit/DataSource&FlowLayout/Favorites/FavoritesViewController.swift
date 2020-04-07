@@ -44,7 +44,7 @@ final class FavoritesViewController: UIViewController {
     override func loadView() {
         super.loadView()
         view = UIView(frame: frame)
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         setupTableView()
     }
 
@@ -57,7 +57,7 @@ final class FavoritesViewController: UIViewController {
     }
 
     private func setupTableView() {
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .systemBackground
         tableView.delegate = self
 
         tableView.register(
@@ -153,5 +153,32 @@ extension FavoritesViewController: UITableViewDelegate {
         if !isEditing {
             tableView.deselectRow(at: indexPath, animated: false)
         }
+    }
+
+    func tableView(
+        _ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        let information = UIContextualAction(style: .normal, title: "") {
+            [weak self] action, view, completionHandler in
+            guard let self = self,
+                let category = self.dataSource.sectionItem(at: indexPath),
+                let symbol = self.dataSource.cellItem(at: indexPath)
+            else {
+                return
+            }
+
+            let input = SymbolViewController.Input(
+                category: FavoriteSymbolKey(
+                    iconName: category.iconName, categoryName: category.categoryName),
+                symbol: symbol, store: self.store)
+            let symbolVC = SymbolViewController(frame: view.bounds, input: input)
+            self.present(symbolVC, animated: true)
+            completionHandler(true)
+        }
+        information.image = UIImage(systemName: "info.circle")
+        information.backgroundColor = .systemBlue
+        let configuration = UISwipeActionsConfiguration(actions: [information])
+        configuration.performsFirstActionWithFullSwipe = false
+        return configuration
     }
 }

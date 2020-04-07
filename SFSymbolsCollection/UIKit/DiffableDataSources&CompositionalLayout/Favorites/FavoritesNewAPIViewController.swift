@@ -44,7 +44,7 @@ final class FavoritesNewAPIViewController: UIViewController {
     override func loadView() {
         super.loadView()
         view = UIView(frame: frame)
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         setupTableView()
     }
 
@@ -56,7 +56,7 @@ final class FavoritesNewAPIViewController: UIViewController {
     }
 
     private func setupTableView() {
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .systemBackground
         tableView.delegate = self
         tableView.register(
             FavoriteSymbolTableCell.self,
@@ -137,5 +137,25 @@ extension FavoritesNewAPIViewController: UITableViewDelegate {
         if !isEditing {
             tableView.deselectRow(at: indexPath, animated: false)
         }
+    }
+
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let information = UIContextualAction(style: .normal, title: "") { [weak self] action, view, completionHandler in
+            guard let self = self,
+                let symbol = self.dataSource.itemIdentifier(for: indexPath) else {
+                return
+            }
+            let category = self.dataSource.snapshot().sectionIdentifiers[indexPath.section]
+            let input = SymbolViewController.Input(category: FavoriteSymbolKey(iconName: category.iconName, categoryName: category.categoryName),
+                                                   symbol: symbol, store: self.store)
+            let symbolVC = SymbolViewController(frame: view.bounds, input: input)
+            self.present(symbolVC, animated: true)
+            completionHandler(true)
+        }
+        information.image = UIImage(systemName: "info.circle")
+        information.backgroundColor = .systemBlue
+        let configuration = UISwipeActionsConfiguration(actions: [information])
+        configuration.performsFirstActionWithFullSwipe = false
+        return configuration
     }
 }

@@ -136,6 +136,7 @@ struct CategoryFavoriteSymbolsView: View {
 
 struct CategoryFavoriteSymbolView: View {
     @Environment(\.editMode) var mode
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
 
     let symbol: SFSymbolCategory.Symbol
     var isSelected: Bool
@@ -145,20 +146,25 @@ struct CategoryFavoriteSymbolView: View {
                 EmptyView()
             } else if isSelected {
                 Image(systemName: "checkmark.circle.fill")
+                    .renderingMode(.template)
+                    .foregroundColor(Color.green)
                     .environment(\.imageScale, .large)
                     .padding(.trailing, 16)
             } else {
                 Image(systemName: "circle")
+                    .renderingMode(.template)
+                    .foregroundColor(colorScheme == .light ? Color.black : Color.white)
                     .environment(\.imageScale, .large)
                     .padding(.trailing, 16)
             }
             Image(systemName: symbol.name)
-                .renderingMode(.original)
+                .renderingMode(.template)
                 .resizable()
                 .scaledToFit()
+                .foregroundColor(colorScheme == .light ? Color.black : Color.white)
             Text(symbol.name)
                 .font(.title)
-                .foregroundColor(Color.black)
+                .foregroundColor(colorScheme == .light ? Color.black : Color.white)
                 .padding(.leading, 16)
             Spacer()
         }

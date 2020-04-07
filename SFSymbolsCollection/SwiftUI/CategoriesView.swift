@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct CategoriesView: View {
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
+
     private let store: FavoriteSymbolStore
     private let columnCount: Int = 4
     private let categories = SFSymbolCategory.loadJSONFile()
@@ -50,9 +52,10 @@ struct CategoriesView: View {
                 ForEach(category.symbols) { symbol in
                     NavigationLink(destination: self.createSymbolView(category: category, symbol: symbol)) {
                         Image(systemName: symbol.name)
-                            .renderingMode(.original)
+                            .renderingMode(.template)
                             .resizable()
                             .scaledToFit()
+                            .foregroundColor(self.colorScheme == .light ? Color.black : Color.white)
                             .padding(.horizontal, 8)
                             .padding(.bottom, 12)
                             .frame(width: size.width, height: size.height)
@@ -67,9 +70,10 @@ struct CategoriesView: View {
         return Grid(category.symbols) { symbol in
             NavigationLink(destination: self.createSymbolView(category: category, symbol: symbol)) {
                 Image(systemName: symbol.name)
-                    .renderingMode(.original)
+                    .renderingMode(.template)
                     .resizable()
                     .scaledToFit()
+                    .foregroundColor(self.colorScheme == .light ? Color.black : Color.white)
                     .padding(.horizontal, 8)
                     .padding(.bottom, 12)
                     .frame(width: size.width, height: size.height)

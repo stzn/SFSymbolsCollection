@@ -9,13 +9,14 @@
 import SwiftUI
 
 struct SymbolView: View {
+    @State private var isFavorite = false
+
     private let addToFavorite = "Add to Favorite"
     private let removeFromFavorite = "Remove from Favorite"
 
     let category: FavoriteSymbolKey
     let symbol: SFSymbolCategory.Symbol
     let store: FavoriteSymbolStore
-    @State private var isFavorite = false
 
     init(category: FavoriteSymbolKey, symbol: SFSymbolCategory.Symbol, store: FavoriteSymbolStore) {
         self.category = category

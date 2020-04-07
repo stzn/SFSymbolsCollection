@@ -10,12 +10,14 @@ import UIKit
 
 final class CategoriesViewController: UIViewController {
     private let collectionView: UICollectionView = {
-        UICollectionView(frame: .zero,
-                         collectionViewLayout: UICollectionViewFlowLayout())
+        UICollectionView(
+            frame: .zero,
+            collectionViewLayout: UICollectionViewFlowLayout())
     }()
 
     private let dataSource: CategoryCollectionViewDataSource
-    private let delegate = CategoryCollectionViewDeglegate(numberOfItemsPerRow: 4, interItemSpacing: 8)
+    private let delegate = CategoryCollectionViewDeglegate(
+        numberOfItemsPerRow: 4, interItemSpacing: 8)
     private let frame: CGRect
     private let store: FavoriteSymbolStore
 
@@ -33,13 +35,14 @@ final class CategoriesViewController: UIViewController {
     override func loadView() {
         super.loadView()
         view = UIView(frame: frame)
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         setupNavigationBar()
         setupCollectionView()
     }
 
     private func setupNavigationBar() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Favorite", style: .plain, target: self, action: #selector(goToFavoriteList))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "Favorite", style: .plain, target: self, action: #selector(goToFavoriteList))
     }
 
     @objc func goToFavoriteList() {
@@ -48,15 +51,17 @@ final class CategoriesViewController: UIViewController {
     }
 
     private func setupCollectionView() {
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .systemBackground
         collectionView.dataSource = dataSource
         collectionView.delegate = delegate
         delegate.didSelectItemAt = didSelectItem
-        collectionView.register(CategoryCell.self,
-                                forCellWithReuseIdentifier: CategoryCell.reuseIdentifier)
-        collectionView.register(CategoryHeader.self,
-                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                                withReuseIdentifier: CategoryHeader.reuseIdentifier)
+        collectionView.register(
+            CategoryCell.self,
+            forCellWithReuseIdentifier: CategoryCell.reuseIdentifier)
+        collectionView.register(
+            CategoryHeader.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: CategoryHeader.reuseIdentifier)
 
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -77,12 +82,14 @@ final class CategoriesViewController: UIViewController {
 
     func didSelectItem(at indexPath: IndexPath) {
         guard let category = dataSource.sectionItem(at: indexPath),
-            let symbol = dataSource.cellItem(at: indexPath) else {
+            let symbol = dataSource.cellItem(at: indexPath)
+        else {
             return
         }
 
-        let input = SymbolViewController.Input(category: FavoriteSymbolKey(iconName: category.iconName, categoryName: category.name),
-                                               symbol: symbol, store: store)
+        let input = SymbolViewController.Input(
+            category: FavoriteSymbolKey(iconName: category.iconName, categoryName: category.name),
+            symbol: symbol, store: store)
         let symbolVC = SymbolViewController(frame: view.bounds, input: input)
         navigationController?.pushViewController(symbolVC, animated: true)
     }
