@@ -115,3 +115,47 @@ extension CategoriesNewAPIViewController: UICollectionViewDelegate {
         navigationController?.pushViewController(symbolVC, animated: true)
     }
 }
+
+#if DEBUG
+import SwiftUI
+
+extension CategoriesNewAPIViewController: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> CategoriesNewAPIViewController {
+        CategoriesNewAPIViewController(frame: UIScreen.main.bounds, store: InMemoryFavoriteSymbolStore())
+    }
+
+    func updateUIViewController(_ uiViewController: CategoriesNewAPIViewController, context: Context) {
+
+    }
+}
+
+struct CategoriesNewAPIViewControllerPreviews: PreviewProvider {
+    static let devices = [
+        "iPhone SE",
+        "iPhone 11",
+        "iPad Pro (11-inch) (2nd generation)",
+    ]
+
+    static var previews: some View {
+        Group {
+            ForEach(devices, id: \.self) { name in
+                Group {
+                    self.content
+                        .previewDevice(PreviewDevice(rawValue: name))
+                        .previewDisplayName(name)
+                        .colorScheme(.light)
+                    self.content
+                        .previewDevice(PreviewDevice(rawValue: name))
+                        .previewDisplayName(name)
+                        .colorScheme(.dark)
+                }
+            }
+        }
+    }
+
+    private static var content: CategoriesNewAPIViewController {
+        CategoriesNewAPIViewController(frame: UIScreen.main.bounds,
+                                 store: InMemoryFavoriteSymbolStore())
+    }
+}
+#endif

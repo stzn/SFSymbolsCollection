@@ -45,3 +45,49 @@ final class CategoryCell: UICollectionViewCell {
             .withRenderingMode(.alwaysTemplate)
     }
 }
+
+#if DEBUG
+import SwiftUI
+
+extension CategoryCell: UIViewRepresentable {
+    func makeUIView(context: Context) -> CategoryCell {
+        let cell = CategoryCell()
+        cell.configure(.init(name: "mic", isFavorite: false))
+        return cell
+    }
+
+    func updateUIView(_ uiView: CategoryCell, context: Context) {
+    }
+}
+
+struct CategoryCellPreview: PreviewProvider {
+    static let devices = [
+        "iPhone SE",
+        "iPhone 11",
+        "iPad Pro (11-inch) (2nd generation)",
+    ]
+
+    static var previews: some View {
+        Group {
+            ForEach(devices, id: \.self) { name in
+                Group {
+                    self.content
+                        .previewLayout(.sizeThatFits)
+                        .previewDevice(PreviewDevice(rawValue: name))
+                        .previewDisplayName(name)
+                        .colorScheme(.light)
+                    self.content
+                        .previewLayout(.sizeThatFits)
+                        .previewDevice(PreviewDevice(rawValue: name))
+                        .previewDisplayName(name)
+                        .colorScheme(.dark)
+                }
+            }
+        }
+    }
+
+    private static var content: some View {
+        CategoryCell()
+    }
+}
+#endif

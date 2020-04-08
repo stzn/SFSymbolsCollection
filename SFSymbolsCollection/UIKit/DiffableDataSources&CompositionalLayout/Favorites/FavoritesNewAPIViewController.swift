@@ -111,7 +111,9 @@ extension FavoritesNewAPIViewController {
 
 extension FavoritesNewAPIViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FavoriteSymbolHeader.reuseIdentifier) as? FavoriteSymbolHeader,
+        guard
+            let header = tableView.dequeueReusableHeaderFooterView(
+                withIdentifier: FavoriteSymbolHeader.reuseIdentifier) as? FavoriteSymbolHeader,
             dataSource.sections.count > section
         else {
             return nil
@@ -129,7 +131,9 @@ extension FavoritesNewAPIViewController: UITableViewDelegate {
         FavoriteSymbolTableCell.height
     }
 
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath)
+        -> UITableViewCell.EditingStyle
+    {
         .delete
     }
 
@@ -139,15 +143,21 @@ extension FavoritesNewAPIViewController: UITableViewDelegate {
         }
     }
 
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let information = UIContextualAction(style: .normal, title: "") { [weak self] action, view, completionHandler in
+    func tableView(
+        _ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        let information = UIContextualAction(style: .normal, title: "") {
+            [weak self] action, view, completionHandler in
             guard let self = self,
-                let symbol = self.dataSource.itemIdentifier(for: indexPath) else {
+                let symbol = self.dataSource.itemIdentifier(for: indexPath)
+            else {
                 return
             }
             let category = self.dataSource.snapshot().sectionIdentifiers[indexPath.section]
-            let input = SymbolViewController.Input(category: FavoriteSymbolKey(iconName: category.iconName, categoryName: category.categoryName),
-                                                   symbol: symbol, store: self.store)
+            let input = SymbolViewController.Input(
+                category: FavoriteSymbolKey(
+                    iconName: category.iconName, categoryName: category.categoryName),
+                symbol: symbol, store: self.store)
             let symbolVC = SymbolViewController(frame: view.bounds, input: input)
             self.present(symbolVC, animated: true)
             completionHandler(true)
@@ -159,3 +169,67 @@ extension FavoritesNewAPIViewController: UITableViewDelegate {
         return configuration
     }
 }
+
+#if DEBUG
+import SwiftUI
+
+extension FavoritesNewAPIViewController: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> UINavigationController {
+        let store = InMemoryFavoriteSymbolStore()
+        store.save(
+            FavoriteSymbolKey(iconName: "mic", categoryName: "Communication"),
+            symbol: .init(name: "mic", isFavorite: true)
+        ) { _ in }
+        store.save(
+            FavoriteSymbolKey(
+                iconName: "mic",
+                categoryName: String(repeating: "A", count: 100)),
+            symbol: .init(name: "mic", isFavorite: true)
+        ) { _ in }
+
+        return UINavigationController(
+            rootViewController:
+                FavoritesNewAPIViewController(
+                    frame: UIScreen.main.bounds,
+                    store: store)
+        )
+    }
+
+    func updateUIViewController(
+        _ uiViewController: UINavigationController, context: Context
+    ) {
+
+    }
+}
+
+struct FavoritesNewAPIViewControllerPreviews: PreviewProvider {
+    static let devices = [
+        "iPhone SE",
+        "iPhone 11",
+        "iPad Pro (11-inch) (2nd generation)",
+    ]
+
+    static var previews: some View {
+        Group {
+            ForEach(devices, id: \.self) { name in
+                Group {
+                    self.content
+                        .previewDevice(PreviewDevice(rawValue: name))
+                        .previewDisplayName(name)
+                        .colorScheme(.light)
+                    self.content
+                        .previewDevice(PreviewDevice(rawValue: name))
+                        .previewDisplayName(name)
+                        .colorScheme(.dark)
+                }
+            }
+        }
+    }
+
+    private static var content: FavoritesNewAPIViewController {
+        FavoritesNewAPIViewController(
+            frame: UIScreen.main.bounds,
+            store: InMemoryFavoriteSymbolStore())
+    }
+}
+#endif

@@ -182,3 +182,62 @@ extension FavoritesViewController: UITableViewDelegate {
         return configuration
     }
 }
+
+#if DEBUG
+import SwiftUI
+
+extension FavoritesViewController: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> FavoritesViewController {
+        let store = InMemoryFavoriteSymbolStore()
+        store.save(
+            FavoriteSymbolKey(iconName: "mic", categoryName: "Communication"),
+            symbol: .init(name: "mic", isFavorite: true)
+        ) { _ in }
+        store.save(
+            FavoriteSymbolKey(
+                iconName: "mic",
+                categoryName: String(repeating: "A", count: 100)),
+            symbol: .init(name: "mic", isFavorite: true)
+        ) { _ in }
+
+        return FavoritesViewController(
+            frame: UIScreen.main.bounds,
+            store: store)
+    }
+
+    func updateUIViewController(_ uiViewController: FavoritesViewController, context: Context) {
+
+    }
+}
+
+struct FavoritesViewControllerPreviews: PreviewProvider {
+    static let devices = [
+        "iPhone SE",
+        "iPhone 11",
+        "iPad Pro (11-inch) (2nd generation)",
+    ]
+
+    static var previews: some View {
+        Group {
+            ForEach(devices, id: \.self) { name in
+                Group {
+                    self.content
+                        .previewDevice(PreviewDevice(rawValue: name))
+                        .previewDisplayName(name)
+                        .colorScheme(.light)
+                    self.content
+                        .previewDevice(PreviewDevice(rawValue: name))
+                        .previewDisplayName(name)
+                        .colorScheme(.dark)
+                }
+            }
+        }
+    }
+
+    private static var content: FavoritesViewController {
+        FavoritesViewController(
+            frame: UIScreen.main.bounds,
+            store: InMemoryFavoriteSymbolStore())
+    }
+}
+#endif

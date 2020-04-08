@@ -62,3 +62,55 @@ final class CategoryTableViewCell: UITableViewCell {
         collectionView.reloadData()
     }
 }
+
+#if DEBUG
+import SwiftUI
+
+extension CategoryTableViewCell: UIViewRepresentable {
+    func makeUIView(context: Context) -> CategoryTableViewCell {
+        let cell = CategoryTableViewCell()
+        cell.configure(symbols: [.init(name: "mic", isFavorite: false)], at: 0)
+        return cell
+    }
+
+    func updateUIView(_ uiView: CategoryTableViewCell, context: Context) {
+    }
+}
+
+struct CategoryTableViewCellPreview: PreviewProvider {
+    static let devices = [
+        "iPhone SE",
+        "iPhone 11",
+        "iPad Pro (11-inch) (2nd generation)",
+    ]
+
+    static var rowHeight: CGFloat {
+        UIScreen.main.bounds.width / CategoryTableViewCell.numberOfItemsPerRow
+    }
+
+    static var previews: some View {
+        Group {
+            ForEach(devices, id: \.self) { name in
+                Group {
+                    self.content
+                        .previewLayout(.fixed(width: UIScreen.main.bounds.width,
+                                              height: rowHeight))
+                        .previewDevice(PreviewDevice(rawValue: name))
+                        .previewDisplayName(name)
+                        .colorScheme(.light)
+                    self.content
+                        .previewLayout(.fixed(width: UIScreen.main.bounds.width,
+                                              height: rowHeight))
+                        .previewDevice(PreviewDevice(rawValue: name))
+                        .previewDisplayName(name)
+                        .colorScheme(.dark)
+                }
+            }
+        }
+    }
+
+    private static var content: some View {
+        CategoryTableViewCell()
+    }
+}
+#endif

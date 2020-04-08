@@ -33,6 +33,7 @@ final class SymbolViewController: UIViewController {
     private let symbolNameLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .title1)
+        label.adjustsFontForContentSizeCategory = true
         label.textColor = .label
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -45,6 +46,7 @@ final class SymbolViewController: UIViewController {
         button.backgroundColor = .systemBlue
         button.setTitle(addToFavorite, for: .normal)
         button.titleLabel?.font = .preferredFont(forTextStyle: .headline)
+        button.titleLabel?.adjustsFontForContentSizeCategory = true
         button.setTitleColor(.white, for: .normal)
         button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         button.layer.cornerRadius = 8
@@ -72,6 +74,7 @@ final class SymbolViewController: UIViewController {
     private let codeLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .body)
+        label.adjustsFontForContentSizeCategory = true
         label.textColor = .label
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -82,6 +85,7 @@ final class SymbolViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("Copy", for: .normal)
         button.titleLabel?.font = .preferredFont(forTextStyle: .body)
+        button.titleLabel?.adjustsFontForContentSizeCategory = true
         button.setTitleColor(.systemBlue, for: .normal)
         button.backgroundColor = .white
         button.layer.borderWidth = 1
@@ -137,7 +141,7 @@ final class SymbolViewController: UIViewController {
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             symbolImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
-            favoriteButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
+            favoriteButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
         ])
         favoriteButton.isHidden = (presentingViewController != nil)
 
@@ -210,3 +214,56 @@ extension SymbolViewController {
         }
     }
 }
+
+#if DEBUG
+import SwiftUI
+
+extension SymbolViewController: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> SymbolViewController {
+        SymbolViewController(
+            frame: UIScreen.main.bounds,
+            input: .init(
+                category: FavoriteSymbolKey(iconName: "mic", categoryName: "mic"),
+                symbol: SFSymbolCategory.Symbol(name: "mic", isFavorite: false),
+                store: InMemoryFavoriteSymbolStore()))
+    }
+
+    func updateUIViewController(_ uiViewController: SymbolViewController, context: Context) {
+
+    }
+}
+
+struct SymbolViewControllerPreview: PreviewProvider {
+    static let devices = [
+        "iPhone SE",
+        "iPhone 11",
+        "iPad Pro (11-inch) (2nd generation)",
+    ]
+
+    static var previews: some View {
+        Group {
+            ForEach(devices, id: \.self) { name in
+                Group {
+                    self.content
+                        .previewDevice(PreviewDevice(rawValue: name))
+                        .previewDisplayName(name)
+                        .colorScheme(.light)
+                    self.content
+                        .previewDevice(PreviewDevice(rawValue: name))
+                        .previewDisplayName(name)
+                        .colorScheme(.dark)
+                }
+            }
+        }
+    }
+
+    private static var content: SymbolViewController {
+        SymbolViewController(
+            frame: UIScreen.main.bounds,
+            input: .init(
+                category: FavoriteSymbolKey(iconName: "mic", categoryName: "mic"),
+                symbol: SFSymbolCategory.Symbol(name: "mic", isFavorite: false),
+                store: InMemoryFavoriteSymbolStore()))
+    }
+}
+#endif

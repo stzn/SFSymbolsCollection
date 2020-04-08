@@ -12,9 +12,16 @@ final class FavoriteSymbolTableCell: UITableViewCell {
     static let height: CGFloat = 88
     static let reuseIdentifier = String(describing: FavoriteSymbolTableCell.self)
 
+    private let containerView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.distribution = .fill
+        return stack
+    }()
+
     private let symbolImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.tintColor = .label
         return imageView
     }()
@@ -22,6 +29,7 @@ final class FavoriteSymbolTableCell: UITableViewCell {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .title1)
+        label.adjustsFontForContentSizeCategory = true
         label.textColor = .label
         label.textAlignment = .left
         label.numberOfLines = 0
@@ -45,22 +53,15 @@ final class FavoriteSymbolTableCell: UITableViewCell {
 
     private func setupView() {
         contentView.backgroundColor = .systemBackground
-        
-        contentView.addSubview(symbolImageView)
-        contentView.addSubview(nameLabel)
-        symbolImageView.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        containerView.addArrangedSubview(symbolImageView)
+        containerView.addArrangedSubview(nameLabel)
+        contentView.addSubview(containerView)
+        containerView.pinEdgesTo(contentView)
+
         NSLayoutConstraint.activate([
-            symbolImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            symbolImageView.leadingAnchor.constraint(
-                equalTo: contentView.leadingAnchor, constant: 8),
             symbolImageView.widthAnchor.constraint(
                 equalTo: contentView.widthAnchor, multiplier: 0.2),
-            nameLabel.leadingAnchor.constraint(
-                equalTo: symbolImageView.trailingAnchor, constant: 12),
-            nameLabel.trailingAnchor.constraint(
-                equalTo: contentView.trailingAnchor, constant: -8),
-            nameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
         ])
     }
 
@@ -70,3 +71,51 @@ final class FavoriteSymbolTableCell: UITableViewCell {
         nameLabel.text = symbol.name
     }
 }
+
+#if DEBUG
+import SwiftUI
+
+extension FavoriteSymbolTableCell: UIViewRepresentable {
+    func makeUIView(context: Context) -> FavoriteSymbolTableCell {
+        let cell = FavoriteSymbolTableCell()
+        cell.configure(.init(name: "mic", isFavorite: false))
+        return cell
+    }
+
+    func updateUIView(_ uiView: FavoriteSymbolTableCell, context: Context) {
+    }
+}
+
+struct FavoriteSymbolTableCellPreview: PreviewProvider {
+    static let devices = [
+        "iPhone SE",
+        "iPhone 11",
+        "iPad Pro (11-inch) (2nd generation)",
+    ]
+
+    static var previews: some View {
+        Group {
+            ForEach(devices, id: \.self) { name in
+                Group {
+                    self.content
+                        .previewLayout(.fixed(width: UIScreen.main.bounds.width,
+                                              height: FavoriteSymbolTableCell.height))
+                        .previewDevice(PreviewDevice(rawValue: name))
+                        .previewDisplayName(name)
+                        .colorScheme(.light)
+                    self.content
+                        .previewLayout(.fixed(width: UIScreen.main.bounds.width,
+                                              height: FavoriteSymbolTableCell.height))
+                        .previewDevice(PreviewDevice(rawValue: name))
+                        .previewDisplayName(name)
+                        .colorScheme(.dark)
+                }
+            }
+        }
+    }
+
+    private static var content: some View {
+        FavoriteSymbolTableCell()
+    }
+}
+#endif

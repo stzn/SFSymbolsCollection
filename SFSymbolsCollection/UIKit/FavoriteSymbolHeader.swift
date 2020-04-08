@@ -27,7 +27,8 @@ final class FavoriteSymbolHeader: UITableViewHeaderFooterView {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .label
-        label.font = UIFont.boldSystemFont(ofSize: 40)
+        label.font = .preferredFont(forTextStyle: .largeTitle)
+        label.adjustsFontForContentSizeCategory = true
         label.numberOfLines = 0
         return label
     }()
@@ -63,9 +64,10 @@ final class FavoriteSymbolHeader: UITableViewHeaderFooterView {
             iconImageView.heightAnchor.constraint(equalToConstant: 44),
             iconImageView.widthAnchor.constraint(equalTo: iconImageView.heightAnchor),
 
-            nameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 8),
+            nameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
             nameLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
 
+            bottomSeparator.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
             bottomSeparator.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8),
             bottomSeparator.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8),
             bottomSeparator.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
@@ -83,3 +85,50 @@ final class FavoriteSymbolHeader: UITableViewHeaderFooterView {
     }
 }
 
+#if DEBUG
+import SwiftUI
+
+extension FavoriteSymbolHeader: UIViewRepresentable {
+    func makeUIView(context: Context) -> FavoriteSymbolHeader {
+        let header = FavoriteSymbolHeader()
+        header.configure(.init(iconName: "mic", name: "communication",
+                               symbols: [.init(name: "mic", isFavorite: false)]))
+        return header
+    }
+    func updateUIView(_ uiView: FavoriteSymbolHeader, context: Context) {
+    }
+}
+
+struct FavoriteSymbolHeaderPreview: PreviewProvider {
+    static let devices = [
+        "iPhone SE",
+        "iPhone 11",
+        "iPad Pro (11-inch) (2nd generation)",
+    ]
+
+    static var previews: some View {
+        Group {
+            ForEach(devices, id: \.self) { name in
+                Group {
+                    self.content
+                        .previewLayout(.fixed(width: UIScreen.main.bounds.width,
+                                              height: FavoriteSymbolHeader.height))
+                        .previewDevice(PreviewDevice(rawValue: name))
+                        .previewDisplayName(name)
+                        .colorScheme(.light)
+                    self.content
+                        .previewLayout(.fixed(width: UIScreen.main.bounds.width,
+                                              height: FavoriteSymbolHeader.height))
+                        .previewDevice(PreviewDevice(rawValue: name))
+                        .previewDisplayName(name)
+                        .colorScheme(.dark)
+                }
+            }
+        }
+    }
+
+    private static var content: some View {
+        FavoriteSymbolHeader()
+    }
+}
+#endif

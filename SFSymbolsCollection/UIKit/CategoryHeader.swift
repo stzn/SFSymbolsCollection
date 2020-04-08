@@ -21,7 +21,8 @@ final class CategoryHeader: UICollectionReusableView {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .label
-        label.font = UIFont.boldSystemFont(ofSize: 40)
+        label.font = .preferredFont(forTextStyle: .largeTitle)
+        label.adjustsFontForContentSizeCategory = true
         label.numberOfLines = 0
         return label
     }()
@@ -29,6 +30,7 @@ final class CategoryHeader: UICollectionReusableView {
     private let bottomSeparator: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGray
+        view.setContentHuggingPriority(.defaultHigh + 1, for: .vertical)
         return view
     }()
 
@@ -57,10 +59,10 @@ final class CategoryHeader: UICollectionReusableView {
             iconImageView.heightAnchor.constraint(equalToConstant: 44),
             iconImageView.widthAnchor.constraint(equalTo: iconImageView.heightAnchor),
 
-            nameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 8),
+            nameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
             nameLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
 
-
+            bottomSeparator.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
             bottomSeparator.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             bottomSeparator.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
             bottomSeparator.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
@@ -74,3 +76,51 @@ final class CategoryHeader: UICollectionReusableView {
         nameLabel.text = category.name
     }
 }
+
+#if DEBUG
+import SwiftUI
+
+extension CategoryHeader: UIViewRepresentable {
+    func makeUIView(context: Context) -> CategoryHeader {
+        let header = CategoryHeader()
+        header.configure(.init(iconName: "mic", name: "communication",
+                               symbols: [.init(name: "mic", isFavorite: false)]))
+        return header
+    }
+    func updateUIView(_ uiView: CategoryHeader, context: Context) {
+    }
+}
+
+struct CategoryHeaderPreview: PreviewProvider {
+    static let devices = [
+        "iPhone SE",
+        "iPhone 11",
+        "iPad Pro (11-inch) (2nd generation)",
+    ]
+
+    static var previews: some View {
+        Group {
+            ForEach(devices, id: \.self) { name in
+                Group {
+                    self.content
+                        .previewLayout(.fixed(width: UIScreen.main.bounds.width,
+                                              height: CategoryHeader.height))
+                        .previewDevice(PreviewDevice(rawValue: name))
+                        .previewDisplayName(name)
+                        .colorScheme(.light)
+                    self.content
+                        .previewLayout(.fixed(width: UIScreen.main.bounds.width,
+                                              height: CategoryHeader.height))
+                        .previewDevice(PreviewDevice(rawValue: name))
+                        .previewDisplayName(name)
+                        .colorScheme(.dark)
+                }
+            }
+        }
+    }
+
+    private static var content: some View {
+        CategoryHeader()
+    }
+}
+#endif

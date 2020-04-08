@@ -98,3 +98,46 @@ extension NestedCategoriesViewController: UITableViewDelegate {
     }
 }
 
+#if DEBUG
+import SwiftUI
+
+extension NestedCategoriesViewController: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> NestedCategoriesViewController {
+        NestedCategoriesViewController(frame: UIScreen.main.bounds, store: InMemoryFavoriteSymbolStore())
+    }
+
+    func updateUIViewController(_ uiViewController: NestedCategoriesViewController, context: Context) {
+
+    }
+}
+
+struct NestedCategoriesViewControllerPreviews: PreviewProvider {
+    static let devices = [
+        "iPhone SE",
+        "iPhone 11",
+        "iPad Pro (11-inch) (2nd generation)",
+    ]
+
+    static var previews: some View {
+        Group {
+            ForEach(devices, id: \.self) { name in
+                Group {
+                    self.content
+                        .previewDevice(PreviewDevice(rawValue: name))
+                        .previewDisplayName(name)
+                        .colorScheme(.light)
+                    self.content
+                        .previewDevice(PreviewDevice(rawValue: name))
+                        .previewDisplayName(name)
+                        .colorScheme(.dark)
+                }
+            }
+        }
+    }
+
+    private static var content: NestedCategoriesViewController {
+        NestedCategoriesViewController(frame: UIScreen.main.bounds,
+                                 store: InMemoryFavoriteSymbolStore())
+    }
+}
+#endif
