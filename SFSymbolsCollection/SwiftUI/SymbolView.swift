@@ -42,10 +42,7 @@ struct SymbolView: View {
                     .padding(.bottom, 48)
                 Text(self.symbol.name).font(.title)
                 self.codeView
-                self.favoriteToggleButton
-                    .frame(width: proxy.size.width * 0.8)
-                    .background(Color.blue)
-                    .cornerRadius(8)
+                self.favoriteToggleButton(for: proxy)
             }.alert(isPresented: self.$showCopyDoneAlert) {
                 Alert(
                     title: Text(""), message: Text("Copy Done!"),
@@ -78,7 +75,7 @@ struct SymbolView: View {
         )
     }
 
-    private var favoriteToggleButton: some View {
+    private func favoriteToggleButton(for proxy: GeometryProxy) -> some View {
         Button(action: {
             if self.isFavorite {
                 self.store.delete(self.category, symbol: self.symbol) { _ in
@@ -92,8 +89,11 @@ struct SymbolView: View {
         }) {
             Text(self.isFavorite ? self.removeFromFavorite : self.addToFavorite)
                 .font(.headline)
-                .foregroundColor(.white)
                 .padding(8)
+                .foregroundColor(.white)
+                .frame(width: proxy.size.width * 0.8)
+                .background(Color.blue)
+                .cornerRadius(8)
         }
     }
 }
