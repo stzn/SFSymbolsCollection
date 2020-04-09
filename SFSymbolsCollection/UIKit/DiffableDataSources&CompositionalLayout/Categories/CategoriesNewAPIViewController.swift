@@ -88,7 +88,7 @@ final class CategoriesNewAPIViewController: UIViewController {
         section.orthogonalScrollingBehavior = .continuous
 
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                heightDimension: .estimated(CategoryHeader.height))
+                                                heightDimension: .absolute(CategoryHeader.height))
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
             elementKind: sectionHeaderElementKind, alignment: .top)

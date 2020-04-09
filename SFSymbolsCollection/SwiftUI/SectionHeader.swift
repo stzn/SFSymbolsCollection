@@ -22,12 +22,12 @@ struct SectionHeader: View {
                     .padding(.trailing, 4)
                 Text(category.name)
                     .bold()
-                    .font(.system(size: 40))
+                    .font(.largeTitle)
             }
             .padding(.top, 16)
             .padding(.bottom, 8)
             Divider()
-                .background(Color.black)
+                .background(Color(UIColor.systemGray))
                 .padding(.horizontal, 8)
         }
     }
