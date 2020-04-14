@@ -234,27 +234,8 @@ extension SymbolViewController: UIViewControllerRepresentable {
 }
 
 struct SymbolViewControllerPreview: PreviewProvider {
-    static let devices = [
-        "iPhone SE",
-        "iPhone 11",
-        "iPad Pro (11-inch) (2nd generation)",
-    ]
-
     static var previews: some View {
-        Group {
-            ForEach(devices, id: \.self) { name in
-                Group {
-                    self.content
-                        .previewDevice(PreviewDevice(rawValue: name))
-                        .previewDisplayName(name)
-                        .colorScheme(.light)
-                    self.content
-                        .previewDevice(PreviewDevice(rawValue: name))
-                        .previewDisplayName(name)
-                        .colorScheme(.dark)
-                }
-            }
-        }
+        Preview(self.content)
     }
 
     private static var content: SymbolViewController {

@@ -87,31 +87,12 @@ extension FavoriteSymbolTableCell: UIViewRepresentable {
 }
 
 struct FavoriteSymbolTableCellPreview: PreviewProvider {
-    static let devices = [
-        "iPhone SE",
-        "iPhone 11",
-        "iPad Pro (11-inch) (2nd generation)",
-    ]
-
     static var previews: some View {
-        Group {
-            ForEach(devices, id: \.self) { name in
-                Group {
-                    self.content
-                        .previewLayout(.fixed(width: UIScreen.main.bounds.width,
-                                              height: FavoriteSymbolTableCell.height))
-                        .previewDevice(PreviewDevice(rawValue: name))
-                        .previewDisplayName(name)
-                        .colorScheme(.light)
-                    self.content
-                        .previewLayout(.fixed(width: UIScreen.main.bounds.width,
-                                              height: FavoriteSymbolTableCell.height))
-                        .previewDevice(PreviewDevice(rawValue: name))
-                        .previewDisplayName(name)
-                        .colorScheme(.dark)
-                }
-            }
-        }
+        Preview(self.content)
+            .previewLayout(
+                .fixed(
+                    width: UIScreen.main.bounds.width,
+                    height: FavoriteSymbolTableCell.height))
     }
 
     private static var content: some View {

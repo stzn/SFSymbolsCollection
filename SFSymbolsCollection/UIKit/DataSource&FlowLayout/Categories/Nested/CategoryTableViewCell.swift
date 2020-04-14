@@ -15,8 +15,9 @@ final class CategoryTableViewCell: UITableViewCell {
     var didSelectItemAt: ((IndexPath) -> Void)?
 
     private let collectionView: UICollectionView = {
-        UICollectionView(frame: .zero,
-                         collectionViewLayout: UICollectionViewFlowLayout())
+        UICollectionView(
+            frame: .zero,
+            collectionViewLayout: UICollectionViewFlowLayout())
     }()
 
     private var dataSource: NestedCategoryCollectionViewDataSource!
@@ -37,8 +38,9 @@ final class CategoryTableViewCell: UITableViewCell {
             layout.scrollDirection = .horizontal
         }
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.register(CategoryCell.self,
-                                forCellWithReuseIdentifier: CategoryCell.reuseIdentifier)
+        collectionView.register(
+            CategoryCell.self,
+            forCellWithReuseIdentifier: CategoryCell.reuseIdentifier)
         contentView.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -78,35 +80,16 @@ extension CategoryTableViewCell: UIViewRepresentable {
 }
 
 struct CategoryTableViewCellPreview: PreviewProvider {
-    static let devices = [
-        "iPhone SE",
-        "iPhone 11",
-        "iPad Pro (11-inch) (2nd generation)",
-    ]
-
     static var rowHeight: CGFloat {
         UIScreen.main.bounds.width / CategoryTableViewCell.numberOfItemsPerRow
     }
 
     static var previews: some View {
-        Group {
-            ForEach(devices, id: \.self) { name in
-                Group {
-                    self.content
-                        .previewLayout(.fixed(width: UIScreen.main.bounds.width,
-                                              height: rowHeight))
-                        .previewDevice(PreviewDevice(rawValue: name))
-                        .previewDisplayName(name)
-                        .colorScheme(.light)
-                    self.content
-                        .previewLayout(.fixed(width: UIScreen.main.bounds.width,
-                                              height: rowHeight))
-                        .previewDevice(PreviewDevice(rawValue: name))
-                        .previewDisplayName(name)
-                        .colorScheme(.dark)
-                }
-            }
-        }
+        Preview(self.content)
+            .previewLayout(
+                .fixed(
+                    width: UIScreen.main.bounds.width,
+                    height: rowHeight))
     }
 
     private static var content: some View {

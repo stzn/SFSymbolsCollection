@@ -58,19 +58,24 @@ final class FavoriteSymbolHeader: UITableViewHeaderFooterView {
         bottomSeparator.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            iconImageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8),
+            iconImageView.leadingAnchor.constraint(
+                equalTo: containerView.leadingAnchor, constant: 8),
             iconImageView.trailingAnchor.constraint(equalTo: nameLabel.leadingAnchor, constant: -8),
             iconImageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
             iconImageView.heightAnchor.constraint(equalToConstant: 44),
             iconImageView.widthAnchor.constraint(equalTo: iconImageView.heightAnchor),
 
-            nameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
+            nameLabel.trailingAnchor.constraint(
+                equalTo: containerView.trailingAnchor, constant: -8),
             nameLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
 
             bottomSeparator.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
-            bottomSeparator.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8),
-            bottomSeparator.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8),
-            bottomSeparator.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
+            bottomSeparator.bottomAnchor.constraint(
+                equalTo: containerView.bottomAnchor, constant: -8),
+            bottomSeparator.leadingAnchor.constraint(
+                equalTo: containerView.leadingAnchor, constant: 8),
+            bottomSeparator.trailingAnchor.constraint(
+                equalTo: containerView.trailingAnchor, constant: -8),
             bottomSeparator.heightAnchor.constraint(equalToConstant: 1),
         ])
 
@@ -80,7 +85,8 @@ final class FavoriteSymbolHeader: UITableViewHeaderFooterView {
     }
 
     func configure(_ category: SFSymbolCategory) {
-        iconImageView.image = UIImage(systemName: category.iconName)?.withRenderingMode(.alwaysTemplate)
+        iconImageView.image = UIImage(systemName: category.iconName)?.withRenderingMode(
+            .alwaysTemplate)
         nameLabel.text = category.name
     }
 }
@@ -91,8 +97,10 @@ import SwiftUI
 extension FavoriteSymbolHeader: UIViewRepresentable {
     func makeUIView(context: Context) -> FavoriteSymbolHeader {
         let header = FavoriteSymbolHeader()
-        header.configure(.init(iconName: "mic", name: "communication",
-                               symbols: [.init(name: "mic", isFavorite: false)]))
+        header.configure(
+            .init(
+                iconName: "mic", name: "communication",
+                symbols: [.init(name: "mic", isFavorite: false)]))
         return header
     }
     func updateUIView(_ uiView: FavoriteSymbolHeader, context: Context) {
@@ -107,24 +115,11 @@ struct FavoriteSymbolHeaderPreview: PreviewProvider {
     ]
 
     static var previews: some View {
-        Group {
-            ForEach(devices, id: \.self) { name in
-                Group {
-                    self.content
-                        .previewLayout(.fixed(width: UIScreen.main.bounds.width,
-                                              height: FavoriteSymbolHeader.height))
-                        .previewDevice(PreviewDevice(rawValue: name))
-                        .previewDisplayName(name)
-                        .colorScheme(.light)
-                    self.content
-                        .previewLayout(.fixed(width: UIScreen.main.bounds.width,
-                                              height: FavoriteSymbolHeader.height))
-                        .previewDevice(PreviewDevice(rawValue: name))
-                        .previewDisplayName(name)
-                        .colorScheme(.dark)
-                }
-            }
-        }
+        Preview(self.content)
+            .previewLayout(
+                .fixed(
+                    width: UIScreen.main.bounds.width,
+                    height: FavoriteSymbolHeader.height))
     }
 
     private static var content: some View {
