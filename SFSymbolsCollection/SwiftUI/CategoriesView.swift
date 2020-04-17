@@ -39,15 +39,14 @@ struct CategoriesView: View {
     private func createSFSymbolCategorySection(for geometry: GeometryProxy, with category: SFSymbolCategory) -> some View {
         VStack {
             SectionHeader(category: category)
-            createSymbolsRow(for: geometry, from: category)
+            createSymbolsRow(size: size(for: geometry), from: category)
             // Change if want grid style layout
 //            createGrid(for: geometry, from: category)
         }
     }
 
-    private func createSymbolsRow(for geometry: GeometryProxy, from category: SFSymbolCategory) -> some View {
-        let size = self.size(for: geometry)
-        return ScrollView(.horizontal, showsIndicators: false) {
+    private func createSymbolsRow(size: CGSize, from category: SFSymbolCategory) -> some View {
+        ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 0) {
                 ForEach(category.symbols) { symbol in
                     NavigationLink(destination: self.createSymbolView(category: category, symbol: symbol)) {
@@ -65,9 +64,8 @@ struct CategoriesView: View {
         }
     }
 
-    private func createGrid(for geometry: GeometryProxy, from category: SFSymbolCategory) -> some View {
-        let size = self.size(for: geometry)
-        return Grid(category.symbols) { symbol in
+    private func createGrid(size: CGSize, from category: SFSymbolCategory) -> some View {
+        Grid(category.symbols) { symbol in
             NavigationLink(destination: self.createSymbolView(category: category, symbol: symbol)) {
                 Image(systemName: symbol.name)
                     .renderingMode(.template)
@@ -79,8 +77,9 @@ struct CategoriesView: View {
                     .frame(width: size.width, height: size.height)
             }
         }
-        .frame(width: geometry.size.width,
-               height: height(elementSize: size, elementCount: category.symbols.count))
+        .frame(maxWidth: .infinity)
+        .frame(height: height(elementSize: size,
+                              elementCount: category.symbols.count))
     }
 
     private func height(elementSize: CGSize, elementCount: Int) -> CGFloat {

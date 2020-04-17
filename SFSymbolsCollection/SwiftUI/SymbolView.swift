@@ -35,14 +35,16 @@ struct SymbolView: View {
         GeometryReader { proxy in
             VStack(alignment: .center, spacing: 8) {
                 Image(systemName: self.symbol.name)
+                    .renderingMode(.template)
                     .resizable()
                     .scaledToFit()
+                    .foregroundColor(self.colorScheme == .light ? Color.black : Color.white)
                     .frame(height: proxy.size.height * 0.5)
                     .padding(.top, 30)
                     .padding(.bottom, 48)
                 Text(self.symbol.name).font(.title)
                 self.codeView
-                self.favoriteToggleButton(for: proxy)
+                self.favoriteToggleButton
             }.alert(isPresented: self.$showCopyDoneAlert) {
                 Alert(
                     title: Text(""), message: Text("Copy Done!"),
@@ -66,8 +68,7 @@ struct SymbolView: View {
                     .background(Color.white)
                     .cornerRadius(8)
             }
-            .padding(.vertical)
-            .padding(.trailing)
+            .padding()
         }
         .overlay(
             RoundedRectangle(cornerRadius: 8)
@@ -75,7 +76,7 @@ struct SymbolView: View {
         )
     }
 
-    private func favoriteToggleButton(for proxy: GeometryProxy) -> some View {
+    private var favoriteToggleButton: some View {
         Button(action: {
             if self.isFavorite {
                 self.store.delete(self.category, symbol: self.symbol) { _ in
@@ -89,20 +90,23 @@ struct SymbolView: View {
         }) {
             Text(self.isFavorite ? self.removeFromFavorite : self.addToFavorite)
                 .font(.headline)
-                .padding(8)
                 .foregroundColor(.white)
-                .frame(width: proxy.size.width * 0.8)
+                .padding(8)
+                .frame(maxWidth: .infinity)
                 .background(Color.blue)
                 .cornerRadius(8)
         }
+        .padding()
     }
 }
 
 struct SymbolView_Previews: PreviewProvider {
     static var previews: some View {
-        SymbolView(
-            category: FavoriteSymbolKey(iconName: "mic", categoryName: "mic"),
-            symbol: SFSymbolCategory.Symbol(name: "mic", isFavorite: false),
-            store: InMemoryFavoriteSymbolStore())
+        Preview(
+            SymbolView(
+                category: FavoriteSymbolKey(iconName: "mic", categoryName: "mic"),
+                symbol: SFSymbolCategory.Symbol(name: "mic", isFavorite: false),
+                store: InMemoryFavoriteSymbolStore())
+        )
     }
 }
