@@ -32,24 +32,22 @@ struct SymbolView: View {
     }
 
     var body: some View {
-        GeometryReader { proxy in
-            VStack(alignment: .center, spacing: 8) {
-                Image(systemName: self.symbol.name)
-                    .renderingMode(.template)
-                    .resizable()
-                    .scaledToFit()
-                    .foregroundColor(self.colorScheme == .light ? Color.black : Color.white)
-                    .frame(height: proxy.size.height * 0.5)
-                    .padding(.top, 30)
-                    .padding(.bottom, 48)
-                Text(self.symbol.name).font(.title)
-                self.codeView
-                self.favoriteToggleButton
-            }.alert(isPresented: self.$showCopyDoneAlert) {
-                Alert(
-                    title: Text(""), message: Text("Copy Done!"),
-                    dismissButton: .default(Text("OK")) { self.showCopyDoneAlert = false })
-            }
+        VStack(alignment: .center, spacing: 8) {
+            Image(systemName: self.symbol.name)
+                .renderingMode(.template)
+                .resizable()
+                .scaledToFit()
+                .foregroundColor(self.colorScheme == .light ? Color.black : Color.white)
+                .frame(maxHeight: .infinity * 0.5)
+                .padding(.top, 30)
+                .padding(.bottom, 48)
+            Text(self.symbol.name).font(.title)
+            self.codeView
+            self.favoriteToggleButton
+        }.alert(isPresented: self.$showCopyDoneAlert) {
+            Alert(
+                title: Text(""), message: Text("Copy Done!"),
+                dismissButton: .default(Text("OK")) { self.showCopyDoneAlert = false })
         }
     }
 
