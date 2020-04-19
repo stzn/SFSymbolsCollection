@@ -39,13 +39,13 @@ struct CategoriesView: View {
     private func createSFSymbolCategorySection(for geometry: GeometryProxy, with category: SFSymbolCategory) -> some View {
         VStack {
             SectionHeader(category: category)
-            createSymbolsRow(size: size(for: geometry), from: category)
+            createSymbolsRow(imageCGSize: size(for: geometry), from: category)
             // Change if want grid style layout
-//            createGrid(for: geometry, from: category)
+//            createGrid(imageCGSize: size(for: geometry), from: category)
         }
     }
 
-    private func createSymbolsRow(size: CGSize, from category: SFSymbolCategory) -> some View {
+    private func createSymbolsRow(imageCGSize: CGSize, from category: SFSymbolCategory) -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 0) {
                 ForEach(category.symbols) { symbol in
@@ -57,14 +57,14 @@ struct CategoriesView: View {
                             .foregroundColor(self.colorScheme == .light ? Color.black : Color.white)
                             .padding(.horizontal, 8)
                             .padding(.bottom, 12)
-                            .frame(width: size.width, height: size.height)
+                            .frame(width: imageCGSize.width, height: imageCGSize.height)
                     }
                 }
             }
         }
     }
 
-    private func createGrid(size: CGSize, from category: SFSymbolCategory) -> some View {
+    private func createGrid(imageCGSize: CGSize, from category: SFSymbolCategory) -> some View {
         Grid(category.symbols) { symbol in
             NavigationLink(destination: self.createSymbolView(category: category, symbol: symbol)) {
                 Image(systemName: symbol.name)
@@ -74,11 +74,11 @@ struct CategoriesView: View {
                     .foregroundColor(self.colorScheme == .light ? Color.black : Color.white)
                     .padding(.horizontal, 8)
                     .padding(.bottom, 12)
-                    .frame(width: size.width, height: size.height)
+                    .frame(width: imageCGSize.width, height: imageCGSize.height)
             }
         }
         .frame(maxWidth: .infinity)
-        .frame(height: height(elementSize: size,
+        .frame(height: height(elementSize: imageCGSize,
                               elementCount: category.symbols.count))
     }
 
